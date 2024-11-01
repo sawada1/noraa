@@ -1,0 +1,283 @@
+@media (max-width: 1200px){
+	.container{width: 100%;max-width: 100%;}
+}
+
+@media all and (min-width: 992px) {
+	.dropdown-menu li{ position: relative; 	}
+	.nav-item .submenu{ display: none;position: absolute;left:100%; top:-7px;}
+	.nav-item .submenu-left{ right:100%; left:auto;}
+	.dropdown-menu > li:hover{ background-color: #f1f1f1 }
+	.dropdown-menu > li:hover > .submenu{ display: block; }
+}	
+
+@media (max-width: 1200px){
+	.home-bannerCon h1{font-size: 50px;line-height: 60px;}
+	.eventBox .card-body ul li span{width: 30px;}
+	.eventBox{margin: 0 4.5px;padding: 10px;}
+	.home-bannerCon p {font-size: 18px;line-height: 25px;}
+	.mentalHealth-sec p {font-size: 18px;line-height: 28px;}
+	.mentalHealth-sec .card h4{font-size: 20px;line-height: 30px;}
+	.mentalHealth-sec .card p{font-size: 14px;line-height: 24px;}
+	.beHappySecCon {min-height: 400px;}
+	.benefitSec .card{height: 326px;padding: 0 20px;}
+	.testimonial-carousel {margin-top: 34px;}
+	.testimonial-carousel figure span {width: 90px;height: 90px;}
+	.testimonial-carousel .item {padding: 32px;}
+	.homeProductsSec .card {padding: 38px 22px 38px;}
+	.homeProductsSec .card h2{margin: 20px 0 10px 0;font-size:23px; line-height: 33px;}
+	.homeProductsSec button{height: 55px;font-size: 18px;}
+	.btnAbout{height: 55px;line-height: 55px;margin: 25px 0 0 0;}
+
+	/*Other Pages*/
+	.calenderBtn{padding: 25px 0 0 0;}
+	.consultaionSec .row{align-items: center;}
+	.consultaionSec {padding: 0 0 70px 0;}
+	.bookConsultationSec h2 {margin-bottom: 42px;}
+	.bookConsultationSec p{font-size: 16px;}
+	.conSpecialSec h4{font-size: 20px;}
+	.conSpecialSec p{font-size: 16px;}
+	.cheknDropdown{margin-top: 30px;justify-content: start;}
+	.prductGallery{flex-direction: column;}
+	#horizon-slider{width: 500px;}
+	.fullscreen #horizon-slider, #horizon-slider ul li{height: 400px !important;width: 500px !important;}
+	#vertical-slider{width: 500px;height: 80px;}
+	#vertical-slider ul{width: 100%;display: flex;justify-content: center;height: 80px !important;position: static;flex-wrap: wrap;}
+	#vertical-slider ul li{width: 70px;height: 70px;margin: 5px;}
+	footer{padding: 40px 0;}
+	.bookCard .card-body, .bookCard figure{border-radius: 25px;}
+	.prdt_details{padding: 15px 10px;}
+	.journalCard figure{border-radius: 25px;}
+	.bundleHdng {margin-bottom: 0;}
+	.timeslot{width: auto;height: auto;padding: 20px;}
+	.coachSec figure{width: 300px;height: 300px;margin: auto;}
+	.liveCourse1 .card-body{padding: 20px;}
+	.productsSec .card-body{justify-content: center;align-items: center;flex-direction: column;}
+	.productsSec .card-body h4{text-align: center;flex: auto;}
+	.productsSec .card-body p{text-align: center;}
+	.quizCard{padding: 20px;}
+	.quizCard .card-header{padding-left: 25px;}
+	.liveCourseSchedule li p{width: 117px;height: 45px;line-height: 45px;font-size: 18px;}
+	.liveCourseSchedule li p:after{left: 46%;}
+	.liveCourseSchedule li h4{margin: 0 15px 0 0;}
+	.liveCourseSchedule li span{margin: 0 25px 0 0;}
+
+}
+
+@media (max-width: 1024px){
+	.eventBox_sec{flex-direction: row;flex-wrap: wrap;justify-content: center;}
+	.eventBox {margin: 4.5px 4.5px;}
+	.homeProductsSec .card {padding: 28px 22px 28px;}
+	.bannerImage h1 {font-size: 40px;}
+	.home-bannerCon h1 {font-size: 40px;line-height: 50px;}
+	.benefitSec .card h4{font-size: 20px;}
+
+	/*Other pages*/
+	.btnGreen1 {width: 160px;height: 49px;line-height: 49px;}
+	.journalCard figure, .bookCard figure{height: 300px;}
+	.booksByNora h2 {margin: 0 0 32px 0;}
+	.noraBookCard figure {margin: 0 0 0 15px;}
+	.noraBookCard figure{width: 200px;}
+	.noraBookCard figure span{height: 200px;}
+	.btnGreen,.conSpecialSec a{width: 249px;height: 49px;line-height: 49px;font-size: 12px;}
+	.about-banner h1{font-size: 35px;}
+	.about-banner p{font-size: 14px;}
+	#horizon-slider{width: 100vw !important;}
+	.fullscreen #horizon-slider, #horizon-slider ul li{height: 384px !important;width: 100vw !important;}
+	#vertical-slider{width: 359px;height: 80px;}
+	#vertical-slider ul{width: 100%;display: flex;justify-content: center;height: 80px !important;position: static;}
+	#vertical-slider ul li{width: 70px;height: 70px;margin: 5px;}
+	.recentjournalsSec .journalCard h4 {margin: 0 0 7px;}
+	.shareOption{width: 35px;height: 35px;line-height: 35px;left: 10px;}
+	.shareOption img{width: 16px;}
+	.liveCourse1 h4 {margin: 36px 0 0 0;}
+	.btnRow{margin: 20px 0;}
+	.liveCourse1 .btnBlack,.liveCourse1 .btnOrange{height: 45px;font-size: 12px;line-height: 45px;}
+	.liveCourse3 a{margin: 33px 0 0 0;}
+	.liveCourseSchedule li p{width: 80px;height: 40px;line-height: 40px;font-size: 15px;}
+	.liveCourseSchedule li h4, .liveCourseSchedule li span{margin: 0px 10px 0 0;font-size: 14px;}
+	.consultation_TabSec{padding: 65px 10px 49px 10px;}
+	.writtenBy, .shortBydate{height: 50px;line-height: 50px;padding: 0 15px;}
+	.descrptnBtnSec button{margin-top: 15px;}
+	.descrptnBtnSec button.btn3 {width: 189px;}
+}
+
+@media (max-width: 991px) {
+  .dropdown-menu .dropdown-menu{margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;}
+  .mobileSec{display: flex;align-items: center;}  
+  .mobileSec .hdlftIcon{margin: 0 0 0 15px;}
+  .mobileSec .hdlftIcon img{width: 26px;}
+
+  .hd-left{display: none;}
+  header{padding: 0px;}
+  header .navSupport{position: absolute;top: 65px;left: 0;width: 100%;text-align: right;z-index: 2;background: #333333;}
+  .navbar-light ul.navbar-nav li a.nav-link, .navbar-nav .dropdown-menu > li:hover a{padding: 10px 17.5px !important;}
+  .navbar-expand-lg .navbar-nav .dropdown-menu.submenu li a{padding: 10px 40px !important;border-radius: 0px; background: #212121;}
+  .navbar-light .navbar-toggler{border: 0px;}
+  .navbar-light .navbar-toggler:focus{box-shadow: none;}
+  .navbar-light .navbar-toggler-icon{background-image: url(/images/menu_icon.png);width: 20px;height: 20px;}
+  .navbar-expand-lg .navbar-nav .dropdown-menu {text-align: right;box-shadow: none;padding: 0px 0;width: 100%;border-radius: 0;border: 0px;top: 100%;left: -40px;margin-top: 0;background: transparent;transform: none;}
+  .navbar-nav .dropdown-menu > li {padding: 0px 0 !important;margin: 0;padding: 0 10px;line-height: normal;text-align: right;border-bottom: 0;}
+  .navbar-expand-lg .navbar-nav .dropdown-menu:before{display: none;}
+  .navbar-expand-lg .navbar-nav .dropdown-menu.submenu{margin:0;box-shadow: none;border: 0px;width: 100%;position: static;}
+  .testimonial-carousel .h2{font-size: 20px;line-height: 30px;}
+  .btnAbout{width: 150px;}
+  .navbar-nav .dropdown-menu > li:hover a{background-color: #2121214c;}
+  .engltr .navbar-expand-lg .navbar-nav .dropdown-menu.submenu{transform: none;margin: 0;}
+  .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{color: #f4c086;}
+  .dropdown-toggle::after{left: 20px;right: auto;}
+  .navbar-light ul.navbar-nav li a.nav-link{border-bottom: 1px solid #212121;position: relative;}
+  .navbar-nav .dropdown-menu > li:hover a:after{display: none;}
+  a#dropdownMenuLink1::before {display: inline-block;margin-left: 0.255em;vertical-align: 0.255em;content: "";border-top: 0.3em solid;border-right: 0.3em solid transparent;border-bottom: 0;border-left: 0.3em solid transparent;left: 20px;right: auto;position: absolute;top: 50%;}
+  .owl-carousel .owl-nav.disabled{display: block;}
+  .navbar-toggler{padding:0px 0px 0 0}
+
+  /*Other Pages*/
+  .prdt_details p{font-size: 14px;line-height: 20px;}
+  .prdt_details a{font-size: 12px;}
+  .bookCard .card-footer button{height: 49px;line-height: 49px;font-size: 12px;}
+  .bookCard .card-footer button:first-child{width: 129px;}
+  .bookCard .card-footer button:last-child{width: 98px;}
+  .about-banner{margin: 0;}
+  .timeslot{margin-right: 15px;}
+  .timeslot .col{width: 97px;height: 57px;}
+  .howtobookGC {margin: 40px 0 50px;}
+  .howtobookGC h2 {margin-bottom: 27px;}
+  .howtobookGC p{padding-left: 0;}
+  .journalsSecSearch {padding: 40px 0 25px;}
+  .liveCourse1 ul.liveCourse1Time li span,
+  .liveCourse3 ul.liveCourse1Time li span{width: 50px;height: 50px;line-height: 50px;font-size: 19px;}
+  .journalCard figure, .bookCard figure {height: 250px;}
+  .prductGallery .show{height: 300px;}
+}	
+@media (max-width: 1024px) and (min-width:768px){
+	.recentjournalsSec .journalCard figure {height: 200px;}
+	.recentjournalsSec .journalCard button{width: 100%;}
+}
+@media (max-width: 767px){
+	.home-bannerCon{margin-top: 20px;}
+	.eventBox {width: 142px;}
+	.home-bannerImg{border-radius: 19px;width: calc(100vw - 30px);margin: auto;}
+	.home-bannerCon h1{font-size: 35px;line-height: 45px;}
+	.home-bannerCon p {font-size: 16px;line-height: 26px;}
+	.home-banner:after{top: 2%;background-position: top right;}
+	.home-banner::before{background: transparent;}
+	.home-bannerImg:before{display: none;}
+	.mentalHealth-sec p {font-size: 16px;line-height: 20px;}
+	.mentalHealth-sec figure{text-align: center;}
+	.mentalHealth-sec figure img{width: 49px;}
+	.mentalHealth-sec h4{margin: 0;}
+	.mentalHealth-sec .card{margin: 10px 0;}
+	.mentalHealth-sec {padding: 0 0 52px;}
+	.beHappySecImg, .beHappySecCon{min-height: 251px;}
+	.benefitSec h6{display: block;text-align: center;font-size: 16px;line-height: 15px;margin: 21px 0 0 0;}
+	.benefitSec .card p, .benefitSec .card h4{display: none;}
+	.benefitSec .card {width: 112px;height: 112px;border-radius: 28px;margin: auto;}
+	.benefitSec .card icon{margin: 0;align-items: center;display: flex;align-items: center;justify-content: center;}
+	.benefitSec .card icon img{width: 50px;}
+	.testimonials_sec{padding: 50px 0 0;}
+	.testimonial-carousel {margin-top: 34px;}
+	.testimonials_sec p{margin: 0;}
+	.testimonial-carousel .item {padding: 40px;}
+	.testimonial-carousel figure span{width: 46px;height: 46px;margin: 0 20px 0 0;}
+	.mentalHealthCard {margin-top: 32px;}
+	.homeProductsSec .row{justify-content: center;}
+	.homeProductsSec .card{margin:10px 0;padding: 48px 22px 48px;}
+	.homeProductsSec .card img{width: 100%;}
+	.benefitSec {padding: 47px 0;}
+	.homeProductsSec button{font-size: 12px;height: 42px;}
+	.homeAboutSec h2 {line-height: 30px;margin: 0 0 10px;font-size: 22px;}
+	.homeAboutSec p{font-size: 14px;line-height: 20px;margin: 0 0 10px 0;}
+	.homeAboutSec img{width: 100%;}
+	footer h4{font-size: 16px;line-height: 21px;}
+	footer ul li {font-size: 12px;line-height: 30px;}
+	footer h4{height: 50px;margin-bottom: 0px;}
+	.btnAbout{height: 49px;font-size: 14px;line-height: 49px;}
+	
+
+	/*Other pages*/
+	.journalCard figure, .bookCard figure{height: auto;}
+	.journalCard figure img, .bookCard figure img{width: 100%;}
+	.QualificationsIcon{display: none;}
+	.QualificationsTitle{text-align: center;}
+	.Qualifications .card{margin: 0 0 20px 0;}
+	.consultaionSec {margin: 53px 0 0 0;}
+	.consultaionSecLft{display: flex;justify-content: center;}
+	.consultaionSecRht{margin-top: 40px;}
+	.bookConsultationSec h2 {margin-bottom: 32px;}
+	.bookConsultationSecLft{align-items: center;}
+	.bookConsultationSecLft{margin-bottom: 30px;}
+	.conSpecialSecLft{text-align: center;padding-right: 15px;}
+	.conSpecialSec h2{font-size: 28px;}
+	.conSpecialSec h4{font-size: 18px;}
+	.conSpecialSec p{font-size: 14px;}
+	.conSpecialSecLft{margin-top: 20px;}
+	.conSpecialSec {margin-top: 50px;}
+	.aboutAllcarousel {margin-top: 80px;}
+	.aboutAllcarousel .testimonial-carousel .bg-black .h2{font-size: 20px;}
+	.aboutAllcarousel .testimonial-carousel figure span{width: 60px;height: 60px;}
+	.bookCard{margin: 0 0 40px 0;}
+	.aboutAuthor div{text-align: center;}
+	.aboutAuthor p{font-size: 16px;line-height: 22px;}
+	.aboutAuthor a {width: 240px;margin: 25px 0 30px 0;}
+	.shortBydate, .writtenBy{font-size: 14px;}
+	.descrptnBtnSec button{margin-top: 14px;}
+	.noraBookCard{flex-direction: column;}
+	.noraBookCard figure{width: 100%;}
+	.noraBookCard figure span{height: auto;}
+	.noraBookCard figure span img{width: 100%;}
+	.bookDeatils h2{text-align: center;}
+	.fullscreen #horizon-slider, #horizon-slider ul li {height: 310px !important;}
+	.aboutAuthor figure{margin: 0 0 10px 0;}
+	.bestSellingBooks h2{margin-bottom: 31px;}
+	.consultation_TabSec .tab_content h2{margin-bottom: 37px;}
+	.tabrhtCon{text-align: center;margin-bottom: 10px;padding-left: 15px;}
+	.timeslot{margin-left: auto;margin-right: auto;margin-bottom: 20px;width: 446px;max-width: 100%;}
+	.bannerImage{height: calc(100vw - 65px);}
+	.howtobookGC p{text-align: center;}
+	.journalsSecRht h2 {margin: 0 0 20px 0;text-align: center;}
+	.engltr .journalsSecLft {justify-content: center;}
+	.writtenBy, .shortBydate{width: 50%;}
+	.coachSec figure{margin: auto auto 20px auto;}
+	.liveCourse1 .card{margin: auto;}
+	.liveCourse1 form .form-group select{width: calc(100% - 30px);margin: auto;}
+	.coachSec {padding: 41px 0 50px;text-align: center;}
+	.liveCourseSchedule{margin: 20px 0 0 0;}
+	.productsSec .card-body{padding: 10px;justify-content: space-between;}
+	.quizCard{padding: 15px;flex-wrap: wrap;flex-direction: column;}
+	.quizCard .card-header{margin-left: 0;border-radius: 100%;}
+	.secIcon {padding: 41px 0 41px;}
+	.secIcon .row div{margin: 30px 0;}
+	.quizCard .card-body{text-align: center;padding: 10px 0;}
+	.noraBookCard{flex-direction: column;}
+	.noraBookCard figure{width: 100%;margin: 0px auto;}
+	.bookDeatils{text-align: center;}
+	.bookDeatils h2{margin:20px 0 12px 0;font-size: 20px;}
+	.descrptnBtnSec button.btn1{width: 370px;}
+	.booksByNora {margin: 58px 0 30px;}
+	.prductGallery .show{height: 400px;}
+	.prductGallery{margin: 0 0 30px;}
+	.topDetailsSec{margin: 0;}
+}
+
+@media screen and (max-width: 480px) {
+	.tabs {display: none;}
+	.tab_drawer_heading {background-color: #ccc;color: #fff;border-top: 1px solid #333;margin: 0;padding: 5px 20px;display: block;cursor: pointer;-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+	.d_active {background-color: #666;color: #fff;}
+	.testimonial-carousel .item {padding: 27px;border-radius: 66px;}
+	.btnAbout{margin: 5px 0 0 0;}
+	.homeProductsSec .card{padding: 28px 12px 28px;}
+	.homeProductsSec .card h2{margin: 15px 0 10px 0;font-size: 20px;line-height: 26px;}
+	.homeProductsSec .card p {font-size: 12px;line-height: 16px;}
+	.btnAbout{width: 100%;}
+	.descrptnBtnSec button.btn2{width: 139px;}
+	.fullscreen #horizon-slider, #horizon-slider ul li{height: 250px !important;width: 100vw !important;}
+	.timeslot{padding: 10px;height: auto;}
+	.timeslot .col{width: 100px;height: 54px;}
+	.consultation_TabSec ul.tabs{height: 55px;border-radius: 25px;}
+	.consultation_TabSec ul.tabs li{padding: 0 10px;height: 55px;line-height: 55px;}
+	.consultation_TabSec ul.tabs li.active{font-size: 17px;border-radius: 0;}
+	#calendar_dropdown{width: 300px !important;}
+	.subTabRht, .subTabLft{width: 100%;}
+	.subscriptionSec .card{margin: auto;}
+	.liveCourseSchedule p::after {display: none;}
+}
