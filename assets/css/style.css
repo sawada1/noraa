@@ -62,7 +62,7 @@ header.sticky{background-color: #ddddddf0;box-shadow: -1px 0 3px rgba(0, 0, 0, 0
 .mentalHealth-sec{padding: 0 0 92px;}
 .mentalHealth-sec h2{margin: 0 0 20px;}
 .mentalHealth-sec p{font-size: 24px; line-height: 28px;margin: 0;}
-.mentalHealth-sec .card{flex-direction: row;align-items: center;padding: 0;}
+.mentalHealth-sec .card{flex-direction: row;align-items: center;padding: 0; border: none;}
 .mentalHealth-sec .card-body{padding: 0;}
 .mentalHealth-sec figure{margin: 0;flex: 0 0 110px;}
 .mentalHealthCard{margin-top: 92px;}
