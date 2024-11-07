@@ -53,7 +53,8 @@ header.sticky{background-color: #ddddddf0;box-shadow: -1px 0 3px rgba(0, 0, 0, 0
 .events-Sec .card .card-header ul li{font-weight: 600;}
 .eventBox{width: 172px; height: 180px;padding: 15px;border: 1px solid #979797; background-color: #FEFEFE; border-radius: 8px;box-shadow: 5px 4px 2px rgba(0, 0, 0, 0.4);margin: 0 8.5px;}
 .eventBox .card-body{padding: 0;display: flex;flex-direction: column;justify-content: center;}
-.eventBox .card-body ul{display: flex;align-items: center;justify-content: space-between;}
+.eventBox .card-body ul{display: flex;align-items: center;justify-content: space-between; padding: 0px; margin: 0px;}
+.eventBox .card-body ul li{ padding: 0px; margin: 0px;}
 .eventBox .card-body ul li span{display:flex; align-items: center; justify-content: center; width:41px; height: 25px;background-color: #f1f1f1; border-radius: 5px;text-align: center;font-size: 14px;color: #212725;}
 .eventBox .card-body ul li span small{font-weight: 600;font-size: 6px;margin: 4px 0 0 0;}
 .eventBox .card-body p{font-size: 10px;line-height: 12px;color: #4C4C4C;margin: 8px 0 0 0;text-align: center;font-weight: 600;}
