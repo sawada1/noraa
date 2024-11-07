@@ -25,7 +25,7 @@
 
             <div class="benefitSec">
                 <HomeBenifits></HomeBenifits>
-               <!-- <HomeTestimonials></HomeTestimonials> -->
+               <HomeTestimonials></HomeTestimonials>
             </div>
 
            <HomeProducts></HomeProducts>

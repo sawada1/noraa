@@ -5,7 +5,7 @@
     margin: 0;
     box-sizing: border-box;
 }
-body{
+body , html{
     font-family: 'Rubik', sans-serif;
     overflow: hidden;
     overflow-y: auto;

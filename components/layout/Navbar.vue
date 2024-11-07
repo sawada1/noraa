@@ -3,7 +3,7 @@
         <header class="container ">
             <div class="row">
                 <nav class="navbar px-2 navbar-expand-lg navbar-light col-lg-9">
-                    <a class="navbar-brand" href="index.html"><img src="/images/logo.png" alt="logo"></a>
+                    <NuxtLink to="/" class="navbar-brand" href="index.html"><img src="/images/logo.png" alt="logo"></NuxtLink>
                     <ul class="mobileSec">
                         <li><a href="#" class="hdlftIcon"><img src="/images/user.png" alt="user"></a></li>
                         <li><a href="#" class="hdlftIcon"><img src="/images/cart-shopping-fast.png" alt="cart-shopping-fast"></a></li>
@@ -31,14 +31,24 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="book-store.html">الكتب</a>
+                            <nuxt-link to="/book-store" class="nav-link">
+                                الكتب
+                            
+                            </nuxt-link>
                           </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">عن دكتورة نورة</a>
+                            <nuxt-link to="/about" class="nav-link">
+                                عن دكتورة نورة
+                            
+                            </nuxt-link>
                           </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="products.html">المنتجات</a>
-                        </li>
+                            <nuxt-link to="/products" class="nav-link">
+                                المنتجات
+                            
+                            </nuxt-link>
+                          </li>
+            
                         <li class="nav-item">
                             <a class="nav-link homeicon" href="index.html"><img src="/images/home.png" alt="home_icon"></a>
                         </li>
