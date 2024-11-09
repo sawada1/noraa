@@ -14,10 +14,10 @@
                     <div class="collapse navbar-collapse navSupport" id="navbarSupportedContent">
                       <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">الدورات</a>
+                            <nuxt-link class="nav-link" to="/bundled-courses" >الدورات</nuxt-link>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">الاستشارات</a>
+                            <a class="nav-link dropdown-toggle" href="#"  id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">الاستشارات</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <li>
                                     <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">استشارة شخصية</a>
@@ -28,6 +28,7 @@
                                     </ul>
                                 </li>
                                 <li><a class="nav-link" href="#">استشارة مجموعات</a></li>
+                                <li><nuxt-link class="nav-link" to="/consultation">استشارة </nuxt-link></li>
                             </ul>
                         </li>
                         <li class="nav-item">
