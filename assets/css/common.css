@@ -46,11 +46,15 @@ h4{
     text-align: right;
 }
 p{
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
+    margin: 0px;
 }
 .bg-green{
     background-color: #43806c !important;
+}
+.bg-light-green{
+    background-color: #F8F9FA !important;
 }
 .bg-black{
     background-color: #212725 !important;
@@ -87,8 +91,10 @@ button, a{
 .fC-green{
     color: #43806c !important;
 }
+
+/* 9F9B95 */
 .fc-grey{
-    color: #9F9B95 !important;
+    color: #6C757D !important;
 }
 .fc-Darkgreay{
     color: #263431 !important;

@@ -1,0 +1,40 @@
+
+
+.mh-full{
+ min-height: 100vh;
+}
+
+.pass-input{
+    position: relative;
+    button{
+        position: absolute;
+        top: 20%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
+
+.divide{
+    background: #DEE2E6;
+    height: 1px;
+}
+
+html[dir="rtl"]{
+    .pass-input{
+        button{
+        left: 15px;
+        }
+    }
+}
+html[dir="ltr"]{
+    .pass-input{
+        button{
+        right: 15px;
+        }
+    }
+}
+

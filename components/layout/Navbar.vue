@@ -51,15 +51,15 @@
                           </li>
             
                         <li class="nav-item">
-                            <a class="nav-link homeicon" href="index.html"><img src="/images/home.png" alt="home_icon"></a>
+                            <NuxtLink :to="localePath('/')" class="nav-link homeicon"><img src="/images/home.png" alt="home_icon"></NuxtLink>
                         </li>
                       </ul>
                     </div>
                 </nav>
                 <div class="col-lg-3 hd-left">
                     <ul class="">
-                        <li><a href="#" class="bg-yellow">تسجيل</a></li>
-                        <li><a href="#" class="hdlftIcon"><img src="/images/user.png" alt="user"></a></li>
+                        <li><NuxtLink :to="localePath('login')" href="#" class="bg-yellow">تسجيل</NuxtLink></li>
+                        <li><NuxtLink :to="localePath('profile')" class="hdlftIcon"><img src="/images/user.png" alt="user"></NuxtLink></li>
                         <li><a href="#" class="hdlftIcon"><img src="/images/cart-shopping-fast.png" alt="cart-shopping-fast"></a></li>
                     </ul>
                 </div>
@@ -67,10 +67,9 @@
 		</header>
     </div>
 </template>
-<script>
-export default {
-    
-}
+<script setup>
+const localePath = useLocalePath();
+
 </script>
 <style lang="">
     

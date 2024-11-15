@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@vee-validate/nuxt',
     'nuxt-swiper',
     // '@nuxtjs/html-validator',
-    'nuxt-aos'
+    'nuxt-aos',
+    "@pinia/nuxt"
   ],
 
   plugins: [
@@ -58,9 +59,19 @@ export default defineNuxtConfig({
       ],
     },
   },
+  runtimeConfig: {
+    // Public keys that are exposed to the client
+    apiKey: process.env.NUXT_API_KEY,
+
+    // Public keys that are exposed to the client
+    public: {
+      apiUrl: process.env.NUXT_API_URL,
+    },
+  },
   css: [
     'bootstrap/dist/css/bootstrap.min.css',
     '~/assets/css/common.css',
+    '~/assets/css/general.scss',
     '~/assets/css/style.css',
     '~/assets/css/responsive.css',
   ]

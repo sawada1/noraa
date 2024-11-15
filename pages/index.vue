@@ -3,7 +3,6 @@
       <section class="main-body">
           
         <HomeHero></HomeHero>
-            
             <div class="organization d-none">
                 <div class="container">
                     <div class="row">
@@ -34,9 +33,12 @@
         </section> 
     </div>
 </template>
-<script>
+<script setup lang="ts">
+import { useExampleStore } from '@/stores/example';
+const exampleStore = useExampleStore();
 
 </script>
+
 <style lang="">
     
 </style>
