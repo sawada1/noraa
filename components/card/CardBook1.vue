@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card bookCard">
+        <div class=" bookCard">
             <div class="card-body">
                 <figure><img src="/images/bookimage.png" alt="book image"></figure>
                 <div class="prdt_details">

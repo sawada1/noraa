@@ -1,5 +1,5 @@
 <template>
-    <div class="card journalCard">
+    <div class=" journalCard">
         <div class="card-header">
             <figure>
                 <img src="/images/journal1.png" alt="journals image">

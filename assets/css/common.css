@@ -86,6 +86,9 @@ button, a{
     transition: all 0.4s !important;
     text-decoration: none;
 }
+a{
+    color:  inherit !important;
+}
 
 button{
     border: none;
