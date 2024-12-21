@@ -19,7 +19,7 @@
                 نص وهمي للطباعة</h4>
             <p class="journalDetails">لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد.</p>
             <nuxt-link to="/blog">
-                <button class="btn btn-primary bg-green btnGreen1">  اقراء المزيد  </button>
+                <button class=" bg-green btnGreen1">  اقراء المزيد  </button>
             </nuxt-link>
         </div>
     </div>

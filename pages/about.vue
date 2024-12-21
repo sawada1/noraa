@@ -26,23 +26,23 @@
                             <img src="/images/Qualifications-Icon.png" alt="Qualifications Icon">
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-5">
                         <div class="col-md-4">
-                            <div class="card text-center">
+                            <div class=" text-center">
                                 <figure><img src="/images/trophy-icon.png" alt=""></figure>
                                 <h4 class="fC-green">المؤهل 3</h4>
                                 <p>لوريم إيبسوم هو ببساطة نص وهمي للطباعة والتنضيد</p>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card text-center">
+                            <div class=" text-center">
                                 <figure><img src="/images/ribbon badges.png" alt=""></figure>
                                 <h4 class="fC-green">المؤهل 2</h4>
                                 <p>لوريم إيبسوم هو ببساطة نص وهمي للطباعة والتنضيد</p>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="card text-center">
+                            <div class=" text-center">
                                 <figure><img src="/images/certificate-icon.png" alt=""></figure>
                                 <h4 class="fC-green">المؤهل 1</h4>
                                 <p>لوريم إيبسوم هو ببساطة نص وهمي للطباعة والتنضيد</p>
@@ -109,8 +109,9 @@
                             <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب.</p>
                         </div>
                         <div class="col-md-6 bookConsultationSecLft">
-                            <div data-bs-toggle="calendar" id="calendar_dropdown" data-bs-target="events.json"></div>
-                            <span class="calenderBtn"><a href="#" class="btn btn-primary bg-green btnGreen">انتقل إلى الخطوة التالية</a></span>
+                            <DatePicker v-model="date" inline showWeek class="w-full sm:w-[30rem]" />
+
+                            <span class="calenderBtn"><button  class="text-light bg-green btnGreen">انتقل إلى الخطوة التالية</button></span>
                         </div>
                     </div>
                 </div>
@@ -128,7 +129,7 @@
                             <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>
                             <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة.</p>
                             <p>وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على مقاطع لوريم إيبسوم. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة.</p>
-                            <a href="#" class="btn btn-primary">استشر الآن</a>
+                            <button  class="bg-dark py-3 px-5 rounded-5 mt-4 text-light">استشر الآن</button>
                         </div>
                     </div>
                 </div>
@@ -141,7 +142,8 @@
             </div>
     </div>
 </template>
-<script>
+<script setup>
+const date = ref();
 
 </script>
 <style lang="">

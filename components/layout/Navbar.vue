@@ -73,7 +73,7 @@
                 </nav>
                 <div class="col-lg-3 hd-left">
                     <ul class="">
-                        <li><NuxtLink :to="localePath('login')"  class="bg-green px-4 py  
+                        <li><NuxtLink :to="localePath('login')"  class="bg-green px-4 text-light mt-2 py  
                             "> تسجيل الدخول  </NuxtLink></li>
                             <!-- <div class="d-flex">
                                 <li><NuxtLink :to="localePath('profile')" class="hdlftIcon"><img src="/images/user.svg" style="width: 35px;" alt="user"></NuxtLink></li>

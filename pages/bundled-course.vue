@@ -86,7 +86,7 @@
                                 <span> 999 دقيقة </span>
                             </div>
                         </div>
-                        <h4 class="mt-5"> مخلص </h4>
+                        <h4 class="mt-5"> ملخص </h4>
                         <div class="detailscDescptn">
                             <p>
                                 وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على
@@ -99,7 +99,7 @@
 
                         <div class="descrptnBtnSec">
                             <button
-                                class="btn d-flex align-items-center justify-content-center gap-2 btn-primary bg-green btnGreen btn1">
+                                class=" d-flex align-items-center justify-content-center gap-2 bg-green btnGreen btn1">
                                 اشتري الان
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
                                     fill="none">
@@ -110,7 +110,7 @@
                                 </svg>
                             </button>
                             <button
-                                class="btn d-flex align-items-center text-success justify-content-center gap-2 btn-primary bg-light-green btnGreen btn2">
+                                class=" d-flex align-items-center text-success justify-content-center gap-2  bg-light-green btnGreen btn2">
                                 هدية لصديق
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">

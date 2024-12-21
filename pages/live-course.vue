@@ -146,7 +146,7 @@
                                 <p class="fC-green">يوم</p>
                             </li>
                         </ul>
-                        <a href="#" class="btn btn-primary bg-green btnGreen">هدية لصديق</a>
+                        <button href="#" class="btn btn-primary text-light mt-5 bg-green btnGreen">هدية لصديق</button>
                     </div>
                     <div class="col-md-6">
                         <GeneralTimeLine1></GeneralTimeLine1>

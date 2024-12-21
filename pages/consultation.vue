@@ -82,12 +82,10 @@
                                         <span><img src="/images/watch-icon.png" alt="watch icon"/></span>
                                         <p>حدد الوقت</p>
                                     </div>
-                                    <div data-bs-toggle="calendar" id="calendar_dropdown" data-bs-target="events.json">
-                                        
-                                    </div>
+                                    <DatePicker v-model="date" inline showWeek class=" h-100" />
                                 </div>
                            </div>
-                            <div class="col-12 text-center"><a href="#" class="btn btn-primary bg-green btnGreen">قم بالدفع</a></div>
+                            <div class="col-12 text-center"><button class=" bg-green text-light btnGreen">قم بالدفع</button></div>
                         </div> 
                         
                     </div>
@@ -95,7 +93,9 @@
             
     </div>
 </template>
-<script>
+<script setup>
+const date = ref();
+
 
 </script>
 <style lang="">

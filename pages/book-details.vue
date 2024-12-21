@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mb-5">
         <div class="topDetailsSec">
             <div class="container">
                 <div class="row">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="descrptnBtnSec">
                             <button
-                                class="btn d-flex align-items-center justify-content-center gap-2 btn-primary bg-green btnGreen btn1">
+                                class=" d-flex align-items-center justify-content-center gap-2  bg-green btnGreen btn1">
                                 اشتري الان
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
                                     fill="none">
@@ -115,7 +115,7 @@
                                 </svg>
                             </button>
                             <button
-                                class="btn d-flex align-items-center text-success justify-content-center gap-2 btn-primary bg-light-green btnGreen btn2">
+                                class=" d-flex align-items-center text-success justify-content-center gap-2  bg-light-green btnGreen btn2">
                                 هدية لصديق
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none">
@@ -140,10 +140,10 @@
         </div>
         <div v-if="tab1 == 1" class="booksByNora">
             <div class="container">
-                <div class="row justify-content-center">
+                <div class="row justify-content-cente">
                     <!-- <h2 class="text-center fC-green">المزيد من كتب دكتورة نورا</h2> -->
-                    <div class="col-md-9">
-                        <div class="card noraBookCard">
+                    <div class="col-12">
+                        <div class=" noraBookCard">
                             <figure>
                                 <span><img src="/images/book-club.png" alt="book /images"></span>
                                 <figcaption>اسم الكتاب</figcaption>
@@ -159,7 +159,7 @@
                                     أخذت طابعة غير معروفة لوح الطباعة وخلطته لصنع نوع.</p>
                             </div>
                         </div>
-                        <div class="card noraBookCard">
+                        <div class=" noraBookCard">
                             <figure>
                                 <span><img src="/images/book-club.png" alt="book /images"></span>
                                 <figcaption>اسم الكتاب</figcaption>
