@@ -73,12 +73,12 @@
                 </nav>
                 <div class="col-lg-3 hd-left">
                     <ul class="">
-                        <li><NuxtLink :to="localePath('login')" href="#" class="bg-green px-4 py  
+                        <li><NuxtLink :to="localePath('login')"  class="bg-green px-4 py  
                             "> تسجيل الدخول  </NuxtLink></li>
-                            <div class="d-flex">
+                            <!-- <div class="d-flex">
                                 <li><NuxtLink :to="localePath('profile')" class="hdlftIcon"><img src="/images/user.svg" style="width: 35px;" alt="user"></NuxtLink></li>
                                 <li><a href="#" class="hdlftIcon"><img src="/images/bell.svg" alt="cart-shopping-fast" style="width: 35px;"></a></li>
-                            </div>
+                            </div> -->
                     </ul>
                 </div>
             </div>
