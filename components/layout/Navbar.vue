@@ -13,27 +13,47 @@
                     </ul>
                     <div class="collapse navbar-collapse navSupport" id="navbarSupportedContent">
                       <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <nuxt-link class="nav-link" to="/bundled-courses" >الدورات</nuxt-link>
-                        </li>
+                   
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"  id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">الاستشارات</a>
+                            <a class="nav-link dropdown-toggle" href="#"  id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">الدورات</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li>
-                                    <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">استشارة شخصية</a>
-                                    <ul class="submenu dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                        <li><a class="nav-link dropdown-item" href="#">لطفلي</a></li>
-                                        <li><a class="nav-link dropdown-item" href="#">لنفسي</a></li>
-                                        <li><a class="nav-link dropdown-item" href="#">للمتزوجين</a></li>
-                                    </ul>
+                           
+                                <li> 
+                                    <nuxt-link  class="nav-link" to="/live-courses">
+                                        دورات حية 
+                                    </nuxt-link>
+                                
                                 </li>
-                                <li><a class="nav-link" href="#">استشارة مجموعات</a></li>
-                                <li><nuxt-link class="nav-link" to="/consultation">استشارة </nuxt-link></li>
+                                <li><nuxt-link class="nav-link" to="/bundled-courses"> باقة دورات </nuxt-link></li>
                             </ul>
                         </li>
                         <li class="nav-item">
+                            <nuxt-link to="/consultation" class="nav-link">
+                                الاستشارات
+                            
+                            </nuxt-link>
+                          </li>
+                        <li class="nav-item">
                             <nuxt-link to="/book-store" class="nav-link">
                                 الكتب
+                            
+                            </nuxt-link>
+                          </li>
+                        <li class="nav-item">
+                            <nuxt-link to="/blogs" class="nav-link">
+                                المدونات
+                            
+                            </nuxt-link>
+                          </li>
+                        <li class="nav-item">
+                            <nuxt-link to="/conversitions" class="nav-link">
+                                المحادثات
+                            
+                            </nuxt-link>
+                          </li>
+                        <li class="nav-item">
+                            <nuxt-link to="/tests" class="nav-link">
+                                الاختبارات
                             
                             </nuxt-link>
                           </li>
@@ -43,24 +63,22 @@
                             
                             </nuxt-link>
                           </li>
-                        <li class="nav-item">
-                            <nuxt-link to="/products" class="nav-link">
-                                المنتجات
-                            
-                            </nuxt-link>
-                          </li>
+                  
             
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <NuxtLink :to="localePath('/')" class="nav-link homeicon"><img src="/images/home.png" alt="home_icon"></NuxtLink>
-                        </li>
+                        </li> -->
                       </ul>
                     </div>
                 </nav>
                 <div class="col-lg-3 hd-left">
                     <ul class="">
-                        <li><NuxtLink :to="localePath('login')" href="#" class="bg-yellow">تسجيل</NuxtLink></li>
-                        <li><NuxtLink :to="localePath('profile')" class="hdlftIcon"><img src="/images/user.png" alt="user"></NuxtLink></li>
-                        <li><a href="#" class="hdlftIcon"><img src="/images/cart-shopping-fast.png" alt="cart-shopping-fast"></a></li>
+                        <li><NuxtLink :to="localePath('login')" href="#" class="bg-green px-4 py  
+                            "> تسجيل الدخول  </NuxtLink></li>
+                            <div class="d-flex">
+                                <li><NuxtLink :to="localePath('profile')" class="hdlftIcon"><img src="/images/user.svg" style="width: 35px;" alt="user"></NuxtLink></li>
+                                <li><a href="#" class="hdlftIcon"><img src="/images/bell.svg" alt="cart-shopping-fast" style="width: 35px;"></a></li>
+                            </div>
                     </ul>
                 </div>
             </div>

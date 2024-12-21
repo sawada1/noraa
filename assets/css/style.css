@@ -11,15 +11,15 @@ header.sticky{background-color: #ddddddf0;box-shadow: -1px 0 3px rgba(0, 0, 0, 0
 .hd-left ul li a:hover{background-color: #212725; color: #F4C086;}
 .hd-left ul li:last-child{margin-left: 12px;}
 .navbar-light ul.navbar-nav li{position: relative;}
-.navbar-light ul.navbar-nav li a.nav-link{color:#43806C; font-size: 16px;padding: 0 17.5px;}
+.navbar-light ul.navbar-nav li a.nav-link{color:#212529; font-size: 16px;padding: 0 17.5px;}
 #navbarNav{justify-content: center;}
-.navbar-expand-lg .navbar-nav .dropdown-menu{box-shadow: -1px 0 3px rgba(0, 0, 0, 0.4); padding: 8px 0; width: 254px;border-radius: 7px; border: 1px solid #F4C086;top: 26px;height: auto;left: 50%;margin-top: 10px;transform: translate(-50%, 0%);}
-.navbar-expand-lg .navbar-nav .dropdown-menu:before{margin: 0px !important;border: 0px;content: '';position: absolute;top: -10px;left: 45%;background: url(/images/Triangle.png) center center;width: 12%;height: 22px;background-size: contain;background-repeat: no-repeat;border-bottom: 8px solid #ffffff;}
+.navbar-expand-lg .navbar-nav .dropdown-menu{box-shadow: -1px 0 3px rgba(0, 0, 0, 0.4); padding: 8px 0; width: 254px;border-radius: 7px;top: 26px;height: auto;left: 50%;margin-top: 10px;transform: translate(-50%, 0%);}
+.navbar-expand-lg .navbar-nav .dropdown-menu:before{margin: 0px !important;border: 0px;content: '';position: absolute;top: -10px;left: 45%;width: 12%;height: 22px;background-size: contain;background-repeat: no-repeat;border-bottom: 8px solid #ffffff;}
 .navbar-nav .dropdown-menu > li{position: relative;background-color: transparent !important;padding: 5px 0 !important;margin:0 5px;padding: 0 10px;line-height: 41px;text-align: center;border-bottom: 1px solid #43806C;}
 .navbar-nav .dropdown-menu > li:hover a{background-color: #F5F5F5;height: 41px; border-radius: 7px;padding: 0px !important;}
 .navbar-nav .dropdown-menu > li a::after{border: 0px;}
 .navbar-nav .dropdown-menu > li a:after{position: absolute;}
-.navbar-nav .dropdown-menu > li:hover a:after{margin:0px !important; border: 0px;content: '';position: absolute;top: 40%;left: 22px;background: url(/images/Triangle2.png) center center; width: 14px; height: 12px;right: auto;}
+/* .navbar-nav .dropdown-menu > li:hover a:after{margin:0px !important; border: 0px;content: '';position: absolute;top: 40%;left: 22px;background: url(/images/Triangle2.png) center center; width: 14px; height: 12px;right: auto;} */
 .navbar-expand-lg .navbar-nav .dropdown-menu.submenu{top: -18px;left: -84px;width: 160px;box-shadow: -1px 0 3px rgba(0, 0, 0, 0.4); border: 0px;}
 .navbar-nav .dropdown-menu > li:last-child{border: 0px;}
 .navbar-expand-lg .navbar-nav .dropdown-menu.submenu li{border-bottom: 1px solid rgba(67, 128, 108, 0.32);}
@@ -187,11 +187,11 @@ footer ul li a:hover{color: #F4C086;}
 .bannerImage p{color: #ffffff;margin: 0;}
 
 .consultation_TabSec{padding: 65px 0 49px 0;}
-.consultation_TabSec .tabsTop{display: flex; justify-content: center;}
-.consultation_TabSec ul.tabs {background-color:#EEEEEE;border-radius: 35px;margin: 0;padding: 0;list-style: none;height: 70px;width: auto;display: flex;border: 0;text-align: center;align-items: center;justify-content: center;overflow: hidden;}
-.consultation_TabSec ul.tabs li {float: left;margin: 0;cursor: pointer;padding: 0px 23px;height: 70px;line-height: 70px;background-color: #EEEEEE;color: #212725;overflow: hidden;position: relative;}
-.consultation_TabSec ul.tabs li:hover {background-color: #ccc;color: #212725;}
-.consultation_TabSec ul.tabs li.active {border-radius: 35px;background-color: #43806C;color: #F4C086;border-bottom: 0px solid #fff;display: block;font-size: 21px;}
+.tabsTop{display: flex; justify-content: center;}
+.tabsTop ul.tabs {background-color:#EEEEEE;border-radius: 35px;margin: 0;padding: 0;list-style: none;height: 48px;width: auto;display: flex;border: 0;text-align: center;align-items: center;justify-content: center;overflow: hidden;}
+.tabsTop ul.tabs li { display: flex; align-items: center; justify-content: center; margin: 0;cursor: pointer;padding: 0px 23px;height: 48px;line-height: 70px;background-color: #EEEEEE;color: #43806C;overflow: hidden;position: relative;}
+.tabsTop ul.tabs li:hover {background-color: #ccc;color: #212725;}
+.tabsTop ul.tabs li.active {border-radius: 35px;background-color: #43806C;color: white;border-bottom: 0px solid #fff;font-size: 16px;}
 .consultation_TabSec .tab_container {border-top: none;clear: both;float: left;width: 100%;background: #fff;overflow: auto;}
 .consultation_TabSec .tab_content {display: none;margin-top:49px;}
 .consultation_TabSec .tab_drawer_heading { display: none; }
@@ -331,12 +331,15 @@ footer ul li a:hover{color: #F4C086;}
 .journalCard .card-body ul li{margin: 0 7px;}
 .journalCard p{color: #979797;margin: 24px 0 16px;}
 .journalCard h4{color: #212725;font-weight: 800;margin-bottom: 20px;}
-.journalCard p.journalDetails{font-size: 16px;line-height: 19px;color: #212725;margin:0 0 20px;}
+/* .journalCard .card-header{margin-bottom: 33px;} */
+.journalCard h4{margin-bottom: 17px;}
+.journalCard p.journalDetails{font-size: 21px;font-weight: bold;line-height: 25px; color:#212725; margin:0 0 20px;}
 
 .journalsSecSearch{padding: 68px 0 65px}
 .journalsSecLft{display: flex;align-items: center;justify-content: left;}
-.shortBydate{background: url(/images/arrow_green.png) #D8D8D8 no-repeat 10% 50%;width: 293px;height: 59px;border-radius: 30px;line-height: 59px;padding: 0 20px;text-align: right;border: 0;font-size: 18px;color: #43806C;font-weight: bold;position: relative;-webkit-appearance: none;}
-.writtenBy{-webkit-appearance: none;background:url(/images/arrow_green.png) #F2F2F2 no-repeat 10% 50%;width: 186px;height: 59px;border-radius: 30px;line-height: 59px;padding: 0 20px;text-align: right;border: 0;font-size: 18px;color: #43806C;font-weight: bold;}
+.selectCustom{background: #F2F2F2 !important; width: 240px; height: 59px; border-radius: 30px !important; line-height: 40px;padding: 0 20px;border: none !important;font-size: 18px;color: #212529;font-weight: bold;position: relative;}
+.shortBydate{background: url(/images/arrow_green.png) #F2F2F2 no-repeat 10% 50%;width: 240px;height: 59px;border-radius: 30px;line-height: 59px;padding: 0 20px;border: 0;font-size: 18px;color: #212529;font-weight: bold;position: relative;-webkit-appearance: none;}
+.writtenBy{-webkit-appearance: none;background:url(/images/arrow_green.png) #F2F2F2 no-repeat 10% 50%;width: 360px;height: 59px;border-radius: 30px;line-height: 59px;padding: 0 20px;text-align: right;border: 0;font-size: 18px;color: #212529;font-weight: bold;}
 .writtenBy:focus{box-shadow: none;outline: none;}
 .shortBydate:focus{box-shadow: none;outline: none;}
 .journalsSecRht h2{margin:0;}
@@ -377,12 +380,12 @@ footer ul li a:hover{color: #F4C086;}
 #quantity:focus{box-shadow: none;}
 .shortBydate .dropdown-menu, .writtenBy .dropdown-menu{width: 100%;border-radius: 10px;}
 .shortBydate .dropdown-toggle::after, .writtenBy .dropdown-toggle::after{position: absolute;left: 20px;top: 50%;}
-.writtenBy{margin-left: 26px;}
+/* .writtenBy{margin-left: 26px;} */
 .journalsSecRht h2{margin:0;}
-.descrptnBtnSec{display: flex;flex-wrap: wrap;flex-direction: row;justify-content: start;}
+.descrptnBtnSec{display: flex;flex-wrap: wrap;flex-direction: row;justify-content: start; gap:20px;}
 .descrptnBtnSec button{margin-top: 33px;text-transform: uppercase;}
-.descrptnBtnSec button.btn1{width: 385px;}
-.descrptnBtnSec button.btn2{width: 158px;margin-left: 9px;}
+.descrptnBtnSec button.btn1{width: 360px;}
+.descrptnBtnSec button.btn2{width: 240px;}
 .descrptnBtnSec button.btn3{width: 209px;}
 .prductGallery{display: flex;flex-direction: column;z-index: 2;position: relative;}
 .horVerSlider .dots{bottom: 0px;}
@@ -420,9 +423,7 @@ footer ul li a:hover{color: #F4C086;}
 /*Bundled Courses page*/
 .bundledCourse h1{margin-bottom: 15px;}
 .bundleHdng{margin-bottom: 43px;}
-.bundledCourse .journalCard .card-header{margin-bottom: 33px;}
-.bundledCourse .journalCard h4{margin-bottom: 17px;}
-.bundledCourse .journalCard p.journalDetails{font-size: 21px;font-weight: bold;line-height: 25px;}
+
 
 /*Products Page*/
 .productTopBanner{height: 281px;}
@@ -431,9 +432,9 @@ footer ul li a:hover{color: #F4C086;}
 .prdctMidban .row div{height: 234px; background-color: #D8D8D8;border-radius: 8px;position: relative;}
 .prdctMidban .row div h2{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);}
 
-.productsSec .card-body{display: flex;align-items: center;margin: 10px 0 0 0;}
+/* .productsSec .card-body{display: flex;align-items: center;margin: 10px 0 0 0;}
 .productsSec .card-body h4{text-align: left;font-size: 21px;line-height: 25px;width: 110px;}
-.productsSec .card-body p{text-align: right;}
+.productsSec .card-body p{text-align: right;} */
 
 /*Group Consultation*/
 .howtobookGC{margin: 89px 0 111px;}
@@ -453,8 +454,9 @@ footer ul li a:hover{color: #F4C086;}
 
 .multipleQuizSec{margin: 90px 0 52px;}
 .multipleQuizSec h2{margin: 0 0 23px;}
+.multipleQuizSec button{ border-radius: 35px;}
 .multipleQuizSec p{margin:0 0 53px;}
-.quizCard{border-radius: 26px;padding: 35px 36px;display: flex;justify-content: center;flex-direction: row;align-items: center;margin: 15px 0;margin: 22px 0;}
+.quizCard{border-radius: 26px;padding: 20px; display: flex;justify-content: center;flex-direction: row;align-items: center;margin: 15px 0;margin: 22px 0;}
 .quizCard .card-header{width: 142px;height: 142px;border-radius: 16px;overflow: hidden;background-position: center;background-repeat: no-repeat;background-size: cover;margin-left: 47px;}
 .quizCard .card-body h2{margin: 0 0 20px;}
 .quizCard .card-body p{color: #979797;margin: 0;}

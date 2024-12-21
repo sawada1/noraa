@@ -13,12 +13,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
     // If the user is already logged in and tries to go to login or signup page, redirect to dashboard
     if (authStore.isLoggedIn && to.path === '/login') {
-        return router.push(localePath("profile"));  // Redirect logged-in users to dashboard
+        return router.push(localePath("/profile"));  // Redirect logged-in users to dashboard
     }
 
     // If the user is not logged in and tries to access a protected route, redirect to login page
     if (!authStore.isLoggedIn && to.path !== '/login') {
-        return router.push(localePath("auth")); // Redirect non-authenticated users to login
+        return router.push(localePath("/login")); // Redirect non-authenticated users to login
     }
 
     //   if (!authStore.isLoggedIn) {

@@ -26,105 +26,12 @@
             <div class="productsSec">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-4 text-center">
-                            <div class="card journalCard">
-                                <div class="card-header">
-                                    <figure>
-                                        <img src="/images/journal2.png" alt="products image">
-                                    </figure>
-                                </div>
-                                <div class="card-body">
-                                    <p class="journalDetails">لوريم إيبسوم هو ببساطة نص وهمي للطباعة</p>
-                                    <h4 class="fC-green">الباقة 1</h4>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary bg-green btnGreen1">عرض التفاصيل</button>
-                                </div>
-                            </div>
+                        <div v-for="i in 6" class="col-md-4 text-center mb-4">
+                           <CardJournal></CardJournal>
                         </div>
-                        <div class="col-md-4 text-center">
-                            <div class="card journalCard">
-                                <div class="card-header">
-                                    <figure>
-                                        <img src="/images/journal2.png" alt="products image">
-                                    </figure>
-                                </div>
-                                <div class="card-body">
-                                    <p class="journalDetails">لوريم إيبسوم هو ببساطة نص وهمي للطباعة</p>
-                                    <h4 class="fC-green">الباقة 1</h4>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary bg-green btnGreen1">عرض التفاصيل</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <div class="card journalCard">
-                                <div class="card-header">
-                                    <figure>
-                                        <img src="/images/journal2.png" alt="products image">
-                                    </figure>
-                                </div>
-                                <div class="card-body">
-                                    <p class="journalDetails">لوريم إيبسوم هو ببساطة نص وهمي للطباعة</p>
-                                    <h4 class="fC-green">الباقة 1</h4>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary bg-green btnGreen1">عرض التفاصيل</button>
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <div class="card journalCard">
-                                <div class="card-header">
-                                    <figure>
-                                        <img src="/images/journal2.png" alt="products image">
-                                    </figure>
-                                </div>
-                                <div class="card-body">
-                                    <p class="journalDetails">لوريم إيبسوم هو ببساطة نص وهمي للطباعة</p>
-                                    <h4 class="fC-green">الباقة 1</h4>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary bg-green btnGreen1">عرض التفاصيل</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <div class="card journalCard">
-                                <div class="card-header">
-                                    <figure>
-                                        <img src="/images/journal2.png" alt="products image">
-                                    </figure>
-                                </div>
-                                <div class="card-body">
-                                    <p class="journalDetails">لوريم إيبسوم هو ببساطة نص وهمي للطباعة</p>
-                                    <h4 class="fC-green">الباقة 1</h4>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary bg-green btnGreen1">عرض التفاصيل</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center">
-                            <div class="card journalCard">
-                                <div class="card-header">
-                                    <figure>
-                                        <img src="/images/journal2.png" alt="products image">
-                                    </figure>
-                                </div>
-                                <div class="card-body">
-                                    <p class="journalDetails">لوريم إيبسوم هو ببساطة نص وهمي للطباعة</p>
-                                    <h4 class="fC-green">الباقة 1</h4>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-primary bg-green btnGreen1">عرض التفاصيل</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                 
                 </div>
            </div>
 

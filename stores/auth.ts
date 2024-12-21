@@ -19,9 +19,10 @@ interface ApiResponse<T> {
   
 
 export const useAuthStore = defineStore('auth', {
-    state: (): AuthState => ({
-        user: null, // Holds the logged-in user data
-        token: null, // Holds the authentication token
+    state: () => ({
+        user: null as User | null , // Holds the logged-in user data
+        token: null as string | null, // Holds the authentication token
+        checkForm: 1 as number
     }),
     getters: {
         isLoggedIn: (state) => !!state.token, // Returns true if token exists

@@ -4,7 +4,6 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="bannerImage" style="background-image: url(/images/consultation-banner.png);">
-                            <!-- <img src="/images/consultation-banner.png" alt="consultation banner"/> -->
                             <div>
                                 <h1 class="fC-LightOrange">الأستشارات</h1>
                                 <p>لوريم إيبسوم هو ببساطة نص وهمي<br>للطباعة والتنضيد</p>

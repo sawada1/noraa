@@ -1,24 +1,11 @@
 <template >
     <div>
-      <section class="main-body">
+      <section ref="content" @mouseup="highlightText"  class="main-body">
           
         <HomeHero></HomeHero>
-            <div class="organization d-none">
-                <div class="container">
-                    <div class="row">
-                        <h5 class="text-center fC-green">Organizations Connected With Us</h5>
-                        <ul class="d-flex">
-                            <li><img src="/images/organizations1.png" alt="organizations image"></li>
-                            <li><img src="/images/organizations2.png" alt="organizations image"></li>
-                            <li><img src="/images/organizations3.png" alt="organizations image"></li>
-                            <li><img src="/images/organizations4.png" alt="organizations image"></li>
-                            <li><img src="/images/organizations5.png" alt="organizations image"></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
 
-            <HomeMentalHealth></HomeMentalHealth>
+
+            <HomeMentalHealth ></HomeMentalHealth>
 
           <HomeHappy></HomeHappy>
 
@@ -36,7 +23,26 @@
 <script setup lang="ts">
 import { useExampleStore } from '@/stores/example';
 const exampleStore = useExampleStore();
+let value = ref(0);
 
+const content = ref<HTMLElement | null>(null);
+
+const highlightText = () => {
+  const selection = window.getSelection();
+  if (selection && selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    const span = document.createElement('span');
+    span.style.backgroundColor = 'yellow'; // Default highlight color
+    span.dataset.noteId = 'some-id'; // You can use this to map to a note
+    range.surroundContents(span);
+    selection.removeAllRanges();
+  }
+};
+
+
+   
+
+     
 </script>
 
 <style lang="">
