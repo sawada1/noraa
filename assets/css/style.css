@@ -312,8 +312,7 @@ footer ul li a:hover{color: #F4C086;}
 .bookCard .card-footer{display: flex;margin:22px 0 0 0;justify-content: space-between;}
 .bookCard .card-footer button:first-child{width: 199px;}
 .bookCard .card-footer button:last-child{width: 148px;}
-.bookCard .card-footer button{height: 65px;color: #ffffff;font-size: 18px;border-radius: 32.5px;border: 0px;padding: 0;text-transform: uppercase;}
-.bookCard .card-footer button:hover{background: #F4C086;color: #212725;}
+.bookCard .card-footer button{height: 50px;color: #ffffff;font-size: 18px;border-radius: 32.5px;border: 0px;padding: 0;text-transform: uppercase;}
 
 .aboutAuthor{padding-bottom: 37px}
 .aboutAuthor h2{margin-bottom: 40px;}

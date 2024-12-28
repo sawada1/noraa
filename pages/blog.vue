@@ -5,12 +5,12 @@
                 <div class="col-9">
                     <div class="main-details">
                         <div class="image">
-                            <img class="rounded w-100" height="330" src="/images/journal1.png" alt="">
+                            <img class="rounded w-100" height="330" :src="store.blog.image" alt="">
                         </div>
-                        <h1 class="fs-2"> لــوريــم إيــبـسـوم هـو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع
+                        <h1 class="fs-2"> {{ store.blog.title }}
                         </h1>
                         <div class="d-flex align-items-center gap-3 mt-3">
-                            <span> 10/10/2024 </span>
+                            <span> {{ store.blog.created_at }}</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
                                 <g clip-path="url(#clip0_88_2396)">
@@ -26,22 +26,7 @@
                             </svg>
                         </div>
                         <p class="mt-3">
-                            لــوريم إيــبسوم هـو نص عــربي غيــر معــنى، يُستـخدم في مجالات الطباعة ومواقع الويب كنص دال
-                            على الشكل والتخطيط. يمكنك اختيار عدد الفقرات وعدد الحروف ثم النقر علىهذا النص هو مثال لنص
-                            يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد
-                            مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى لــوريم إيــبسوم هـو نص عــربي غيــر
-                            معــنى، يُستـخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل والتخطيط. يمكنك اختيار عدد
-                            الفقرات وعدد الحروف ثم النقر علىهذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم
-                            توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص
-                            الأخرى إضافة إلى عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل
-                            والتخطيط. يمكنك اختيار عدد الفقرات لــوريم إيــبسوم هـو نص عــربي غيــر معــنى، يُستـخدم في
-                            مجالات الطباعة ومواقع الويب كنص دال على الشكل والتخطيط. يمكنك اختيار عدد الفقرات وعدد الحروف
-                            ثم النقر علىهذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من
-                            مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى
-                            لــوريم إيــبسوم هـو نص عــربي غيــر معــنى، يُستـخدم في مجالات الطباعة ومواقع الويب كنص دال
-                            على الشكل والتخطيط. يمكنك اختيار عدد الفقرات وعدد الحروف ثم النقر علىهذا النص هو مثال لنص
-                            يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد
-                            مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى
+                         {{ store.blog.fully_description }}
                         </p>
                         <div class="mt-5">
                             <h3 class="fC-green"> التعليقات </h3>
@@ -130,14 +115,14 @@
                         <form class="w-100 d-flex justify-content-center flex-column align-items-center">
 
                             <div class="mb-3 w-100">
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" v-model="comment" id="message-text"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn  solid px-4" style="border-radius: 20px;"
                             data-bs-dismiss="modal"> رجوع </button>
-                        <button type="button" class="btn btn-success  bg-green px-4" style="border-radius: 20px;"> إرسال
+                        <button @click="getComment()" type="button" class="btn btn-success  bg-green px-4" style="border-radius: 20px;"> إرسال
                         </button>
                     </div>
                 </div>
@@ -146,6 +131,14 @@
     </div>
 </template>
 <script setup>
+import {useBlogsStore} from '@/stores/blogs';
+let store = useBlogsStore();
+let route = useRoute()
+store.getBlog(route.query.id);
+let comment = ref('');
+const getComment = async() =>{
+    store.createComment(route.query.id , comment.value);
+}
 const reviews = [
     { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },
     { name: 'أحمد مصطفى', rating: 5, date: '6 يناير, 2024', comment: 'العمل بشكل مثالي، شكراً!' },

@@ -9,10 +9,10 @@ export default defineNuxtRouteMiddleware(async (to) => {
     const route = useRoute();
     const router = useRouter();
     // Initialize auth state
-    authStore.initializeAuth();
+    // await authStore.initializeAuth();
 
     // If the user is already logged in and tries to go to login or signup page, redirect to dashboard
-    if (authStore.isLoggedIn && to.path === '/login') {
+    if (authStore.token && to.path === '/login') {
         return router.push(localePath("/profile"));  // Redirect logged-in users to dashboard
     }
 

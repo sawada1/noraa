@@ -1,5 +1,5 @@
 <template>
-    <div class="container mb-5 mt-5">
+    <div class="">
         <div class="chat-container">
             <div class="persons">
                 <div class="head d-flex flex-column gap-3">
@@ -88,6 +88,6 @@
 <script setup>
 
 </script>
-<style lang="scss">
-
+<style lang="">
+    
 </style>

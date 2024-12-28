@@ -23,8 +23,8 @@
                 </div>
                 <div class="blogs mt-5">
                     <div class="row">
-                        <div v-for="i in 6" class="col-12 col-xl-4 col-lg-4 text-center mb-4">
-                            <CardJournal2></CardJournal2>
+                        <div v-for="item in store.blogs" class="col-12 col-xl-4 col-lg-4 text-center mb-4">
+                            <CardJournal2 :blog="item"></CardJournal2>
                         </div>
                     </div>
                 </div>
@@ -33,6 +33,9 @@
     </div>
 </template>
 <script setup>
+import {useBlogsStore} from '@/stores/blogs';
+let store = useBlogsStore();
+store.getBlogs();
 const selectedCity = ref();
 const cities = ref([
     { name: 'New York', code: 'NY' },
