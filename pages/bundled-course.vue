@@ -13,9 +13,9 @@
                             }" :spaceBetween="10" :thumbs="{ swiper: thumbsSwiper }"
                                 :modules="[SwiperFreeMode, SwiperNavigation, SwiperZoom, SwiperThumbs]"
                                 class="mySwiper2 show">
-                                <swiper-slide v-for="i, index in images" :key="index">
+                                <swiper-slide v-for="i, index in store.CourseData?.images" :key="index">
                                     <div class="swiper-zoom-container">
-                                        <img :src="i.image" class="w-100" />
+                                        <img :src="i" class="w-100" />
                                     </div>
                                 </swiper-slide>
                             </swiper>
@@ -42,8 +42,8 @@
                                         },
                                     }" :modules="[SwiperFreeMode, SwiperNavigation, SwiperThumbs]"
                                     class="mySwiper small-container">
-                                    <swiper-slide v-for="i, index in images" :key="index">
-                                        <img :src="i.image" class="show-small-img" />
+                                    <swiper-slide v-for="i, index in store.CourseData?.images" :key="index">
+                                        <img :src="i" class="show-small-img" />
                                     </swiper-slide>
 
                                 </swiper>
@@ -57,10 +57,10 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h2 class=""> اسم باقة الدورة اسم باقة الدورة </h2>
+                        <h2 class=""> {{ store.CourseData?.title }} </h2>
                         <div class="price d-flex align-items-center gap-3 mb-3 mt-5">
-                            <h4 class="fC-green fw-bold m-0"> السعر : 9999 ر.س</h4>
-                            <h6> قبل الخصم 99999 ر.س </h6>
+                            <h4 class="fC-green fw-bold m-0"> السعر : {{ store.CourseData?.price }} ر.س</h4>
+                            <h6 v-if="store.CourseData?.price_before_discount"> قبل الخصم {{ store.CourseData?.price_before_discount }} ر.س </h6>
                         </div>
                         <div class="details-price d-flex flex-column gap-3 mt-4">
                             <div class="d-flex align-items-center gap-2">
@@ -72,7 +72,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                                 <h6> اجمالي الحصص : </h6>
-                                <span> 99 حصة </span>
+                                <span> {{ store.CourseData?.total_count_lecture }} حصة </span>
                             </div>
                             <div class="d-flex align-items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
@@ -89,10 +89,7 @@
                         <h4 class="mt-5"> ملخص </h4>
                         <div class="detailscDescptn">
                             <p>
-                                وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على
-                                مقاطع لوريم إيبسوم. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة عندما أخذت
-                                طابعة غير معروفة لوح الطباعة وخلطته لصنع نوع. وقد انتشر بشكل كبير في ستينيات القرن
-                                الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على مقاطع لوريم إيبسوم.
+                                {{ store.CourseData?.short_description }}
                             </p>
 
                         </div>
@@ -133,7 +130,7 @@
                     <button @click="checkBtn = 3" :class="{ 'active': checkBtn == 3 }"> ماذا ساتعلم</button>
                 </div>
                 <div v-if="checkBtn == 1" class="desc-details d-flex flex-column gap-5">
-                    <div class="d-flex flex-column gap-4">
+                    <!-- <div class="d-flex flex-column gap-4">
                         <h3> وصف شامل عن (اسم الباقة) </h3>
                         <p>
                             لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل
@@ -172,23 +169,24 @@
                             عندما تتلقى تفاصيل تسجيل الدخول الخاصة بالدورة التدريبية، يمكنك البدء في التعلم على الفور. الأمر
                             بهذه البساطة!
                         </p>
-                    </div>
+                    </div> -->
+                    {{ store.CourseData?.fully_description }}
                 </div>
                 <div v-if="checkBtn == 2" class="accordion-details">
                     <Accordion value="0">
-                        <AccordionPanel v-for="i, index in 2" :value="index">
+                        <AccordionPanel v-for="item, index in  store.CourseData?.sections_videos " :value="index">
                             <AccordionHeader class="head">
-                                كورس رقم {{ i }}
+                                كورس رقم {{item.section_name }}
                             </AccordionHeader>
                             <AccordionContent class="mt-3">
-                                <div v-for="i in 2"
+                                <div v-for="i in item.videos"
                                     class="d-flex mb-3 align-items-center justify-content-between w-100 item">
                                     <div class="d-flex align-items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32"
                                             fill="none">
                                             <circle cx="16.9053" cy="16" r="12" stroke="#43806C" stroke-width="8" />
                                         </svg>
-                                        <h5> لوريم إيبسوم هو نص عربي غير معنى </h5>
+                                        <h5> {{ i.title }}</h5>
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20"
@@ -199,7 +197,7 @@
                                                 stroke-linejoin="round" />
                                         </svg>
                                         <span> المدة الحصة : </span>
-                                        <span class="minute"> 999 دقيقة </span>
+                                        <span class="minute"> {{ i.time }} دقيقة </span>
                                     </div>
                                 </div>
                             </AccordionContent>
@@ -209,7 +207,7 @@
                 </div>
                 <div v-if="checkBtn == 3" class="learn">
                     <div class="row">
-                        <div v-for="i in 6" class="col-12 col-xl-6 col-lg-6">
+                        <div v-for="i in  store.CourseData?.outcome" class="col-12 col-xl-6 col-lg-6">
                             <div class="d-flex my-4 align-items-center gap-2">
                                 <div class="check">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -219,8 +217,7 @@
                                             fill="white" />
                                     </svg>
                                 </div>
-                                <h6> لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على
-                                    الشكل والتخطيط. </h6>
+                                <h6> {{ i }} </h6>
                             </div>
                         </div>
                     </div>
@@ -245,26 +242,14 @@
     </div>
 </template>
 <script setup lang="ts">
+import { useCoursesStore } from '@/stores/courses';
+let store = useCoursesStore();
+let route = useRoute()
+store.getCourse(route.query.id);
 const thumbsSwiper = ref(null);
 const tab1 = ref(1);
 const checkBtn = ref(1);
-// Reviews Data
-const reviews = [
-    { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },
-    { name: 'أحمد مصطفى', rating: 5, date: '6 يناير, 2024', comment: 'العمل بشكل مثالي، شكراً!' },
-    { name: 'مصطفى ماجد', rating: 4, date: '6 يناير, 2024', comment: 'كنت أتساءل عما إذا كان من الممكن إضافة المزيد...' },
-    { name: 'معاذ جابر', rating: 4, date: '6 يناير, 2024', comment: 'مرحباً، أود أن أعرف كيفية الحصول على تحديثات...' },
-    { name: 'معاذ جابر', rating: 4, date: '6 يناير, 2024', comment: 'مرحباً، أود أن أعرف كيفية الحصول على تحديثات...' },
 
-];
-
-const starBreakdown = [
-    { stars: 5, percentage: 20 },
-    { stars: 4, percentage: 20 },
-    { stars: 3, percentage: 20 },
-    { stars: 2, percentage: 20 },
-    { stars: 1, percentage: 20 },
-];
 const setThumbsSwiper = (swiper: any) => {
     thumbsSwiper.value = swiper;
 };

@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div v-if="BookData" class="mb-5">
         <div class="topDetailsSec">
             <div class="container">
                 <div class="row">
@@ -33,9 +33,9 @@
                             }" :spaceBetween="10" :thumbs="{ swiper: thumbsSwiper }"
                                 :modules="[SwiperFreeMode, SwiperNavigation, SwiperZoom, SwiperThumbs]"
                                 class="mySwiper2 show">
-                                <swiper-slide v-for="i, index in images" :key="index">
+                                <swiper-slide v-for="i, index in BookData.images" :key="index">
                                     <div class="swiper-zoom-container">
-                                        <img :src="i.image" class="w-100" />
+                                        <img :src="i" class="w-100 rounded-3" />
                                     </div>
                                 </swiper-slide>
                             </swiper>
@@ -62,8 +62,8 @@
                                         },
                                     }" :modules="[SwiperFreeMode, SwiperNavigation, SwiperThumbs]"
                                     class="mySwiper small-container">
-                                    <swiper-slide v-for="i, index in images" :key="index">
-                                        <img :src="i.image" class="show-small-img" />
+                                    <swiper-slide v-for="i, index in BookData.images" :key="index">
+                                        <img :src="i" class="show-small-img" />
                                     </swiper-slide>
 
                                 </swiper>
@@ -77,17 +77,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h2 class="fC-green">اسم الكتاب<a class="bdShare" href="#"><img src="/images/share_icon.png"
+                        <h2 class="fC-green"> {{ BookData.title }} <a class="bdShare" href="#"><img src="/images/share_icon.png"
                                     alt="share Icon"></a></h2>
                         <h4>وصف</h4>
                         <div class="detailscDescptn">
-                            <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص
-                                الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>
-                            <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء ليس
-                                فقط لخمسة قرون، بل أيضًا للقفزة.</p>
-                            <p>وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على
-                                مقاطع لوريم إيبسوم. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة عندما أخذت
-                                طابعة غير معروفة لوح الطباعة وخلطته لصنع نوع.</p>
+                            <p> {{ BookData.fully_description }} </p>
+                         
                         </div>
                         <div class="cheknDropdown d-flex align-items-center gap-3">
                             <select class="writtenBy">
@@ -133,7 +128,7 @@
         <div class=" container mt-5 d-flex">
             <div class="tabsTop">
                 <ul class="tabs">
-                    <li @click="tab1 = 1" rel="tab4" :class="{ 'active': tab1 == 1 }"> وصف الكتاب </li>
+                    <li @click="tab1 = 1" rel="tab4" :class="{ 'active': tab1 == 1 }"> وصف الكاتب </li>
                     <li @click="tab1 = 2" rel="tab3" :class="{ 'active': tab1 == 2 }"> تقيمات الكتاب </li>
                 </ul>
             </div>
@@ -145,34 +140,12 @@
                     <div class="col-12">
                         <div class=" noraBookCard">
                             <figure>
-                                <span><img src="/images/book-club.png" alt="book /images"></span>
-                                <figcaption>اسم الكتاب</figcaption>
+                                <span><img :src="BookData?.author?.image" alt="book /images"></span>
+                                <figcaption> {{ BookData?.author?.name }} </figcaption>
                             </figure>
                             <div class="bookDeatils">
                                 <h2 class="fC-green">وصف</h2>
-                                <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو
-                                    النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>
-                                <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء
-                                    ليس فقط لخمسة قرون، بل أيضًا للقفزة.</p>
-                                <p>وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على
-                                    مقاطع لوريم إيبسوم. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة عندما
-                                    أخذت طابعة غير معروفة لوح الطباعة وخلطته لصنع نوع.</p>
-                            </div>
-                        </div>
-                        <div class=" noraBookCard">
-                            <figure>
-                                <span><img src="/images/book-club.png" alt="book /images"></span>
-                                <figcaption>اسم الكتاب</figcaption>
-                            </figure>
-                            <div class="bookDeatils">
-                                <h2 class="fC-green">وصف</h2>
-                                <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو
-                                    النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>
-                                <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء
-                                    ليس فقط لخمسة قرون، بل أيضًا للقفزة.</p>
-                                <p>وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على
-                                    مقاطع لوريم إيبسوم. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة عندما
-                                    أخذت طابعة غير معروفة لوح الطباعة وخلطته لصنع نوع.</p>
+                                 <p> {{ BookData?.author?.description }} </p>                        
                             </div>
                         </div>
                     </div>
@@ -189,12 +162,11 @@
                             <Rating class="bigStars" :model-value="4" readonly />
                         </div>
 
-                        <p class="mb-3" style="color:#758AA0; font-size: 12px;"> إجمالي التقييمات ({{
-                            starBreakdown.length }}) </p>
-                        <div class="mb-2" v-for="rating in starBreakdown" :key="rating.stars">
+                        <p class="mb-3" style="color:#758AA0; font-size: 12px;"> إجمالي التقييمات ({{ BookData.rate_count }}) </p>
+                        <div class="mb-2" v-for="rating in BookData.rate_percentage" :key="rating.rate">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="">{{ rating.stars }}</span>
+                                    <span class="">{{ rating.rate }}</span>
                                     <span class="" style="color:#F4C900;"> ★</span>
                                 </div>
                                 <div class="progress  flex-grow-1" style="height: 8px">
@@ -210,7 +182,7 @@
                         <div class="d-flex border-bottom align-items-center justify-content-between">
                             <h4>
 
-                                {{ reviews.length }}
+                                {{ BookData?.comments_count }}
 
                                 تعليق
                             </h4>
@@ -232,22 +204,23 @@
                                 </button>
                             </div>
                         </div>
-                        <div v-for="(review, index) in reviews" :key="index" class="mb-4 mt-4 border-bottom pb-3">
+                        <div v-for="(review, index) in BookData.comments" :key="index" class="mb-4 mt-4 border-bottom pb-3">
                             <div class="d-flex align-items-center gap-3">
 
                                 <div class="image">
-                                    <Avatar image="/images/aboutBanner.jpg" class="mr-2" size="large" shape="circle" />
+                                    <!-- <Avatar image="/images/aboutBanner.jpg" class="mr-2" size="large" shape="circle" /> -->
+                                    <Avatar :image="review?.vendor?.image" class="mr-2" size="large" shape="circle" />
 
                                 </div>
 
                                 <div>
-                                    <p class="mb-1 fw-bold">{{ review.name }}</p>
+                                    <p class="mb-1 fw-bold">{{ review?.vendor?.name }}</p>
                                     <div class="d-flex align-items-center gap-2 mb-2">
-                                        <span class="text-muted" style="color: #758AA0; font-size: 14px;">{{ review.date
+                                        <span class="text-muted" style="color: #758AA0; font-size: 14px;">{{ review?.created_at
                                             }}</span>
                                         <Rating :model-value="4" readonly />
                                     </div>
-                                    <p class="text-muted">{{ review.comment }}</p>
+                                    <p class="text-muted">{{ review?.description }}</p>
                                 </div>
                             </div>
                         </div>
@@ -270,16 +243,16 @@
                     <div class="modal-body  w-100">
                         <form class="w-100 d-flex justify-content-center flex-column align-items-center">
                             <div class="mb-3">
-                                <Rating class="bigStars" :model-value="4"  />
+                                <Rating class="bigStars" v-model="commentData.star"  />
                             </div>
                             <div class="mb-3 w-100">
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" v-model="commentData.comment" id="message-text"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn  solid px-4" style="border-radius: 20px;" data-bs-dismiss="modal"> رجوع </button>
-                        <button type="button" class="btn btn-success  bg-green px-4" style="border-radius: 20px;"> إرسال </button>
+                        <button type="button" class="btn btn-success  bg-green px-4" @click="createCommentFunc()" data-bs-dismiss="modal" style="border-radius: 20px;"> إرسال </button>
                     </div>
                 </div>
             </div>
@@ -302,10 +275,27 @@
     </div>
 </template>
 <script setup lang="ts">
+import Rating from 'primevue/rating';
 const thumbsSwiper = ref(null);
 const tab1 = ref(1);
-import Rating from 'primevue/rating';
-
+const route = useRoute();
+const itemId = ref(route.query.id);
+import { useBooksStore } from '@/stores/books';
+let store = useBooksStore();
+store.getBook(route.query.id);
+let BookData = ref(store.BookData);
+let commentData = ref({
+    comment: '',
+    star: 1
+})
+const createCommentFunc = ()=>{
+    store.createComment(route.query.id , commentData.value)
+}
+watch(()=> store.BookData , (val)=>{
+    if(val){
+        BookData.value = val
+    }
+})
 // Reviews Data
 const reviews = [
     { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },
@@ -316,39 +306,10 @@ const reviews = [
 
 ];
 
-const starBreakdown = [
-    { stars: 5, percentage: 20 },
-    { stars: 4, percentage: 20 },
-    { stars: 3, percentage: 20 },
-    { stars: 2, percentage: 20 },
-    { stars: 1, percentage: 20 },
-];
 const setThumbsSwiper = (swiper: any) => {
     thumbsSwiper.value = swiper;
 };
 
-let images = ref([
-    {
-        image: "/images/book-club.png",
-    },
-    {
-        image: "/images/bookimage.png",
-    },
-    {
-        image: "/images/couple1.jpg",
-    },
-    {
-        image: "/images/couple2.png",
-    },
-    {
-        image: "/images/book-club.png",
-    },
-    {
-        image: "/images/couple1.jpg",
-    },
-    {
-        image: "/images/bookimage.png",
-    },
-])
+
 </script>
 <style></style>

@@ -88,13 +88,16 @@
         </div>
 
     </div>
+    <Toast />
+
 </template>
 <script setup>
+import { useToast } from "primevue/usetoast";
 import { useAuthStore } from "@/stores/auth.ts";
 let store = useAuthStore();
 import { useForm } from "vee-validate";
 import * as yup from "yup";
-
+const toast = useToast();
 const { locale } = useI18n();
 const { errors, handleSubmit, values, resetForm, defineField } = useForm({
     validationSchema: yup.object({
@@ -106,8 +109,12 @@ const [email, emailAttrs] = defineField("email");
 const [password, passwordAttrs] = defineField("password");
 const onSubmit = handleSubmit(() => {
     store.login(values , resetForm);
-
 });
+watch(()=>store.checkToast , (val)=>{
+    if(val){
+        toast.add({ severity: 'error', summary: 'Error Message', detail: store.messageToast, life: 5000 });
+    }
+})
 </script>
 <style lang="">
 

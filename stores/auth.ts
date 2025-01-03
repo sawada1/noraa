@@ -2,7 +2,6 @@
 import { defineStore } from 'pinia';
 import { AxiosError } from 'axios';
 
-
 interface User {
     id: number;
     name: string;
@@ -35,6 +34,8 @@ export const useAuthStore = defineStore('auth', {
         errorsLogin: undefined,
         phoneLogin: undefined,
         errorsRegister: undefined,
+        messageToast: '',
+        checkToast: false,
         otpNum: '' as number | string,
         errorOtp: undefined,
     }),
@@ -42,7 +43,7 @@ export const useAuthStore = defineStore('auth', {
         isLoggedIn: (state) => !!state.token, // Returns true if token exists
     },
     actions: {
-        async login(form: any , resetForm: any) {
+        async login(form: any, resetForm: any) {
             const router = useRouter();
             const localePath = useLocalePath();
             this.pendingLogin = true;
@@ -52,7 +53,7 @@ export const useAuthStore = defineStore('auth', {
             try {
                 const api = useApi();
                 const response = await api.post<ApiResponse<AuthState>>('login', form);
-                const { user , token } = response.data.data;
+                const { user, token } = response.data.data;
                 if (user && token) {
                     this.pendingLogin = false;
                     this.setUser(user, token);
@@ -69,8 +70,16 @@ export const useAuthStore = defineStore('auth', {
                 }
             } catch (error) {
                 this.pendingLogin = false;
+                this.checkToast = true;
                 const axiosError = error as AxiosError; // Cast error to AxiosError
                 this.errorsRegister = axiosError.response?.data?.errors;
+                if (!axiosError.response?.data?.errors?.verified) {
+                    this.checkOtp = 2;
+                    this.checkForm = 2;
+                    this.messageToast = axiosError.response?.data?.errors?.message;
+                    this.otpNum = String(axiosError.response?.data?.errors?.otp);
+                    this.phoneLogin = axiosError.response?.data?.errors?.phone;
+                }
             }
         },
         async register(form: any, resetForm: any) {
@@ -88,7 +97,7 @@ export const useAuthStore = defineStore('auth', {
                     this.pendingReg = false;
                     this.phoneLogin = form.phone;
                     this.checkOtp = 2;
-                    this.otpNum = String(response.data.data?.vendor?.verification_code);
+                    this.otpNum = String(response.data.data?.user?.verification_code);
                     this.errorsRegister = undefined;
                     resetForm({
                         values: {
@@ -137,6 +146,9 @@ export const useAuthStore = defineStore('auth', {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
             }
+            const router = useRouter();
+            const localePath = useLocalePath();
+            router.push(localePath('/'));
         },
         initializeAuth() {
             // Restore token from localStorage

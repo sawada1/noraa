@@ -43,7 +43,7 @@
               </div>
               <span>  الملاحظات </span>
             </div>
-            <div class="item d-flex align-items-center gap-2" @click="store.profileStat = 8" :class="{'active': store.profileStat == 8}">
+            <div class="item d-flex align-items-center gap-2" @click="store2.clearAuth()" :class="{'active': store.profileStat == 8}">
               <div class="icon">
                 <SvgProfile8></SvgProfile8>
               </div>
@@ -54,8 +54,9 @@
 </template>
 <script setup>
 import {useGeneralStore} from '@/stores/general';
-
+import { useAuthStore } from "@/stores/auth.ts";
 let store = useGeneralStore();
+let store2 = useAuthStore();
 </script>
 <style lang="">
     

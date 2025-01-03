@@ -35,7 +35,6 @@
 <script setup>
 import {useBlogsStore} from '@/stores/blogs';
 let store = useBlogsStore();
-store.getBlogs();
 const selectedCity = ref();
 const cities = ref([
     { name: 'New York', code: 'NY' },
@@ -44,6 +43,11 @@ const cities = ref([
     { name: 'Istanbul', code: 'IST' },
     { name: 'Paris', code: 'PRS' }
 ]);
+
+onMounted(() => {
+store.getBlogs();
+ 
+});
 </script>
 <style lang="">
 

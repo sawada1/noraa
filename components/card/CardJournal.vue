@@ -1,10 +1,10 @@
 <template>
     <div class="card-bundle">
-        <img src="/images/journal2.png" alt="journals image">
+        <img :src="course.image" alt="journals image">
         <div class="details">
-            <h4> الباقة 1 </h4>
-            <p> وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي. </p>
-            <nuxt-link to="/bundled-course">
+            <h4> {{ course.title }} </h4>
+            <p> {{ course.short_description }}  </p>
+            <nuxt-link :to="localePath({ path: '/bundled-course', query:{id: course?.id} })">
                 <button> عرض التفاصيل </button>
             </nuxt-link>
         </div>
@@ -26,7 +26,19 @@
 </template>
 
 <script setup>
+const localePath = useLocalePath();
 
+let props = defineProps({
+    course:{
+        required: true,
+        default:{
+            id: 1,
+            title: 'title',
+            image: '/images/journal2.png',
+            short_description: 'dsdsdsd'
+        }
+    }
+})
 </script>
 <style lang="scss">
 .card-bundle {

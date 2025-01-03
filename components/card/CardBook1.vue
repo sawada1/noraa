@@ -2,10 +2,10 @@
     <div>
         <div class=" bookCard">
             <div class="card-body">
-                <figure><img src="/images/bookimage.png" alt="book image"></figure>
+                <figure><img :src="book?.image" alt="book image" class="w-100"></figure>
                 <div class="prdt_details">
-                    <p>لوريم إيبسوم هو ببساطة النص الوهمي</p>
-                    <NuxtLink to="/book-details">التفاصيل</NuxtLink>
+                    <p> {{ book?.title }} </p>
+                    <NuxtLink :to="localePath({ path: '/book-details', query:{id: book?.id} })">التفاصيل</NuxtLink>
                 </div>
             </div>
             <div  class="card-footer">
@@ -17,10 +17,20 @@
     </div>
 </template>
 <script setup>
+const localePath = useLocalePath();
+
 let props = defineProps({
     profile:{
         default: false,
         type: Boolean
+    },
+    book:{
+        required: true,
+        default:{
+            id: 1,
+            title: 'title',
+            image: '/images/bookimage.png'
+        }
     }
 })
 

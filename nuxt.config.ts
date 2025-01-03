@@ -19,19 +19,17 @@ export default defineNuxtConfig({
   primevue: {
     options: {
       ripple: true,
-      // inputVariant: 'filled',
+      inputVariant: 'filled',
       theme: {
         preset: Aura,
-        // options: {
-        //   prefix: 'p',
-        //   darkModeSelector: 'system',
-        //   cssLayer: false
-        // }
+        options: {
+          prefix: 'p',
+          darkModeSelector: 'system',
+          cssLayer: false
+        }
       }
     },
-    components:{
-      include: ['Button']
-    }
+   
 },
 
   plugins: [

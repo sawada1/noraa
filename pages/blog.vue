@@ -26,7 +26,7 @@
                             </svg>
                         </div>
                         <p class="mt-3">
-                         {{ store.blog.fully_description }}
+                            {{ store.blog.fully_description }}
                         </p>
                         <div class="mt-5">
                             <h3 class="fC-green"> التعليقات </h3>
@@ -37,7 +37,7 @@
                                         <div class="d-flex border-bottom align-items-center justify-content-between">
                                             <h4>
 
-                                                {{ reviews.length }}
+                                                {{ store.blog?.comments?.length }}
 
                                                 تعليق
                                             </h4>
@@ -56,24 +56,24 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div v-for="(review, index) in reviews" :key="index"
+                                        <div v-for="(review, index) in store.blog?.comments" :key="index"
                                             class="mb-4 mt-4 border-bottom pb-3">
                                             <div class="d-flex align-items-center gap-3">
 
                                                 <div class="image">
-                                                    <Avatar image="/images/aboutBanner.jpg" class="mr-2" size="large"
+                                                    <Avatar :image="review.vendor.image" class="mr-2" size="large"
                                                         shape="circle" />
 
                                                 </div>
 
                                                 <div>
-                                                    <p class="mb-1 fw-bold">{{ review.name }}</p>
+                                                    <p class="mb-1 fw-bold">{{ review.vendor.name }}</p>
                                                     <div class="d-flex align-items-center gap-2 mb-2">
                                                         <span class="text-muted"
-                                                            style="color: #758AA0; font-size: 14px;">{{ review.date
+                                                            style="color: #758AA0; font-size: 14px;">{{ review.created_at
                                                             }}</span>
                                                     </div>
-                                                    <p class="text-muted">{{ review.comment }}</p>
+                                                    <p class="text-muted">{{ review.description }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,19 +88,19 @@
                     </div>
                 </div>
                 <div class="col-3 position-relative">
-                  <div class="lastNews position-sticky " style="top: 50px;">
-                    <h6 class="mb-3"> اخر الاخبار </h6>
-                    <div class="d-flex flex-column gap-3">
-                        <img src="/images/journal1.png" class="w-100 rounded" height="190" alt="">
-                        <h5> لــوريــم إيــبـسـوم هـو نص عربي غير معنى، يُستخدم ... </h5>
-                        <span> 10/10/2024 </span>
+                    <div class="lastNews position-sticky " style="top: 50px;">
+                        <h6 class="mb-3"> اخر الاخبار </h6>
+                        <div class="d-flex flex-column gap-3">
+                            <img src="/images/journal1.png" class="w-100 rounded" height="190" alt="">
+                            <h5> لــوريــم إيــبـسـوم هـو نص عربي غير معنى، يُستخدم ... </h5>
+                            <span> 10/10/2024 </span>
+                        </div>
+                        <div class="d-flex flex-column gap-3">
+                            <img src="/images/journal1.png" class="w-100 rounded" height="190" alt="">
+                            <h5> لــوريــم إيــبـسـوم هـو نص عربي غير معنى، يُستخدم ... </h5>
+                            <span> 10/10/2024 </span>
+                        </div>
                     </div>
-                    <div class="d-flex flex-column gap-3">
-                        <img src="/images/journal1.png" class="w-100 rounded" height="190" alt="">
-                        <h5> لــوريــم إيــبـسـوم هـو نص عربي غير معنى، يُستخدم ... </h5>
-                        <span> 10/10/2024 </span>
-                    </div>
-                  </div>
                 </div>
             </div>
         </div>
@@ -115,14 +115,15 @@
                         <form class="w-100 d-flex justify-content-center flex-column align-items-center">
 
                             <div class="mb-3 w-100">
-                                <textarea class="form-control" v-model="comment" id="message-text"></textarea>
+                                <textarea class="form-control" v-model="obj.comment" id="message-text"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn  solid px-4" style="border-radius: 20px;"
                             data-bs-dismiss="modal"> رجوع </button>
-                        <button @click="getComment()" type="button" class="btn btn-success  bg-green px-4" style="border-radius: 20px;"> إرسال
+                        <button @click="getComment()" type="button" data-bs-dismiss="modal" class="btn btn-success  bg-green px-4"
+                            style="border-radius: 20px;"> إرسال
                         </button>
                     </div>
                 </div>
@@ -131,13 +132,16 @@
     </div>
 </template>
 <script setup>
-import {useBlogsStore} from '@/stores/blogs';
+import { useBlogsStore } from '@/stores/blogs';
 let store = useBlogsStore();
 let route = useRoute()
 store.getBlog(route.query.id);
 let comment = ref('');
-const getComment = async() =>{
-    store.createComment(route.query.id , comment.value);
+let obj = ref({
+    comment: ''
+})
+const getComment = async () => {
+    store.createComment(route.query.id, obj.value);
 }
 const reviews = [
     { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },

@@ -85,7 +85,6 @@
         </div>
 
     </div>
-    {{ store.checkOtp }} {{ store.otpNum }}
     <div class="form-container mb-4" v-if="store.checkForm == 2 && store.checkOtp == 2">
         <NuxtImg src="/images/logoAuth.svg" width="150" height="150"></NuxtImg>
         <div class="text d-flex flex-column mt-4 align-items-center gap-3">
