@@ -314,6 +314,11 @@ footer ul li a:hover{color: #F4C086;}
 .bookCard .card-footer button:last-child{width: 148px;}
 .bookCard .card-footer button{height: 50px;color: #ffffff;font-size: 18px;border-radius: 32.5px;border: 0px;padding: 0;text-transform: uppercase;}
 
+.bookCard.profile figure{
+    border-radius: 40px;
+}
+
+
 .aboutAuthor{padding-bottom: 37px}
 .aboutAuthor h2{margin-bottom: 40px;}
 .aboutAuthor figure{margin:0;border-radius: 30px;overflow: hidden;display: flex;justify-content: center;align-items: center;}

@@ -1,5 +1,5 @@
 <template>
-    <div class="live-course-card">
+    <div class="live-course-card" :class="{'profile': profile}">
         <img class="mainImg" src="/images/live1.png" alt="">
         <div class="main">
             <h4> هنا يكتب اسم الدورة الحية هنا يكتب اسم الدورة الحية </h4>
@@ -49,7 +49,21 @@
 
     </div>
 </template>
-<script>
+<script setup>
+let props = defineProps({
+    profile:{
+        default: false,
+        type: Boolean
+    },
+    book:{
+        required: true,
+        default:{
+            id: 1,
+            title: 'title',
+            image: '/images/bookimage.png'
+        }
+    }
+})
 
 </script>
 <style lang="scss">
@@ -106,6 +120,10 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    &.profile{
+        
     }
 }
 </style>

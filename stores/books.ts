@@ -41,6 +41,7 @@ interface Comments{
     id: number;
     vendor_id: number;
     vendor: Vendor;
+    rate?: number | string
 }
 
 interface BookDetail{

@@ -19,6 +19,9 @@
                     </svg>
                 </button>
             </div>
+            <div class="d-flex justify-content-end ">
+                    <Paginator :rows="10" :totalRecords="120"></Paginator>
+                </div>
         </div>
     </div>
 </template>

@@ -60,7 +60,8 @@
                         <h2 class=""> {{ store.CourseData?.title }} </h2>
                         <div class="price d-flex align-items-center gap-3 mb-3 mt-5">
                             <h4 class="fC-green fw-bold m-0"> السعر : {{ store.CourseData?.price }} ر.س</h4>
-                            <h6 v-if="store.CourseData?.price_before_discount"> قبل الخصم {{ store.CourseData?.price_before_discount }} ر.س </h6>
+                            <h6 v-if="store.CourseData?.price_before_discount"> قبل الخصم {{
+                                store.CourseData?.price_before_discount }} ر.س </h6>
                         </div>
                         <div class="details-price d-flex flex-column gap-3 mt-4">
                             <div class="d-flex align-items-center gap-2">
@@ -95,7 +96,7 @@
                         </div>
 
                         <div class="descrptnBtnSec">
-                            <button
+                            <button data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 class=" d-flex align-items-center justify-content-center gap-2 bg-green btnGreen btn1">
                                 اشتري الان
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
@@ -130,67 +131,27 @@
                     <button @click="checkBtn = 3" :class="{ 'active': checkBtn == 3 }"> ماذا ساتعلم</button>
                 </div>
                 <div v-if="checkBtn == 1" class="desc-details d-flex flex-column gap-5">
-                    <!-- <div class="d-flex flex-column gap-4">
-                        <h3> وصف شامل عن (اسم الباقة) </h3>
-                        <p>
-                            لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل
-                            والتخطيط. يمكنك اختيار عدد الفقرات وعدد الحروف ثم النقر علىهذا النص هو مثال لنص يمكن أن يستبدل
-                            في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص. لوريم
-                            إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل والتخطيط.
-                            يمكنك اختيار عدد الفقرات وعدد الحروف ثم النقر علىهذا النص هو مثال لنص يمكن أن يستبدل في نفس
-                            المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص. لوريم إيبسوم
-                            هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل والتخطيط. يمكنك
-                            اختيار عدد الفقرات وعدد الحروف ثم النقر علىهذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة،
-                            لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص. لوريم .
-                        </p>
-                    </div>
-                    <div class="d-flex flex-column gap-4">
-                        <h3> من هي الفئة المستهدفة من هذه الباقة؟ </h3>
-                        <p>
-                            لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل
-                            والتخطيط.
-                            لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل
-                            والتخطيط.
-                            لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل
-                            والتخطيط.
-                            لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال على الشكل
-                            والتخطيط.
-                        </p>
-                    </div>
-                    <div class="d-flex flex-column gap-4">
-                        <h3> كيف تعمل باقة الدورات عبر الإنترنت </h3>
-                        <p>
-                            لا يمكن أن يكون التسجيل في Nura أبسط من ذلك:
-    
-                            انقر فوق الزر "اشتر الآن" لبدء طلب الدورة! ادفع بأمان باستخدام بطاقة الخصم/الائتمان أو عبر
-                            PayPal.
-                            بمجرد تقديم طلبك، ستتلقى وصولاً فوريًا إلى الدورة التدريبية عبر الإنترنت وسيتم إرسال تفاصيل
-                            تسجيل الدخول الخاصة بك عبر البريد الإلكتروني.
-                            عندما تتلقى تفاصيل تسجيل الدخول الخاصة بالدورة التدريبية، يمكنك البدء في التعلم على الفور. الأمر
-                            بهذه البساطة!
-                        </p>
-                    </div> -->
                     {{ store.CourseData?.fully_description }}
                 </div>
                 <div v-if="checkBtn == 2" class="accordion-details">
                     <Accordion value="0">
-                        <AccordionPanel v-for="item, index in  store.CourseData?.sections_videos " :value="index">
+                        <AccordionPanel v-for="item, index in store.CourseData?.sections_videos " :value="index">
                             <AccordionHeader class="head">
-                                كورس رقم {{item.section_name }}
+                                كورس رقم {{ item.section_name }}
                             </AccordionHeader>
                             <AccordionContent class="mt-3">
                                 <div v-for="i in item.videos"
                                     class="d-flex mb-3 align-items-center justify-content-between w-100 item">
                                     <div class="d-flex align-items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32"
-                                            fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32"
+                                            viewBox="0 0 33 32" fill="none">
                                             <circle cx="16.9053" cy="16" r="12" stroke="#43806C" stroke-width="8" />
                                         </svg>
                                         <h5> {{ i.title }}</h5>
                                     </div>
                                     <div class="d-flex align-items-center gap-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20"
-                                            fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20"
+                                            viewBox="0 0 21 20" fill="none">
                                             <path
                                                 d="M10.1885 5V10H13.9385M17.6885 10C17.6885 10.9849 17.4945 11.9602 17.1176 12.8701C16.7407 13.7801 16.1882 14.6069 15.4918 15.3033C14.7953 15.9997 13.9685 16.5522 13.0586 16.9291C12.1487 17.306 11.1734 17.5 10.1885 17.5C9.20356 17.5 8.22829 17.306 7.31835 16.9291C6.40841 16.5522 5.58161 15.9997 4.88518 15.3033C4.18874 14.6069 3.63629 13.7801 3.25938 12.8701C2.88247 11.9602 2.68848 10.9849 2.68848 10C2.68848 8.01088 3.47865 6.10322 4.88518 4.6967C6.2917 3.29018 8.19935 2.5 10.1885 2.5C12.1776 2.5 14.0853 3.29018 15.4918 4.6967C16.8983 6.10322 17.6885 8.01088 17.6885 10Z"
                                                 stroke="black" stroke-width="1.3" stroke-linecap="round"
@@ -202,12 +163,12 @@
                                 </div>
                             </AccordionContent>
                         </AccordionPanel>
-    
+
                     </Accordion>
                 </div>
                 <div v-if="checkBtn == 3" class="learn">
                     <div class="row">
-                        <div v-for="i in  store.CourseData?.outcome" class="col-12 col-xl-6 col-lg-6">
+                        <div v-for="i in store.CourseData?.outcome" class="col-12 col-xl-6 col-lg-6">
                             <div class="d-flex my-4 align-items-center gap-2">
                                 <div class="check">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -234,6 +195,74 @@
                         <CardJournal></CardJournal>
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade modal-dialog-center" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4> </h4>
+
+                </div>
+                <div class="modal-content">
+                    <div class="modal-heade pt-3 px-4 d-flex align-items-center justify-content-between">
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        <h1 class="modal-title" style="font-size: 16px;" id="exampleModalLabel">
+                            لمشاهدة المحتوي يمكنك اختيار ومتابعة من احدي الكورسات
+                        </h1>
+                        <button data-bs-dismiss="modal" aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <path d="M6 18L18 6M6 6L18 18" stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body  w-100">
+                        <div class="w-100 d-flex justify-content-center flex-column gap-4 align-items-center">
+                            <label for="input-radio-1"
+                                class="input-radio-modal w-100 d-flex align-items-center justify-content-between">
+                                <input type="radio" name="type" id="input-radio-1" class="d-none">
+                                <span> هنا يكتب اسم الكورس رقم واحد </span>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12.0017 21.5C10.6877 21.5 9.45267 21.2507 8.2965 20.752C7.14033 20.2533 6.13467 19.5766 5.2795 18.7218C4.42433 17.8669 3.74725 16.8617 3.24825 15.706C2.74942 14.5503 2.5 13.3156 2.5 12.0017C2.5 10.6877 2.74933 9.45267 3.248 8.2965C3.74667 7.14033 4.42342 6.13467 5.27825 5.2795C6.13308 4.42433 7.13833 3.74725 8.294 3.24825C9.44967 2.74942 10.6844 2.5 11.9983 2.5C13.3123 2.5 14.5473 2.74933 15.7035 3.248C16.8597 3.74667 17.8653 4.42342 18.7205 5.27825C19.5757 6.13308 20.2528 7.13833 20.7518 8.294C21.2506 9.44967 21.5 10.6844 21.5 11.9983C21.5 13.3123 21.2507 14.5473 20.752 15.7035C20.2533 16.8597 19.5766 17.8653 18.7218 18.7205C17.8669 19.5757 16.8617 20.2528 15.706 20.7518C14.5503 21.2506 13.3156 21.5 12.0017 21.5ZM12 20C14.2333 20 16.125 19.225 17.675 17.675C19.225 16.125 20 14.2333 20 12C20 9.76667 19.225 7.875 17.675 6.325C16.125 4.775 14.2333 4 12 4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12C4 14.2333 4.775 16.125 6.325 17.675C7.875 19.225 9.76667 20 12 20Z"
+                                        fill="#212529" />
+                                </svg>
+                                <svg class="icon-active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 16.5C13.2487 16.5 14.3108 16.0622 15.1865 15.1865C16.0622 14.3108 16.5 13.2487 16.5 12C16.5 10.7513 16.0622 9.68917 15.1865 8.8135C14.3108 7.93783 13.2487 7.5 12 7.5C10.7513 7.5 9.68917 7.93783 8.8135 8.8135C7.93783 9.68917 7.5 10.7513 7.5 12C7.5 13.2487 7.93783 14.3108 8.8135 15.1865C9.68917 16.0622 10.7513 16.5 12 16.5ZM12.0017 21.5C10.6877 21.5 9.45267 21.2507 8.2965 20.752C7.14033 20.2533 6.13467 19.5766 5.2795 18.7218C4.42433 17.8669 3.74725 16.8617 3.24825 15.706C2.74942 14.5503 2.5 13.3156 2.5 12.0017C2.5 10.6877 2.74933 9.45267 3.248 8.2965C3.74667 7.14033 4.42342 6.13467 5.27825 5.2795C6.13308 4.42433 7.13833 3.74725 8.294 3.24825C9.44967 2.74942 10.6844 2.5 11.9983 2.5C13.3123 2.5 14.5473 2.74933 15.7035 3.248C16.8597 3.74667 17.8653 4.42342 18.7205 5.27825C19.5757 6.13308 20.2528 7.13833 20.7518 8.294C21.2506 9.44967 21.5 10.6844 21.5 11.9983C21.5 13.3123 21.2507 14.5473 20.752 15.7035C20.2533 16.8597 19.5766 17.8653 18.7218 18.7205C17.8669 19.5757 16.8617 20.2528 15.706 20.7518C14.5503 21.2506 13.3156 21.5 12.0017 21.5ZM12 20C14.2333 20 16.125 19.225 17.675 17.675C19.225 16.125 20 14.2333 20 12C20 9.76667 19.225 7.875 17.675 6.325C16.125 4.775 14.2333 4 12 4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12C4 14.2333 4.775 16.125 6.325 17.675C7.875 19.225 9.76667 20 12 20Z"
+                                        fill="#43806C" />
+                                </svg>
+                            </label>
+                            <label for="input-radio-2"
+                                class="input-radio-modal w-100 d-flex align-items-center justify-content-between">
+                                <input type="radio" name="type" id="input-radio-2" class="d-none">
+                                <span> هنا يكتب اسم الكورس رقم اثنين </span>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12.0017 21.5C10.6877 21.5 9.45267 21.2507 8.2965 20.752C7.14033 20.2533 6.13467 19.5766 5.2795 18.7218C4.42433 17.8669 3.74725 16.8617 3.24825 15.706C2.74942 14.5503 2.5 13.3156 2.5 12.0017C2.5 10.6877 2.74933 9.45267 3.248 8.2965C3.74667 7.14033 4.42342 6.13467 5.27825 5.2795C6.13308 4.42433 7.13833 3.74725 8.294 3.24825C9.44967 2.74942 10.6844 2.5 11.9983 2.5C13.3123 2.5 14.5473 2.74933 15.7035 3.248C16.8597 3.74667 17.8653 4.42342 18.7205 5.27825C19.5757 6.13308 20.2528 7.13833 20.7518 8.294C21.2506 9.44967 21.5 10.6844 21.5 11.9983C21.5 13.3123 21.2507 14.5473 20.752 15.7035C20.2533 16.8597 19.5766 17.8653 18.7218 18.7205C17.8669 19.5757 16.8617 20.2528 15.706 20.7518C14.5503 21.2506 13.3156 21.5 12.0017 21.5ZM12 20C14.2333 20 16.125 19.225 17.675 17.675C19.225 16.125 20 14.2333 20 12C20 9.76667 19.225 7.875 17.675 6.325C16.125 4.775 14.2333 4 12 4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12C4 14.2333 4.775 16.125 6.325 17.675C7.875 19.225 9.76667 20 12 20Z"
+                                        fill="#212529" />
+                                </svg>
+                                <svg class="icon-active" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none">
+                                    <path
+                                        d="M12 16.5C13.2487 16.5 14.3108 16.0622 15.1865 15.1865C16.0622 14.3108 16.5 13.2487 16.5 12C16.5 10.7513 16.0622 9.68917 15.1865 8.8135C14.3108 7.93783 13.2487 7.5 12 7.5C10.7513 7.5 9.68917 7.93783 8.8135 8.8135C7.93783 9.68917 7.5 10.7513 7.5 12C7.5 13.2487 7.93783 14.3108 8.8135 15.1865C9.68917 16.0622 10.7513 16.5 12 16.5ZM12.0017 21.5C10.6877 21.5 9.45267 21.2507 8.2965 20.752C7.14033 20.2533 6.13467 19.5766 5.2795 18.7218C4.42433 17.8669 3.74725 16.8617 3.24825 15.706C2.74942 14.5503 2.5 13.3156 2.5 12.0017C2.5 10.6877 2.74933 9.45267 3.248 8.2965C3.74667 7.14033 4.42342 6.13467 5.27825 5.2795C6.13308 4.42433 7.13833 3.74725 8.294 3.24825C9.44967 2.74942 10.6844 2.5 11.9983 2.5C13.3123 2.5 14.5473 2.74933 15.7035 3.248C16.8597 3.74667 17.8653 4.42342 18.7205 5.27825C19.5757 6.13308 20.2528 7.13833 20.7518 8.294C21.2506 9.44967 21.5 10.6844 21.5 11.9983C21.5 13.3123 21.2507 14.5473 20.752 15.7035C20.2533 16.8597 19.5766 17.8653 18.7218 18.7205C17.8669 19.5757 16.8617 20.2528 15.706 20.7518C14.5503 21.2506 13.3156 21.5 12.0017 21.5ZM12 20C14.2333 20 16.125 19.225 17.675 17.675C19.225 16.125 20 14.2333 20 12C20 9.76667 19.225 7.875 17.675 6.325C16.125 4.775 14.2333 4 12 4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12C4 14.2333 4.775 16.125 6.325 17.675C7.875 19.225 9.76667 20 12 20Z"
+                                        fill="#43806C" />
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success w-100 text-light bg-green  solid px-4" style="border-radius: 20px;"
+                            data-bs-dismiss="modal"> متابعة </button>
+                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -279,6 +308,39 @@ let images = ref([
 ])
 </script>
 <style lang="scss">
+.input-radio-modal {
+    border-radius: 60px;
+    background: #FFF;
+    border: 1px solid #212529;
+    padding: 16px 24px;
+    cursor: pointer;
+
+    span {
+        color: #212529;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .icon-active {
+        display: none;
+    }
+}
+
+.input-radio-modal:has(input[type="radio"]:checked) {
+    border: 1px solid #43806C;
+
+    .icon-active {
+        display: block;
+    }
+    span{
+        color: #43806C;
+    }
+
+    .icon {
+        display: none;
+    }
+}
+
 .bundled-details {
     .price {
         h4 {}
@@ -345,7 +407,8 @@ let images = ref([
             border-radius: 4px;
             background: #43806C;
         }
-        h6{
+
+        h6 {
             line-height: 31px;
         }
     }

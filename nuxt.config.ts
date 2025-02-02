@@ -34,6 +34,7 @@ export default defineNuxtConfig({
 
   plugins: [
     "~/plugins/auth.ts",
+    "~/plugins/pdfjs.client.ts"
   ],
 
   i18n: {

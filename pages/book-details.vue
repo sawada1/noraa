@@ -218,7 +218,7 @@
                                     <div class="d-flex align-items-center gap-2 mb-2">
                                         <span class="text-muted" style="color: #758AA0; font-size: 14px;">{{ review?.created_at
                                             }}</span>
-                                        <Rating :model-value="4" readonly />
+                                        <Rating :model-value="review?.rate" readonly />
                                     </div>
                                     <p class="text-muted">{{ review?.description }}</p>
                                 </div>

@@ -1,11 +1,13 @@
 <template>
-    <div>
+   
         <ProfileDetails v-if="store.profileStat == 1"></ProfileDetails>
          <ProfileProducts v-if="store.profileStat == 2"></ProfileProducts>
          <ProfileBooks v-if="store.profileStat == 3"></ProfileBooks>
          <ProfileCourses v-if="store.profileStat == 4"></ProfileCourses>
+         <ProfileEvents v-if="store.profileStat == 5"></ProfileEvents>
          <ProfileChat v-if="store.profileStat == 6"></ProfileChat>
-    </div>
+         <ProfileNotes v-if="store.profileStat == 7"></ProfileNotes>
+
 </template>
 <script setup>
 import {useGeneralStore} from '@/stores/general';

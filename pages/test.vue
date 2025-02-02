@@ -405,27 +405,7 @@ onUnmounted(() => {
         padding: 5px;
     }
 
-    .radio-check-inputs {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-
-        .input {
-            padding: 16px 24px;
-            border-radius: 44px;
-            background: #E9ECEF;
-            cursor: pointer;
-
-            span {
-                font-size: 16px;
-                font-weight: 500;
-
-                &.active {
-                    color: #43806C;
-                }
-            }
-
-        }
-    }
+    
+    
 }
 </style>

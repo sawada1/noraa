@@ -1,12 +1,14 @@
 <template>
-  <div class="container mt-5 mb-5 main-profile-container" style="min-height: 100vh;">
-    <div class="row">
-      <div class="col-3">
-       <ProfileNav></ProfileNav>
-      
-      </div>    
-      <div class="col-9">
-       <ProfileMain></ProfileMain>
+  <div style="min-height: 100vh;">
+    <div v-if="showPage" class="container mt-5 mb-5 main-profile-container" >
+      <div class="row position-relative">
+        <div class="col-xl-3 col-lg-3 col-12  position-relative">
+         <ProfileNav class="" style="position: sticky; top: 20px;"></ProfileNav>
+        
+        </div>    
+        <div class="col-xl-9 col-lg-9 col-12 mt-5 mt-xl-0 mt-lg-0">
+         <ProfileMain id="mainProfile"></ProfileMain>
+        </div>
       </div>
     </div>
   </div>
@@ -16,6 +18,13 @@ definePageMeta({
   middleware: "auth",
 });
 
+const showPage = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    showPage.value = true;
+  }, 500);
+});
 
 </script>
 <style lang="scss">
