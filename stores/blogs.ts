@@ -38,6 +38,7 @@ interface Blog{
 export const useBlogsStore = defineStore('blogs', {
     state: () => ({
         blogs: [] as Blogs[],
+        lengthBlogs: false,
         blog: {} as Blog
     }),
     getters: {
@@ -46,10 +47,14 @@ export const useBlogsStore = defineStore('blogs', {
     actions: {
         async getBlogs() {
             try {
+                this.lengthBlogs = false;
                 const api = useApi();
                 const response = await api.get<ApiResponse<Blogs[]>>('blogs');
                 if(response.data){
                     this.blogs = response.data.data;
+                    if(this.blogs.length === 0){
+                        this.lengthBlogs = true;
+                    }
                 }
             } catch (error) {
               console.log(error);

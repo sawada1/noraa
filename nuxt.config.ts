@@ -63,7 +63,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title:"dsdsd",
+      title:"nora",
       htmlAttrs: {
         lang: "ar",
         dir: "rtl",

@@ -4,16 +4,16 @@
             <div class="persons">
                 <div class="head d-flex flex-column gap-3">
                     <h3> جميع الاعضاء </h3>
-                    <span> 44 عضو </span>
+                    <span> {{ store.groupDetails?.group?.members_count }} عضو </span>
                 </div>
                 <div class="persons-main d-flex flex-column gap-3">
-                    <div v-for="i in 20" class="person d-flex align-items-center gap-3">
-                        <img src="/images/person.png" alt="">
+                    <div v-for="i in store.groupDetails?.clients" class="person d-flex align-items-center gap-3">
+                        <img :src="i.image" alt="">
                         <div class="text d-flex flex-column gap-1">
-                            <h6> محمد احمد مصطفي </h6>
+                            <h6> {{ i.name }} </h6>
                             <div class="d-flex align-items-center gap-2">
                                 <div class="status mt-1"></div>
-                                <span> متصل </span>
+                                <span> {{ i.status }} </span>
                             </div>
                         </div>
                     </div>
@@ -22,10 +22,10 @@
             <div class="main-chat">
                 <div class="head d-flex align-items-center justify-content-between">
                     <div class="image d-flex align-items-center gap-3">
-                        <img src="/images/bookGroup.png" alt="">
+                        <img :src="store.groupDetails?.group?.image" alt="">
                         <div class="text d-flex flex-column gap-1">
-                            <h5> هنا يكتب اسم المجموعة </h5>
-                            <p> هنا يكتب وصف قصير عن المجموعة, هنا يكتب وصف قصير عن المجموعة, </p>
+                            <h5>  {{ store.groupDetails?.group?.title }} </h5>
+                            <p>  {{ store.groupDetails?.group?.description }}  </p>
                         </div>
                     </div>
                     <nuxt-link to="tests">
@@ -42,24 +42,22 @@
                 </div>
                 <div class="chat-msgs">
                     <div class="main-items d-flex flex-column gap-5">
-                        <div v-for="i , index in 30" class="item-container" :class="{'active': i % 2 == 0}">
+                        <div v-for="item , i in store.messages"  class="item-container" :class="{'active': i % 2 == 0}">
                             <div class="item d-flex align-items-center gap-2">
                                 <img src="/images/person.png" alt="">
                                 <div class="text">
                                     <p>
-                                        لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة ومواقع الويب كنص دال
-                                        على الشكل والتخطيط. يمكنك اختيار عدد الفقرات وعدد الحروف ثم النقر علىهذا النص هو
-                                        مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
-                                        العربى، حيث يمكنك أن تولد مثل هذا النص
+                                      {{ item.message }}
                                     </p>
-                                    <span> 09:12 ص </span>
+                                    <span>  {{ item.time }} </span>
                                 </div>
                             </div>
                         </div>
                        
                     </div>
+                    
                     <div class="foot d-flex align-items-center justify-content-between px-3">
-                        <input type="text" placeholder=" اكتب رسالتك هنا ... ">
+                        <input type="text" v-model="text" placeholder=" اكتب رسالتك هنا ... ">
                         <div class="icons d-flex align-items-center gap-3">
                             <label for="file-input1">
                                 <input id="file-input1" type="file" class="d-none">
@@ -70,7 +68,7 @@
                                         fill="#43806C" />
                                 </svg>
                             </label>
-                            <button>
+                            <button @click="clickFunc()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
                                     fill="none">
                                     <path
@@ -83,10 +81,36 @@
                 </div>
             </div>
         </div>
+        <GeneralLoader v-if="store.pendingGroup_details"></GeneralLoader>
     </div>
 </template>
 <script setup>
+import {useChatStore} from "@/stores/chat";
+import { useAuthStore } from '@/stores/auth';
+let authStore = useAuthStore();
+let store = useChatStore();
+import { io } from "socket.io-client";
+const socket = io('ws://localhost:8080');
+const arr = ref([]);
+let route = useRoute();
+socket.on('message', text => {
+     console.log(text);
+     
+    arr.value.push(text);
 
+});
+
+let text = ref('');
+
+const clickFunc = ()=>{
+    socket.emit('message', {name: 'khaled' , text: text.value , image: 'sss'});
+    text.value = ''
+}
+
+onMounted(() => {
+   store.group_details(route.query?.id); 
+   store.get_messages(route.query?.id); 
+});
 </script>
 <style lang="scss">
 

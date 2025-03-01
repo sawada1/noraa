@@ -3,8 +3,8 @@
         <div class="container">
                     <div class="row justify-content-center align-items-center text-center">
                         <div class="col-md-11">
-                            <div class="row">
-                                <div class="col-4">
+                            <div class="row justify-content-center justify-content-lg-start  justify-content-xl-start">
+                                <div data-aos="fade-up" data-aos-duration="500" class=" col-xl-4 col-lg-4 col-6 mb-5 mb-xl-0 mb-lg-0">
                                     <div class="card align-items-center">
                                       <img src="/images/health-icon.png" alt="">
                                        
@@ -13,7 +13,7 @@
                                     </div>
                                     <h6 class="fC-green">المنفعة الثانوية I</h6>
                                 </div>
-                                <div class="col-4">
+                                <div data-aos="fade-up" data-aos-duration="700" class=" col-xl-4 col-lg-4 col-6 mb-5 mb-xl-0 mb-lg-0">
                                     <div class="card align-items-center">
                                       <img src="/images/mental_icon.png" alt="">
                                     
@@ -22,7 +22,7 @@
                                     </div>
                                     <h6 class="fC-green">المنفعة الثانوية I</h6>
                                 </div>
-                                <div class="col-4">
+                                <div data-aos="fade-up" data-aos-duration="900" class=" col-xl-4 col-lg-4 col-6 mb-5 mb-xl-0 mb-lg-0">
                                     <div class="card align-items-center">
                                       <img src="/images/heart-icon.png" alt="">
                                      

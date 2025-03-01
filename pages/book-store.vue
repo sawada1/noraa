@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="min-vh-100">
         <div class="bestSellingBooks">
                 <h2 class="fC-green text-center">شراء الكتب الأكثر مبيعا من قبل نورا</h2>
                 <div class="container">
@@ -8,12 +8,13 @@
                             <CardBook1 :book="i"></CardBook1>
                         </div>
                     </div>
+                    <GeneralEmpty v-if="store.lengthBooks"></GeneralEmpty>
                 </div>
             </div>
 
     
 
-            <div class="bestSellingBooks">
+            <div v-if="store.books?.books?.length >= 1" class="bestSellingBooks">
                 <h2 class="fC-green text-center">اختر كتابك الإلكتروني أو نسختك المادية</h2>
                 <div class="container">
                     <div class="row">
@@ -24,12 +25,27 @@
                     </div>
                 </div>
             </div>
+        <GeneralLoader v-if="store.pendingLoader"></GeneralLoader>
+        
     </div>
 </template>
 <script setup lang="ts">
 import { useBooksStore } from '@/stores/books';
 let store = useBooksStore();
 store.getBooks();
+
+useHead({
+      title: ` الكتب `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `الكتب | نورا` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
 </script>
 <style lang="">
     

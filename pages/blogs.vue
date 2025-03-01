@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="min-vh-100">
         <div class="container-fluid">
             <div class="row">
                 <div class="bannerImage" style="background-image: url(/images/consultation-banner.png);">
@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="container">
-            <div class="blogs-container mt-5 mb-5">
+            <div v-if="store.blogs.length >= 1" class="blogs-container mt-5 mb-5">
                 <div class="head d-flex flex-column flex-xl-row flex-lg-row align-items-center gap-3 justify-content-between">
                     <h1 class="fC-green fs-2"> المدونات </h1>
                     <div class="d-flex align-items-center flex-column flex-xl-row flex-lg-row gap-3">
@@ -29,6 +29,8 @@
                     </div>
                 </div>
             </div>
+            <GeneralEmpty v-if="store.lengthBlogs"></GeneralEmpty>
+
         </div>
     </div>
 </template>
@@ -44,6 +46,18 @@ const cities = ref([
     { name: 'Paris', code: 'PRS' }
 ]);
 
+useHead({
+      title: ` المدونات `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `المدونات | نورا` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
 onMounted(() => {
 store.getBlogs();
  

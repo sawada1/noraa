@@ -3,7 +3,7 @@
         <img :src="course.image" alt="journals image">
         <div class="details">
             <h4> {{ course.title }} </h4>
-            <p> {{ course.short_description }}  </p>
+            <p v-html="course.short_description"> </p>
             <nuxt-link :to="localePath({ path: '/bundled-course', query:{id: course?.id} })">
                 <button> عرض التفاصيل </button>
             </nuxt-link>

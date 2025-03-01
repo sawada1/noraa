@@ -3,18 +3,18 @@
         <div class="head-container">
             <div class="container head flex-column flex-xl-row flex-lg-row">
                 <div class=" d-flex align-items-center gap-4">
-                    <Knob v-model="percentage" :size="80" valueColor="#43806C" readonly  />
+                    <Knob v-model="updatePercentage" :size="80" valueColor="#43806C" readonly  />
 
                     <span> المتبقي من محتوي الكورس </span>
                 </div>
-                <h1 class="fs-6"> اسم باقة الدورة اسم باقة الدورة </h1>
+                <h1 class="fs-6"> {{ store.videos?.course }} </h1>
             </div>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-12 col-xl-3 col-lg-3">
                     <div class="main-videos px-3 py-2">
-                        <div class="item" v-for="i, index in arrData"
+                        <div class="item" v-for="i, index in store.videos?.videos"
                             :class="{ 'active': activeVideo.includes(index + 1) }">
 
                             <svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -30,20 +30,21 @@
                                     fill="#6C757D" />
                             </svg>
 
-                            <span> {{ index + 1 }}- {{ i.name }} </span>
+                            <span> {{ index + 1 }}- {{ i.title }} </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-xl-9 col-lg-9">
                     <div>
                         <div class="video-container">
-                            <img :src="videoActive" alt="">
-                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+                            <!-- <img :src="videoActive" alt=""> -->
+                            <iframe :src="videoActive" frameborder="0"></iframe>
+                            <!-- <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
                                 viewBox="0 0 100 100" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M9.375 50C9.375 27.5625 27.5625 9.375 50 9.375C72.4375 9.375 90.625 27.5625 90.625 50C90.625 72.4375 72.4375 90.625 50 90.625C27.5625 90.625 9.375 72.4375 9.375 50ZM67.8083 45.9042C68.5382 46.3104 69.1463 46.9043 69.5696 47.6244C69.993 48.3445 70.2162 49.1647 70.2162 50C70.2162 50.8353 69.993 51.6555 69.5696 52.3756C69.1463 53.0957 68.5382 53.6896 67.8083 54.0958L44.4625 67.0667C43.7491 67.4627 42.9447 67.6656 42.1289 67.6554C41.313 67.6452 40.514 67.4222 39.8107 67.0085C39.1075 66.5948 38.5244 66.0047 38.1191 65.2966C37.7139 64.5884 37.5004 63.7867 37.5 62.9708V37.0292C37.5 33.4583 41.3375 31.1958 44.4625 32.9333L67.8083 45.9042Z"
                                     fill="#43806C" />
-                            </svg>
+                            </svg> -->
                         </div>
                         <div
                             class="btns d-flex flex-column flex-xl-row flex-lg-row gap-4 align-items-center justify-content-between mt-4">
@@ -54,9 +55,14 @@
                 </div>
             </div>
         </div>
+        <GeneralLoader v-if="store.pendingVideos"></GeneralLoader>
+
     </div>
 </template>
 <script setup>
+import { useCoursesStore } from '@/stores/courses';
+let store = useCoursesStore();
+let route = useRoute()
 let percentage = ref(10);
 let arrData = ref([
     {
@@ -86,33 +92,41 @@ let arrData = ref([
 
 ])
 let activeVideo = ref([1]);
-let videoActive = ref(arrData.value[0].video);
+let videoActive = ref();
 let indexVideo = ref(1);
 
-const updatePercentage = () => {
-    percentage.value = Math.round((activeVideo.value.length / arrData.value.length) * 100);
-};
+
+const updatePercentage = computed(()=>{
+    return percentage.value = Math.round((activeVideo.value.length / store.videos?.videos?.length) * 100);
+});
+
+watch(()=> store.videos?.videos , (val)=>{
+if(val.length >= 1){
+    videoActive.value = val[0]?.video_path
+}
+})
 const nextVideo = ()=>{
-    if(arrData.value.length == activeVideo.value.length)return;
+    if(store.videos?.videos?.length == activeVideo.value.length)return;
     console.log('testtt');
     activeVideo.value.push(++indexVideo.value);
-    videoActive.value = arrData.value[indexVideo.value - 1].video
+    videoActive.value = store.videos?.videos[indexVideo.value - 1].video_path
     console.log(activeVideo.value);
-    updatePercentage();
+    // updatePercentage();
     
 }
 const prevVideo = ()=>{
     if(activeVideo.value.length <= 1)return;
     console.log('testtt');
     activeVideo.value.pop(--indexVideo.value);
-    videoActive.value = arrData.value[indexVideo.value - 1].video
+    videoActive.value = store.videos?.videos[indexVideo.value - 1].video_path
     console.log(activeVideo.value);
-    updatePercentage();
+    // updatePercentage();
     
 }
 
 onMounted(() => {
-    updatePercentage()  
+    store.getVideos(route.query?.id);
+    // updatePercentage()  
 });
 </script>
 <style lang="scss">

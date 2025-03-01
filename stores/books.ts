@@ -62,15 +62,23 @@ export const useBooksStore = defineStore('books', {
     state: () => ({
         books: {} as BooksData,
         slots: [] as String[],
+        lengthBooks: false,
+        pendingLoader: false,
         BookData: {} as BookDetail
     }),
     actions: {
         async getBooks() {
             try {
+                this.lengthBooks = false;
+                this.pendingLoader = true;
                 const api = useApi();
                 const response = await api.get<ApiResponse<BooksData>>('books');
                 if (response.data) {
+                    this.pendingLoader = false;
                     this.books = response.data.data;
+                    if(this.books.Best_Seller.length === 0){
+                        this.lengthBooks = true;
+                    }
                 }
             } catch (error) {
                 console.log(error);

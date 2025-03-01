@@ -133,15 +133,22 @@
 </template>
 <script setup>
 import { useBlogsStore } from '@/stores/blogs';
+import { useAuthStore } from '@/stores/auth';
 let store = useBlogsStore();
-let route = useRoute()
+let authStore = useAuthStore();
+let route = useRoute();
+let router = useRouter();
 store.getBlog(route.query.id);
 let comment = ref('');
 let obj = ref({
     comment: ''
 })
 const getComment = async () => {
-    store.createComment(route.query.id, obj.value);
+    if(authStore.isLoggedIn){
+        store.createComment(route.query.id, obj.value);
+    } else{
+      router.push('/login')
+    }
 }
 const reviews = [
     { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },
@@ -159,6 +166,19 @@ const starBreakdown = [
     { stars: 2, percentage: 20 },
     { stars: 1, percentage: 20 },
 ];
+
+useHead({
+      title: ` المدونة `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `المدونة | نورا` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
 </script>
 <style lang="">
 

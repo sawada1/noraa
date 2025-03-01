@@ -15,14 +15,22 @@
 
         <div class="consultation_TabSec">
             <div class="container">
+                <div class="d-flex align-items-center justify-content-center mb-5">
+                    <div class="tabsConst d-flex align-items-center justify-content-betwee gap-2">
+                        <button @click="activeBtn = 0" :class="{'active': activeBtn == 0}"  class=""> فردي (لنفسي) </button>
+                        <button @click="activeBtn = 1" :class="{'active': activeBtn == 1}" > أزواج (لي ولشريكي) </button>
+                        <button @click="activeBtn = 2" :class="{'active': activeBtn == 2}" > لطفلي (استشارات تربوية -مراهقة) </button>
+                    </div>
+
+                </div>
                 <div class="row">
-                    <div class="tabsTop">
+                    <!-- <div class="tabsTop">
                         <ul class="tabs">
                             <li v-for="item, index in store?.types"
                                 @click="activeType = item.id, store.getData(activeType)"
                                 :class="{ 'active': activeType == item.id }"> {{ item.name }} </li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="tab_container">
                         <div id="tab1" class="tab_content d-block">
                             <h2> {{ store?.dataConsultation?.title }} </h2>
@@ -83,11 +91,11 @@
         </div>
 
     </div>
-    <div class="container consultation-questions">
+    <div class="container consultation-questions mb-5 ">
         <h3 class="fC-green text-center my-5"> أزواج (لي ولشريكي) </h3>
         <div class="row">
-            <div class="col-3">
-                <div class="custom-shadow-container">
+            <div class="col-xl-3 col-lg-3 col-12 mb-5 mb-xl-0 mb-lg-0  position-relative">
+                <div class="custom-shadow-container position-sticky top-0">
                     <div>
                         <div class="head d-flex align-items-center gap-3">
                             <div class="icon d-flex align-items-center justify-content-center">
@@ -101,56 +109,73 @@
                                         fill="#43806C" />
                                 </svg>
                             </div>
-                            <h4 class="fw-bold fc-Darkgreay fs-6"> عدد الاسألة 8 من 16 </h4>
+                            <h4 class="fw-bold fc-Darkgreay fs-6"> عدد الاسألة {{ questionNum }} من 12 </h4>
                         </div>
                         <div class=" d-flex align-items-center flex-column gap-4">
-                            <Knob v-model="percentage" :size="80" valueColor="#43806C" readonly />
+                            <Knob v-model="updatePercentage" :size="80" valueTemplate="{value}%" valueColor="#43806C" readonly />
 
                             <span> المتبقي من محتوي الكورس </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-9">
+            
+            <div class="col-xl-9 col-lg-9 col-12">
                 <div class="custom-shadow-container">
                     <div v-if="selectedInputs == 1" class="row">
                         <div class="col-xl-6 col-lg-6 col-12 ">
                             <div class="input  d-flex flex-column gap-2">
                                 <label for=""> هل سينضم إليك شريكك؟ في العلاج؟ </label>
-                                <Select v-model="selectedCity" :options="cities" optionLabel="name"
-                                    placeholder=" كتب بواسطة  " class="" />
+                                <Select v-model="selected1"  :options="joinPartner" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
 
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-12 ">
                             <div class="input  d-flex flex-column gap-2">
-                                <label for=""> هل سينضم إليك شريكك؟ في العلاج؟ </label>
-                                <Select v-model="selectedCity" :options="cities" optionLabel="name"
-                                    placeholder=" كتب بواسطة  " class="" />
+                                <label for=""> الاسم كامل </label>
+                                <InputText name="" v-model="selected2"  type="text" placeholder="" />
+
 
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-12 mt-5">
                             <div class="input  d-flex flex-column gap-2">
-                                <label for=""> هل سينضم إليك شريكك؟ في العلاج؟ </label>
-                                <Select v-model="selectedCity" :options="cities" optionLabel="name"
-                                    placeholder=" كتب بواسطة  " class="" />
+                                <label for=""> العمر </label>
+                                <Select v-model="selected3"  :options="ages" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
 
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-12 mt-5">
                             <div class="input  d-flex flex-column gap-2">
-                                <label for=""> هل سينضم إليك شريكك؟ في العلاج؟ </label>
-                                <Select v-model="selectedCity" :options="cities" optionLabel="name"
-                                    placeholder=" كتب بواسطة  " class="" />
+                                <label for=""> نوع الجنس </label>
+                                <Select v-model="selected4" :options="genders" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
 
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-12 mt-5">
                             <div class="input  d-flex flex-column gap-2">
-                                <label for=""> هل سينضم إليك شريكك؟ في العلاج؟ </label>
-                                <Select v-model="selectedCity" :options="cities" optionLabel="name"
-                                    placeholder=" كتب بواسطة  " class="" />
+                                <label for=""> ما هو الوضع الاجتماعي الخاص بك؟ </label>
+                                <Select v-model="selected5" :options="statues" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-12 mt-5">
+                            <div class="input  d-flex flex-column gap-2">
+                                <label for=""> هل تعيش حالياً مع شريك حياتك؟ </label>
+                                <Select v-model="selected6" :options="relations1" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-12 mt-5">
+                            <div class="input  d-flex flex-column gap-2">
+                                <label for=""> هل العنف المنزلي قضية حالية في علاقتك؟ </label>
+                                <Select v-model="selected7" :options="relations2" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
 
                             </div>
                         </div>
@@ -159,25 +184,69 @@
                         <h4> ما الذي دفعك إلى التفكير في طلب الاستشارة اليوم؟يمكنك اختيار أكثر من خيار </h4>
                         <div class="mt-4">
                             <div class="radio-check-inputs">
-                                <label v-for="(theinput, index) in 15" :key="`check-${index}`" :for="`check-${index}`"
+                                <label v-for="(theinput, index) in checkBoxArray1" :key="`check-${index}`" :for="`check-${index}`"
                                     class="input d-flex align-items-center justify-content-between">
                                     <span>
-                                        تحسين التواصل بيننا
+                                      {{ theinput.name }}
                                     </span>
-                                    <Checkbox v-model="question1" :inputId="`check-${index}`" :value="index + 1" />
+                                    <Checkbox v-model="selected8" :inputId="`check-${index}`" :value="theinput.value" />
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div v-if="selectedInputs == 3">
+                    <div v-if="selectedInputs == 3" class="">
+                        <h4> ما الذي دفعك إلى التفكير في طلب الاستشارة اليوم؟يمكنك اختيار أكثر من خيار </h4>
+                        <div class="mt-4">
+                            <div class="radio-check-inputs">
+                                <label v-for="(theinput, index) in checkBoxArray2" :key="`check-${index}`" :for="`check-${index}`"
+                                    class="input d-flex align-items-center justify-content-between">
+                                    <span>
+                                      {{ theinput.name }}
+                                    </span>
+                                    <Checkbox v-model="selected9" :inputId="`check-${index}`" :value="theinput.value" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="selectedInputs == 4" class="row">
+                        <div class="col-xl-6 col-lg-6 col-12 mt-5">
+                            <div class="input  d-flex flex-column gap-2">
+                                <label for=""> 	بالنسبة للجلسات المباشرة للمعالج، ماذا تفضل؟ </label>
+                                <Select v-model="selected10" :options="DirectSessions" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-12 mt-5">
+                            <div class="input  d-flex flex-column gap-2">
+                                <label for=""> 	هل تفضل المعالج الذي يكون مرنًا أم منظمًا؟</label>
+                                <Select v-model="selected11" :options="flexArray" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-12 mt-5">
+                            <div class="input  d-flex flex-column gap-2">
+                                <label for=""> 	هل تفضل المعالج الذي يكون </label>
+                                <Select v-model="selected12" :options="favArray" style="min-height: 41px;" optionLabel="name"
+                                    placeholder="  " class="" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="selectedInputs == 5">
                         <div class="d-flex align-items-center flex-column gap-3 mb-5">
                             <img src="/images/success1.svg" alt="">
                             <span> تم الانتهاء من عملية الاختبار بنجاح </span>
                             <button class="bg-green px-5 py-2 rounded-5 text-light"> ادفع الان </button>
                         </div>
                     </div>
-                    <button @click="selectedInputs++" class="bg-green text-light py-2 px-5 rounded-5 mt-5"> التالي
-                    </button>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button v-if="selectedInputs >= 2" @click="selectedInputs--" class="bg-green text-light py-2 px-5 rounded-5 mt-5"> رجوع
+                        </button>
+                        <button @click="selectedInputs++" class="bg-green text-light py-2 px-5 rounded-5 mt-5"> التالي
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -190,14 +259,224 @@ let store = useConsultationStore();
 let percentage = ref(10);
 let activeType = ref(0);
 const selectedCity = ref();
+const selected1 = ref();
+const selected2 = ref('');
+const selected3 = ref();
+const selected4 = ref();
+const selected5 = ref();
+const selected6 = ref();
+const selected7 = ref();
+const selected8 = ref([]);
+const selected9 = ref([]);
+const selected10 = ref();
+const selected11 = ref();
+const selected12 = ref();
 const selectedInputs = ref(1);
-const cities = ref([
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' }
+const activeBtn = ref(0);
+let questionNum = ref(0);
+const  joinPartner = ref([
+    { name: 'نعم', value: 'yes' },
+    { name: 'لا', value: 'no' },
+    { name: 'لست متأكد بعد', value: 'not sure' },
 ]);
+const  ages = ref([]);
+
+
+const checkQuestionsNum = () => {
+  let count = 0;
+
+  if (selected1.value) count++;
+  if (selected2.value.trim() !== "") count++;
+  if (selected3.value) count++;
+  if (selected4.value) count++;
+  if (selected5.value) count++;
+  if (selected6.value) count++;
+  if (selected7.value) count++;
+  if (selected8.value.length) count++;
+  if (selected9.value.length) count++;
+  if (selected10.value) count++;
+  if (selected11.value) count++;
+  if (selected12.value) count++;
+
+  questionNum.value = count;
+};
+
+watch([selected1, selected2, selected3, selected4, selected5, selected6, selected7 , selected8 , selected9 , selected10 , selected11 , selected12], checkQuestionsNum);
+const genders = ref([
+    {
+    name:"ذكر",
+    value:"male"
+},
+    {
+    name:"أنثي",
+    value:"female"
+},
+]);
+
+const updatePercentage = computed(()=>{
+    return percentage.value = Math.round((questionNum.value / 12) * 100);
+});
+
+const DirectSessions = ref([
+    {
+        name:"فيديو",
+        value:"test1"
+    },
+    {
+        name:"صوت فقط",
+        value:"test1"
+    },
+    {
+        name:"الرسائل النصية",
+        value:"test1"
+    },
+    {
+        name:"لا اعرف",
+        value:"test1"
+    },
+]);
+const flexArray = ref([
+    {
+        name:"مرن",
+        value:"test1"
+    },
+    {
+        name:" مرن الي حد ما ",
+        value:"test1"
+    },
+    {
+        name:" ليس لدي تفضيلات ",
+        value:"test1"
+    },
+    {
+        name:" منظم الي حد ما ",
+        value:"test1"
+    },
+    {
+        name:" منظم ",
+        value:"test1"
+    },
+]);
+const favArray = ref([
+    {
+        name:"متعاطف",
+        value:"test1"
+    },
+    {
+        name:"  مستمع جيد ",
+        value:"test1"
+    },
+    {
+        name:" مباشر وصريح ",
+        value:"test1"
+    },
+    {
+        name:"لا اعرف",
+        value:"test1"
+    },
+   
+]);
+const statues = ref([
+    {
+    name:"متزوج",
+    value:"male"
+},
+    {
+    name:"منفصل",
+    value:"female"
+},
+    {
+    name:"مطلق",
+    value:"female"
+},
+    {
+    name:"ارمل",
+    value:"female"
+},
+{
+    name:"مرتبط (خطوبة)",
+    value:"female"
+},
+{
+name:"اخري",
+value:"female"
+},
+]);
+
+const relations1 = ref([
+    {
+        name:"لا",
+        value:"no",
+    },
+    {
+        name:"نعم",
+        value:"yes",
+    },
+])
+const relations2 = ref([
+    {
+        name:"لا",
+        value:"no",
+    },
+    {
+        name:"نعم",
+        value:"yes",
+    },
+    {
+        name:"احيانا",
+        value:"sometimes",
+    },
+]);
+
+const checkBoxArray1 = ref([
+    {name:"تحسين التواصل بيننا " , value:"test1"},
+    {name:" لكي أقرر: هل الطلاق هو الخيار الأفضل لنا " , value:"test2"},
+    {name:" أود ان أجعل زواجي قوي " , value:"test3"},
+    {name:" حل النزاعات والخلافات بيننا " , value:"test4"},
+    {name:" التغلب على الخيانة " , value:"test5"},
+    {name:" أفهم نفسي بشكل أفضل " , value:"test6"},
+    {name:" أفهم شريكي بشكل أفضل " , value:"test7"},
+    {name:" مشاكل بالعلاقة الزوجية " , value:"test8"},
+    {name:" تخفيف التوتر بيننا " , value:"test9"},
+    {name:" منع الانفصال أو الطلاق " , value:"test10"},
+    {name:" تعلم طرقا 'جيدة' للخلاف " , value:"test11"},
+    {name:" التوقف عن إيذاء بعضنا البعض " , value:"test12"},
+    {name:" استعادة قلب وحب شريكي المفقود " , value:"test13"},
+    {name:" أتعلم أن أحب شريكي مرة أخرى " , value:"test14"},
+    {name:" مناقشة قضايا خاصة بتربية الأطفال والمال " , value:"test15"},
+    {name:" تحسين الجنس وعلاقتنا الحميمة " , value:"test16"},
+    {name:" التأقلم مع مرحلة ما بعد الطلاق أو الانفصال " , value:"test17"},
+    {name:" العلاقة مع أهل الزوج/الزوجة " , value:"test18"},
+    {name:" أعرف كيف اختار الشريك المناسب " , value:"test19"},
+    {name:" كيف ارفع حصانة علاقتي الزوجية ضد الخيانة والطلاق؟ " , value:"test20"},
+    {name:" كيف أكون صديقة زوجي؟ " , value:"test21"},
+    {name:" اريد ان افهم نوع ارتباطي العاطفي بزوجي وتأثيره بعلاقتنا؟ " , value:"test22"},
+    {name:" أود أن ادخل الاثارة والحماس بيني وبين شريكي" , value:"test23"},
+    {name:" أفهم نفسي ودوافعي اتجاه رغبة الزواج " , value:"test24"},
+    {name:" مساعدتي للاستعداد لفترة الخطبة والتعارف " , value:"test25"},
+    {name:" معرفة نمطي ونمط زوجي(خطيبي) ونقاط القوة والضعف فيما بيننا " , value:"test26"},
+    {name:" فهم الحب وأنواعه  " , value:"test27"},
+    {name:" التخلص من الخوف أو التعلق بالزواج " , value:"test28"},
+    {name:" المساعدة في التعامل مع زوجي المعدد وتقبل الواقع " , value:"test29"},
+    {name:" المساعدة في التعامل مع وضعي الجديد (سنقل مام) " , value:"test30"},
+    {name:" آخرى " , value:"test31"},
+]);
+const checkBoxArray2 = ref([
+    {name:" يستمع جيداً " , value:"test1"},
+    {name:" يستكشف ديناميكية العلاقة ودولفعها الخفية " , value:"test2"},
+    {name:" يعلمني مهارات جديدة للتواصل " , value:"test3"},
+    {name:" يتحدى معتقداتي او معتقداتنا  " , value:"test4"},
+    {name:" التوسط في الأوقات الصعبة " , value:"test5"},
+    {name:" اكتشاف تأثير التاريخ الاسري والتربية " , value:"test6"},
+    {name:" اعطاء الواجبات المنزلية " , value:"test7"},
+    {name:" ارشادي لوضع الأهداف " , value:"test8"},
+    {name:" يتحقق مني بشكل استباقي " , value:"test9"},
+    {name:" آخرى " , value:"test10"},
+    {name:" لا أعرف " , value:"test11"},
+]);
+for(let i = 18; i <= 55; i++){
+   ages.value.push({ name: i, value: i }) 
+}
 const question1 = ref();
 const formateDate = () => {
     const year = date.value.getFullYear();
@@ -217,8 +496,43 @@ onMounted(() => {
     store.getTypes();
 })
 
+useHead({
+      title: ` الاستشارات `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `الاستشارات | نورا` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
+
 </script>
 <style lang="scss">
+.tabsConst{
+    // width: 627px;
+    height: 56px;
+    border: 1px solid #43806C;
+    border-radius: 28px;
+    padding: 4px;
+    button{
+        color: #111928;
+        padding: 3px 9px;
+        width: fit-content;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 28px;
+        &.active{
+            background-color: #43806C;
+            color: #fff;
+        }
+    }
+
+}
 .p-datepicker-panel {
     background-color: #F4C086 !important;
 

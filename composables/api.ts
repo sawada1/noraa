@@ -9,7 +9,7 @@ export function useApi(){
     // Create Axios instance with default configuration
     const apiClient: AxiosInstance = axios.create({
       // baseURL: config.public.apiUrl || 'https://api.example.com',
-      baseURL: 'https://dev.noraalsufairy.com/api/',
+      baseURL: 'https://nura.omar-a-mahran.com/api/',
       headers: {
         'Content-Type': 'application/json',
       },

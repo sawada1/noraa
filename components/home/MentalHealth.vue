@@ -7,7 +7,7 @@
                         <p class="text-center">لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد، وكان لوريم<br>إيبسوم هو الصناعة.</p>
                     </div>
                     <div class="row mentalHealthCard">
-                        <div class="col-md-4">
+                        <div data-aos="fade-up" data-aos-duration="500" class="col-md-4">
                             <div class="card">
                                 <figure>
                                     <img src="/images/benefit3.png" alt="">
@@ -18,7 +18,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div data-aos="fade-up" data-aos-duration="700" class="col-md-4">
                             <div class="card">
                                 <figure>
                                     <img src="/images/benefit2.png" alt="">
@@ -30,7 +30,7 @@
                                 
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div data-aos="fade-up" data-aos-duration="900" class="col-md-4">
                             <div class="card">
                                 <figure>
                                     <img src="/images/benefit1.png" alt="">

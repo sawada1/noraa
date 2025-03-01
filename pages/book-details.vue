@@ -306,6 +306,19 @@ const reviews = [
 
 ];
 
+useHead({
+      title: ` الكتاب `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `الكتاب | نورا` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
+
 const setThumbsSwiper = (swiper: any) => {
     thumbsSwiper.value = swiper;
 };

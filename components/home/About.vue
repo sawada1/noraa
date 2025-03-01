@@ -3,10 +3,10 @@
         <div class="homeAboutSec">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-6 homeAboutSecImg">
+                        <div data-aos="fade-right" class="col-12 col-xl-6 col-lg-6 homeAboutSecImg">
                             <img src="/images/nora.png" alt="nora_image"/>
                         </div>
-                        <div class="col-6">
+                        <div data-aos="fade-left" class="col-12 col-xl-6 col-lg-6 text-center text-xl-start text-lg-start">
                             <h2>عن المدربة و المعلمة</h2>
                             <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>
                             <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة.</p>

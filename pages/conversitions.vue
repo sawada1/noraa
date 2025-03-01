@@ -15,28 +15,57 @@
             <div class="multipleQuizSec">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div v-for="i in 6" class="col-md-11">
+                        <div v-for="group in store.groups" class="col-md-11">
                             <div class="card quizCard bg-offwhite3">
-                                <div class="card-header" style="background-image:url(/images/journal3.png);"></div>
-                                <div class="card-body">
-                                    <h2 class="fs-3 fC-green"> هنا يكتب عناون المجموعة </h2>
-                                    <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد.</p>
+                                <div class="card-header" :style="{ backgroundImage: `url(${group.image})`}">
                                 </div>
-                                <nuxt-link to="/conversation">
-                                    <button class="btn btn-success bg-green py-3 px-5"> دخول الي المجموعة </button>
-                                </nuxt-link>
+                                <div class="card-body">
+                                    <h2 class="fs-3 fC-green">  {{ group.title }} </h2>
+                                    <p > {{ group.description }}  </p>
+                                </div>
+                                    <button @click="joinChat(group.id)" class="btn btn-success bg-green py-3 px-5"> دخول الي المجموعة </button>
                          
                             </div>
                         </div>
                     
                     </div>
+                <GeneralEmpty v-if="store.lengthChat"></GeneralEmpty>
+
                 </div>
             </div>
         </div>
+
+        <GeneralLoader v-if="store.pendingGroup"></GeneralLoader>
+
     </div>
 </template>
-<script>
-
+<script  setup>
+import {useChatStore} from "@/stores/chat";
+import { useAuthStore } from '@/stores/auth';
+let authStore = useAuthStore();
+let store = useChatStore();
+const joinChat = async (id) => {
+    if(authStore.isLoggedIn){
+        store.joinGroup(id);
+    } else{
+      router.push('/login')
+    }
+}
+onMounted(() => {
+   store.getGroups(); 
+});
+useHead({
+      title: ` المحادثات `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `المحادثات  | نورا ` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
 </script>
 <style lang="">
     

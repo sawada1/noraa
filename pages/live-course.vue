@@ -306,6 +306,19 @@ const starBreakdown = [
     { stars: 1, percentage: 20 },
 ];
 
+useHead({
+      title: ` الدورات الحيه `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `الدورات الحيه | نورا` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
+
 </script>
 <style lang="scss">
 .liveCourse1 {

@@ -88,10 +88,7 @@
                             </div>
                         </div>
                         <h4 class="mt-5"> ملخص </h4>
-                        <div class="detailscDescptn">
-                            <p>
-                                {{ store.CourseData?.short_description }}
-                            </p>
+                        <div class="detailscDescptn" v-html="store.CourseData?.short_description">
 
                         </div>
 
@@ -259,8 +256,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success w-100 text-light bg-green  solid px-4" style="border-radius: 20px;"
-                            data-bs-dismiss="modal"> متابعة </button>
+                        <button type="button" data-bs-dismiss="modal" class="w-100">
+                            <nuxt-link  :to="{path:'/videos-course' , query:{id:route.query.id}}" class="btn btn-success w-100 text-light bg-green  solid px-4" style="border-radius: 20px;"
+                                > متابعة </nuxt-link>
+                        </button>
                     
                     </div>
                 </div>
@@ -282,6 +281,19 @@ const checkBtn = ref(1);
 const setThumbsSwiper = (swiper: any) => {
     thumbsSwiper.value = swiper;
 };
+
+useHead({
+      title: ` باقات الدورات `,
+      meta: [
+        { name: 'description', content: 'test test test'},
+        { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+        { name: 'author', content: 'khaled sawada' },
+        { name: 'robots', content: 'index, follow' },
+        { property: 'og:title', content: `باقات الدورات | نورا` },
+        { property: 'og:description', content: 'test test test' },
+        { property: 'og:image', content: '/images/nora.png' },
+      ],
+    });
 
 let images = ref([
     {
