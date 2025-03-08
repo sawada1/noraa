@@ -28,7 +28,7 @@
                             <p>  {{ store.groupDetails?.group?.description }}  </p>
                         </div>
                     </div>
-                    <nuxt-link to="tests">
+                    <nuxt-link to="/conversitions">
                         <button class="d-flex align-items-center gap-2">
                             <span class="fC-green"> رجوع </span>
                             <svg class="mt-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -89,16 +89,16 @@ import {useChatStore} from "@/stores/chat";
 import { useAuthStore } from '@/stores/auth';
 let authStore = useAuthStore();
 let store = useChatStore();
-import { io } from "socket.io-client";
-const socket = io('ws://localhost:8080');
+// import { io } from "socket.io-client";
+// const socket = io('ws://localhost:8080');
 const arr = ref([]);
 let route = useRoute();
-socket.on('message', text => {
-     console.log(text);
+// socket.on('message', text => {
+//      console.log(text);
      
-    arr.value.push(text);
+//     arr.value.push(text);
 
-});
+// });
 
 let text = ref('');
 

@@ -5,30 +5,16 @@
                     <div class="row justify-content-center align-items-center text-center">
                         <div class="col-md-11">
                             <div class="row">
-                                <div class="col-md-4 col-12" data-aos="fade-up" data-aos-duration="500">
+                                <div v-for="i , index in store.HomeData?.books" class="col-md-4 col-12" data-aos="fade-up" :data-aos-duration="(index + 1) * 200">
                                     <div class="card bg-offwhite">
-                                        <span><img src="/images/product1.png" alt="product1"/></span>
-                                        <h2>كتاب الزواج من A-Z</h2>
-                                        <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>    
+                                        <!-- <span><img src="/images/product1.png" alt="product1"/></span> -->
+                                        <span><img :src="i?.image" alt="product1"/></span>
+                                        <h2> {{i?.title}} </h2>
+                                        <p> {{i?.description}}  </p>    
                                     </div>
                                     <button class="btn btn-primary btn-pr bg-green">اشتري الآن</button>
                                 </div>
-                                <div class="col-md-4 col-12" data-aos="fade-up" data-aos-duration="700">
-                                    <div class="card bg-offwhite">
-                                        <span><img src="/images/product2.png" alt="product1"/></span>
-                                        <h2>كتاب الزواج من A-Z</h2>
-                                        <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>    
-                                    </div>
-                                    <button class="btn btn-primary btn-pr bg-green">اشتري الآن</button>
-                                </div>
-                                <div class="col-md-4 col-12" data-aos="fade-up" data-aos-duration="900">
-                                    <div class="card bg-offwhite">
-                                        <span><img src="/images/product3.png" alt="product1"/></span>
-                                        <h2>كتاب الزواج من A-Z</h2>
-                                        <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>    
-                                    </div>
-                                    <button class="btn btn-primary btn-pr bg-green">اشتري الآن</button>
-                                </div>
+                             
                             </div>
                         </div>
                     </div>
@@ -36,10 +22,18 @@
             </div>
     </div>
 </template>
-<script>
-
+<script setup>
+import { useGeneralStore } from '@/stores/general';
+const store = useGeneralStore();
 </script>
 <style lang="scss">
+.homeProductsSec{
+    .card{
+        p{
+            
+        }
+    }
+}
 @media(max-width:770px){
     .homeProductsSec{
         .card{

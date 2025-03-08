@@ -46,6 +46,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useGeneralStore } from '@/stores/general';
+const store = useGeneralStore();
 let testArr = ref([
   {
     background:'bg-yellow',

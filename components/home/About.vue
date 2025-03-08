@@ -4,22 +4,25 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div data-aos="fade-right" class="col-12 col-xl-6 col-lg-6 homeAboutSecImg">
-                            <img src="/images/nora.png" alt="nora_image"/>
+                            <!-- <img src="/images/nora.png" alt="nora_image"/> -->
+                            <img :src="store.HomeData?.section7?.image" alt="nora_image"/>
                         </div>
                         <div data-aos="fade-left" class="col-12 col-xl-6 col-lg-6 text-center text-xl-start text-lg-start">
-                            <h2>عن المدربة و المعلمة</h2>
-                            <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>
-                            <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء ليس فقط لخمسة قرون، بل أيضًا للقفزة.</p>
-                            <p>وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على مقاطع لوريم إيبسوم. لقد نجا لا.</p>
-                            <a href="#" class="btn btn-primary btnAbout bg-yellow">المزيد عن نورا</a>
+                            <h2>  {{store.HomeData?.section7?.title}} </h2>
+                            <p> {{store.HomeData?.section7?.description}}  </p>
+                            <nuxt-link to="/about">
+                               <button class="btn btn-primary btnAbout bg-yellow"> المزيد عن نورا  </button> 
+                            </nuxt-link>
+                            <!-- <a href="#" class="btn btn-primary btnAbout bg-yellow"> </a> -->
                         </div>
                     </div>
                 </div>
             </div>
     </div>
 </template>
-<script>
-
+<script setup>
+import { useGeneralStore } from '@/stores/general';
+const store = useGeneralStore();
 </script>
 <style lang="">
     

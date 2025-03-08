@@ -5,12 +5,13 @@
                     <div class="row align-content-center">
                         <div data-aos="fade-right"   class="col-md-6 home-bannerCon p-0">
                             <div class="container">
-                                <h1>عنوانك هنا تسليط<br>الضوء على ما هو مهم</h1>
-                                <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في هذه الصناعة منذ عام 1500.</p>    
+                                <h1> {{store.HomeData?.section1?.title}} </h1>
+                                <p> {{store.HomeData?.section1?.description}}  </p>    
                             </div>
                         </div>
                         <div data-aos="fade-left"   class="col-md-6 home-bannerImg p-0">
-                            <img src="/images/home-banner.png" alt="homebanner">
+                            <!-- <img src="/images/home-banner.png" alt="homebanner"> -->
+                            <img :src="store.HomeData?.section1?.image" alt="homebanner">
                         </div>
                     </div>
                     <div class="events-Sec">
@@ -134,7 +135,8 @@
     </div>
 </template>
 <script setup>
-
+import { useGeneralStore } from '@/stores/general';
+const store = useGeneralStore();
 </script>
 <style lang="scss">
     

@@ -44,6 +44,7 @@ import {useChatStore} from "@/stores/chat";
 import { useAuthStore } from '@/stores/auth';
 let authStore = useAuthStore();
 let store = useChatStore();
+const router = useRouter();
 const joinChat = async (id) => {
     if(authStore.isLoggedIn){
         store.joinGroup(id);

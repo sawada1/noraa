@@ -1,6 +1,7 @@
 <template >
     <div>
-      <section ref="content" @mouseup="highlightText"  class="main-body">
+      <!-- ref="content" @mouseup="highlightText" -->
+      <section   class="main-body">
           
         <HomeHero></HomeHero>
 
@@ -24,9 +25,8 @@
 
 </template>
 <script setup lang="ts">
-import { useExampleStore } from '@/stores/example';
-const exampleStore = useExampleStore();
-let value = ref(0);
+import { useGeneralStore } from '@/stores/general';
+const store = useGeneralStore();
 let checkLoader = ref(true);
 const content = ref<HTMLElement | null>(null);
 
@@ -57,6 +57,7 @@ useHead({
 
 
    onMounted(() => {
+    store.getHome();
     setTimeout(() => {
       checkLoader.value = false;
     }, 1000);

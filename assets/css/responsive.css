@@ -23,7 +23,7 @@
 	.testimonial-carousel {margin-top: 34px;}
 	.testimonial-carousel figure span {width: 90px;height: 90px;}
 	.testimonial-carousel .item {padding: 32px;}
-	.homeProductsSec .card {padding: 38px 22px 38px;}
+	/* .homeProductsSec .card {padding: 38px 22px 38px;} */
 	.homeProductsSec .card h2{margin: 20px 0 10px 0;font-size:23px; line-height: 33px;}
 	.homeProductsSec button{height: 55px;font-size: 18px;}
 	.btnAbout{height: 55px;line-height: 55px;margin: 25px 0 0 0;}
@@ -66,7 +66,7 @@
 @media (max-width: 1024px){
 	.eventBox_sec{flex-direction: row;flex-wrap: wrap;justify-content: center;}
 	.eventBox {margin: 4.5px 4.5px;}
-	.homeProductsSec .card {padding: 28px 22px 28px;}
+	/* .homeProductsSec .card {padding: 28px 22px 28px;} */
 	.bannerImage h1 {font-size: 40px;}
 	.home-bannerCon h1 {font-size: 40px;line-height: 50px;}
 	.benefitSec .card h4{font-size: 20px;}
@@ -266,7 +266,7 @@
 	.d_active {background-color: #666;color: #fff;}
 	.testimonial-carousel .item {padding: 27px;border-radius: 66px;}
 	.btnAbout{margin: 5px 0 0 0;}
-	.homeProductsSec .card{padding: 28px 12px 28px;}
+	/* .homeProductsSec .card{padding: 28px 12px 28px;} */
 	.homeProductsSec .card h2{margin: 15px 0 10px 0;font-size: 20px;line-height: 26px;}
 	.homeProductsSec .card p {font-size: 12px;line-height: 16px;}
 	.btnAbout{width: 100%;}
