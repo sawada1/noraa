@@ -8,14 +8,16 @@
                 <div class="inputs mt-3">
                     <div class="mb-3">
                         <label class="form-label "> رقم الجوال </label>
-                        <input type="text" class="form-control form-control-l" placeholder=" أدخل بريدك الإلكتروني ">
+                        <input v-model="phone" type="text" class="form-control form-control-l" placeholder=" أدخل  رقم الجوال ">
+                        <div class="text-danger"> {{ errors.phone }} </div>
+                        <div class="text-danger" v-if="store.errorsLogin?.phone"> {{ store.errorsLogin?.phone[0] }} </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label "> كلمة المرور </label>
 
                         <div class="pass-input">
-                            <input type="password" class="form-control form-control-l" placeholder=" أدخل كلمة المرور ">
-                            <button class="">
+                            <input :type="typePass ? 'password' : 'text'" v-model="password" class="form-control form-control-l" placeholder=" أدخل كلمة المرور ">
+                            <button @click="typePass = !typePass" class="">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
                                     fill="none">
                                     <path
@@ -27,10 +29,17 @@
                                 </svg>
                             </button>
                         </div>
+                        <div class="text-danger"> {{ errors.password }} </div>
+                        <div class="text-danger" v-if="store.errorsLogin?.password"> {{ store.errorsLogin?.password[0] }} </div>
                     </div>
 
                     <div class="btns d-flex flex-column gap-3">
-                        <button type="button" class="btn btn-success bg-green w-100"> تسجيل عبر رقم الجوال </button>
+                        <button @click="onSubmit()" :disabled="pendingLogin" type="button" class="btn btn-success d-flex align-items-center gap-2 justify-content-center bg-green w-100"> 
+                            تسجيل عبر رقم الجوال
+                            <div v-if="store.pendingLogin" class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                        </button>
                     </div>
                     <div class="divide my-4"></div>
                     <div class="btns d-flex flex-column gap-3">
@@ -76,8 +85,33 @@
             </div>
 </template>
 <script setup>
- import {useAuthStore} from "@/stores/auth.ts";
- let store = useAuthStore();
+import { useToast } from "primevue/usetoast";
+import { useAuthStore } from "@/stores/auth.ts";
+let store = useAuthStore();
+import { useForm } from "vee-validate";
+import * as yup from "yup";
+const toast = useToast();
+const { locale } = useI18n();
+let typePass = ref(true);
+const changeType = ()=>{
+ 
+}
+const { errors, handleSubmit, values, resetForm, defineField } = useForm({
+    validationSchema: yup.object({
+        phone: yup.string().required(locale.value == 'ar' ? 'هذا الحقل مطلوب' : 'this field is required'),
+        password: yup.string().required(locale.value == 'ar' ? 'هذا الحقل مطلوب' : 'this field is required'),
+    }),
+});
+const [phone] = defineField("phone");
+const [password, passwordAttrs] = defineField("password");
+const onSubmit = handleSubmit(() => {
+    store.login(values , resetForm , 'email');
+});
+watch(()=>store.checkToast , (val)=>{
+    if(val){
+        toast.add({ severity: 'error', summary: 'Error Message', detail: store.messageToast, life: 5000 });
+    }
+})
 </script>
 <style lang="">
     

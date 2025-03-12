@@ -43,17 +43,22 @@ export const useAuthStore = defineStore('auth', {
         isLoggedIn: (state) => !!state.token, // Returns true if token exists
     },
     actions: {
-        async login(form: any, resetForm: any) {
+        async login(form: any, resetForm: any , type: string) {
             const router = useRouter();
             const localePath = useLocalePath();
             this.pendingLogin = true;
             let formData = new FormData();
-            formData.append("email", form.email);
+            if(type == 'email'){
+                formData.append("email", form.email);
+            } else{
+                formData.append("phone", form.phone);
+            }
             formData.append("password", form.password);
             try {
                 const api = useApi();
                 const response = await api.post<ApiResponse<AuthState>>('login', form);
                 const { user, token } = response.data.data;
+                response.data
                 if (user && token) {
                     this.pendingLogin = false;
                     this.setUser(user, token);
@@ -70,10 +75,12 @@ export const useAuthStore = defineStore('auth', {
                 }
             } catch (error) {
                 this.pendingLogin = false;
-                this.checkToast = true;
+                     
+                // const axiosError = error as AxiosError; // Cast error to AxiosError
                 const axiosError = error as AxiosError; // Cast error to AxiosError
-                this.errorsRegister = axiosError.response?.data?.errors;
+                this.errorsLogin = axiosError.response?.data?.errors;
                 if (!axiosError.response?.data?.errors?.verified) {
+                    this.checkToast = true;
                     this.checkOtp = 2;
                     this.checkForm = 2;
                     this.messageToast = axiosError.response?.data?.errors?.message;

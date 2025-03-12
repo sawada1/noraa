@@ -29,9 +29,9 @@
                 <label class="form-label "> كلمة المرور </label>
                 
                 <div class="pass-input">
-                    <input type="password" v-model="password" class="form-control form-control-l"
+                    <input :type="checkPass1 ? 'password' : 'text'" v-model="password" class="form-control form-control-l"
                     placeholder=" أدخل كلمة المرور ">
-                    <button class="">
+                    <button @click="checkPass1 = !checkPass1" class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                             <path
                             d="M16 8.5C16 8.5 13 3 8 3C3 3 0 8.5 0 8.5C0 8.5 3 14 8 14C13 14 16 8.5 16 8.5ZM1.173 8.5C1.65651 7.76512 2.21264 7.08069 2.833 6.457C4.12 5.168 5.88 4 8 4C10.12 4 11.879 5.168 13.168 6.457C13.7884 7.08069 14.3445 7.76512 14.828 8.5C14.77 8.587 14.706 8.683 14.633 8.788C14.298 9.268 13.803 9.908 13.168 10.543C11.879 11.832 10.119 13 8 13C5.88 13 4.121 11.832 2.832 10.543C2.21165 9.91931 1.65652 9.23487 1.173 8.5Z"
@@ -50,9 +50,9 @@
                 <label class="form-label "> تاكيد كلمة المرور </label>
                 
                 <div class="pass-input">
-                    <input type="password" v-model="password_confirmation" class="form-control form-control-l"
+                    <input :type="checkPass2 ? 'password' : 'text'" v-model="password_confirmation" class="form-control form-control-l"
                     placeholder=" أدخل كلمة المرور ">
-                    <button class="">
+                    <button @click="checkPass2 = !checkPass2" class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                             <path
                             d="M16 8.5C16 8.5 13 3 8 3C3 3 0 8.5 0 8.5C0 8.5 3 14 8 14C13 14 16 8.5 16 8.5ZM1.173 8.5C1.65651 7.76512 2.21264 7.08069 2.833 6.457C4.12 5.168 5.88 4 8 4C10.12 4 11.879 5.168 13.168 6.457C13.7884 7.08069 14.3445 7.76512 14.828 8.5C14.77 8.587 14.706 8.683 14.633 8.788C14.298 9.268 13.803 9.908 13.168 10.543C11.879 11.832 10.119 13 8 13C5.88 13 4.121 11.832 2.832 10.543C2.21165 9.91931 1.65652 9.23487 1.173 8.5Z"
@@ -108,6 +108,8 @@ let store = useAuthStore();
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 
+let checkPass1 = ref(true);
+let checkPass2 = ref(true);
 const { locale } = useI18n();
 const { errors, handleSubmit, values, resetForm, defineField } = useForm({
     validationSchema: yup.object({
