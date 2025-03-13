@@ -89,6 +89,38 @@ export const useAuthStore = defineStore('auth', {
                 }
             }
         },
+        async loginGoogle() {
+            const router = useRouter();
+            const localePath = useLocalePath();
+            this.pendingLogin = true;
+    
+            try {
+                const api = useApi();
+                const response = await api.get<ApiResponse<AuthState>>('login/google');
+                const { user, token } = response.data.data;
+                response.data
+                if (user && token) {
+                    this.pendingLogin = false;
+                    this.setUser(user, token);
+                    this.errorsLogin = undefined;
+                    router.push(localePath('/'));
+                }
+            } catch (error) {
+                this.pendingLogin = false;
+                     
+                // const axiosError = error as AxiosError; // Cast error to AxiosError
+                const axiosError = error as AxiosError; // Cast error to AxiosError
+                this.errorsLogin = axiosError.response?.data?.errors;
+                if (!axiosError.response?.data?.errors?.verified) {
+                    this.checkToast = true;
+                    this.checkOtp = 2;
+                    this.checkForm = 2;
+                    this.messageToast = axiosError.response?.data?.errors?.message;
+                    this.otpNum = String(axiosError.response?.data?.errors?.otp);
+                    this.phoneLogin = axiosError.response?.data?.errors?.phone;
+                }
+            }
+        },
         async register(form: any, resetForm: any) {
             let formData = new FormData();
             formData.append("phone", form.phone);
