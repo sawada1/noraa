@@ -64,7 +64,7 @@
                         </defs>
                     </svg>
                 </button>
-                <button type="button"
+                <button @click="store.loginFacebook()" type="button"
                     class="btn btn-outline-success d-flex align-items-center gap-2 justify-content-center  w-100">
                     تسجيل الدخول عبر فيس بوك
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">

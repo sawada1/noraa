@@ -96,29 +96,71 @@ export const useAuthStore = defineStore('auth', {
     
             try {
                 const api = useApi();
-                const response = await api.get<ApiResponse<AuthState>>('login/google');
-                const { user, token } = response.data.data;
-                response.data
-                if (user && token) {
-                    this.pendingLogin = false;
-                    this.setUser(user, token);
-                    this.errorsLogin = undefined;
-                    router.push(localePath('/'));
+                const response = await api.get('login/google');
+                // const { user, token } = response.data.data;
+                // response.data
+                // if (user && token) {
+                //     this.pendingLogin = false;
+                //     this.setUser(user, token);
+                //     this.errorsLogin = undefined;
+                //     router.push(localePath('/'));
+                // }
+                if(response.status === 200){
+                    if(process.client){
+                        window.location.href =  response.data?.auth_url
+                    }
                 }
             } catch (error) {
                 this.pendingLogin = false;
                      
                 // const axiosError = error as AxiosError; // Cast error to AxiosError
-                const axiosError = error as AxiosError; // Cast error to AxiosError
-                this.errorsLogin = axiosError.response?.data?.errors;
-                if (!axiosError.response?.data?.errors?.verified) {
-                    this.checkToast = true;
-                    this.checkOtp = 2;
-                    this.checkForm = 2;
-                    this.messageToast = axiosError.response?.data?.errors?.message;
-                    this.otpNum = String(axiosError.response?.data?.errors?.otp);
-                    this.phoneLogin = axiosError.response?.data?.errors?.phone;
+                // const axiosError = error as AxiosError; // Cast error to AxiosError
+                // this.errorsLogin = axiosError.response?.data?.errors;
+                // if (!axiosError.response?.data?.errors?.verified) {
+                //     this.checkToast = true;
+                //     this.checkOtp = 2;
+                //     this.checkForm = 2;
+                //     this.messageToast = axiosError.response?.data?.errors?.message;
+                //     this.otpNum = String(axiosError.response?.data?.errors?.otp);
+                //     this.phoneLogin = axiosError.response?.data?.errors?.phone;
+                // }
+            }
+        },
+        async loginFacebook() {
+            const router = useRouter();
+            const localePath = useLocalePath();
+            this.pendingLogin = true;
+    
+            try {
+                const api = useApi();
+                const response = await api.get('login/facebook');
+                // const { user, token } = response.data.data;
+                // response.data
+                // if (user && token) {
+                //     this.pendingLogin = false;
+                //     this.setUser(user, token);
+                //     this.errorsLogin = undefined;
+                //     router.push(localePath('/'));
+                // }
+                if(response.status === 200){
+                    if(process.client){
+                        window.location.href =  response.data?.auth_url
+                    }
                 }
+            } catch (error) {
+                this.pendingLogin = false;
+                     
+                // // const axiosError = error as AxiosError; // Cast error to AxiosError
+                // const axiosError = error as AxiosError; // Cast error to AxiosError
+                // this.errorsLogin = axiosError.response?.data?.errors;
+                // if (!axiosError.response?.data?.errors?.verified) {
+                //     this.checkToast = true;
+                //     this.checkOtp = 2;
+                //     this.checkForm = 2;
+                //     this.messageToast = axiosError.response?.data?.errors?.message;
+                //     this.otpNum = String(axiosError.response?.data?.errors?.otp);
+                //     this.phoneLogin = axiosError.response?.data?.errors?.phone;
+                // }
             }
         },
         async register(form: any, resetForm: any) {
