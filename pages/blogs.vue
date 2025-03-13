@@ -14,9 +14,12 @@
             <div v-if="store.blogs.length >= 1" class="blogs-container mt-5 mb-5">
                 <div class="head d-flex flex-column flex-xl-row flex-lg-row align-items-center gap-3 justify-content-between">
                     <h1 class="fC-green fs-2"> المدونات </h1>
+                    
                     <div class="d-flex align-items-center flex-column flex-xl-row flex-lg-row gap-3">
-                        <Select v-model="selectedCity" :options="cities" optionLabel="name" placeholder=" كتب بواسطة  " class="selectCustom" />
-                        <Select v-model="selectedCity" :options="cities" optionLabel="name" placeholder=" رتب حسب التاريخ  " class="selectCustom" />
+                        <Select v-model="selectedAuthor" :options="authors" optionValue="id" optionLabel="name" placeholder=" كتب بواسطة  " class="selectCustom" />
+                        <DatePicker v-model="selectedDate" placeholder=" رتب حسب التاريخ  " class="selectDate" />
+
+                        <!-- <Select v-model="selectedCity" :options="cities" optionLabel="name" placeholder=" رتب حسب التاريخ  " class="selectCustom" /> -->
 
                 
                     </div>
@@ -32,19 +35,26 @@
             <GeneralEmpty v-if="store.lengthBlogs"></GeneralEmpty>
 
         </div>
+        <GeneralLoader v-if="store.pendingBlogs"></GeneralLoader>
     </div>
 </template>
 <script setup>
 import {useBlogsStore} from '@/stores/blogs';
 let store = useBlogsStore();
-const selectedCity = ref();
-const cities = ref([
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' }
-]);
+const selectedAuthor = ref();
+const selectedDate = ref();
+const authors = ref([]);
+const getAuthors = async()=>{
+    let result = await useApi().get('authors');
+    if(result.status === 200){
+        authors.value = result.data.data 
+    }
+}
+
+const getBlogsFilter = ()=>{
+    store.getBlogs();
+}
+
 
 useHead({
       title: ` المدونات `,
@@ -60,6 +70,7 @@ useHead({
     });
 onMounted(() => {
 store.getBlogs();
+getAuthors();
  
 });
 </script>

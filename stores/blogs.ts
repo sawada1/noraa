@@ -39,6 +39,8 @@ export const useBlogsStore = defineStore('blogs', {
     state: () => ({
         blogs: [] as Blogs[],
         lengthBlogs: false,
+        pendingBlogs: false,
+        pendingBlog: false,
         blog: {} as Blog
     }),
     getters: {
@@ -48,10 +50,12 @@ export const useBlogsStore = defineStore('blogs', {
         async getBlogs() {
             try {
                 this.lengthBlogs = false;
+                this.pendingBlogs = true;
                 const api = useApi();
                 const response = await api.get<ApiResponse<Blogs[]>>('blogs');
                 if(response.data){
                     this.blogs = response.data.data;
+                    this.pendingBlogs = false;
                     if(this.blogs.length === 0){
                         this.lengthBlogs = true;
                     }
@@ -63,9 +67,11 @@ export const useBlogsStore = defineStore('blogs', {
         },
         async getBlog(id:any) {
             try {
+                this.pendingBlog = true;
                 const api = useApi();
                 const response = await api.get<ApiResponse<Blog>>(`blogs/${id}`);
                 if(response.data){
+                    this.pendingBlog = false;
                     this.blog = response.data.data;
                 }
             } catch (error) {

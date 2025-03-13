@@ -79,7 +79,7 @@ export const useAuthStore = defineStore('auth', {
                 // const axiosError = error as AxiosError; // Cast error to AxiosError
                 const axiosError = error as AxiosError; // Cast error to AxiosError
                 this.errorsLogin = axiosError.response?.data?.errors;
-                if (!axiosError.response?.data?.errors?.verified) {
+                if (!axiosError.response?.data?.verified) {
                     this.checkToast = true;
                     this.checkOtp = 2;
                     this.checkForm = 2;

@@ -6,14 +6,14 @@
             </figure>
         </div>
         <div class="card-body">
-            <ul>
+            <!-- <ul>
                 <li><a href="#"><img src="/images/linkedin_social media Icon.png"
                             alt="linkedin_social media Icon" /></a></li>
                 <li><a href="#"><img src="/images/facebook_social media_icon.png"
                             alt="facebook_social media_icon" /></a></li>
                 <li><a href="#"><img src="/images/twitter_social media_icon.png" alt="twitter_social media_icon" /></a>
                 </li>
-            </ul>
+            </ul> -->
             <p> {{ blog.created_at }} </p>
             <h4> {{ blog.title }} </h4>
             <p class="journalDetails"> {{ blog.short_description }} </p>

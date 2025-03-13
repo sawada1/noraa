@@ -26,7 +26,9 @@
 </template>
 <script setup lang="ts">
 import { useGeneralStore } from '@/stores/general';
+import { useAuthStore } from '@/stores/auth';
 const store = useGeneralStore();
+const authStore = useAuthStore();
 let checkLoader = ref(true);
 const content = ref<HTMLElement | null>(null);
 
@@ -41,6 +43,8 @@ const highlightText = () => {
     selection.removeAllRanges();
   }
 };
+
+const router = useRouter();
 
 useHead({
       title: ` الرئيسية `,
@@ -58,6 +62,26 @@ useHead({
 
    onMounted(() => {
     store.getHome();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const encodedData = urlParams.get("data");
+
+    if (encodedData) {
+      try {
+        const decodedData = JSON.parse(atob(encodedData)); // Decode Base64
+        // localStorage.setItem("token", decodedData.token);
+        // localStorage.setItem("user", JSON.stringify(decodedData.user));
+         authStore.setUser(decodedData.user , decodedData.token)
+
+        // Redirect to home page
+        router.push("/");
+      } catch (error) {
+        console.error("Error decoding authentication data:", error);
+        router.push("/login");
+      }
+    } else {
+      // router.push("/login");
+    }
     setTimeout(() => {
       checkLoader.value = false;
     }, 1000);

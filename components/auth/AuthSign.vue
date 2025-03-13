@@ -92,7 +92,7 @@
             <p class="fc-grey"> ابدأ معانا الان! </p>
         </div>
         <div class="inputs d-flex align-items-center justify-content-center mb-5 mt-4">
-            <InputOtp v-model="store.otpNum" size="large" />
+            <InputOtp v-model="store.otpNum" size="large" dir="ltr" />
         </div>
         <div class="btns d-flex flex-column gap-3">
             <button @click="otpSubmit" type="button" class="btn btn-success bg-green px-5 w-100"> ابدأ الان

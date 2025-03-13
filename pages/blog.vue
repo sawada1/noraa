@@ -129,6 +129,7 @@
                 </div>
             </div>
         </div>
+        <GeneralLoader v-if="store.pendingBlog"></GeneralLoader>
     </div>
 </template>
 <script setup>

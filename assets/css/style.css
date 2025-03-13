@@ -341,6 +341,7 @@ footer ul li a:hover{color: #F4C086;}
 
 .journalsSecSearch{padding: 68px 0 65px}
 .journalsSecLft{display: flex;align-items: center;justify-content: left;}
+.selectDate .p-inputtext.p-variant-filled{background: #F2F2F2 !important; width: 240px; height: 59px; border-radius: 30px !important; line-height: 40px;padding: 0 20px;border: none !important;font-size: 18px;color: #212529;font-weight: bold;position: relative;}
 .selectCustom{background: #F2F2F2 !important; width: 240px; height: 59px; border-radius: 30px !important; line-height: 40px;padding: 0 20px;border: none !important;font-size: 18px;color: #212529;font-weight: bold;position: relative;}
 .shortBydate{background: url(/images/arrow_green.png) #F2F2F2 no-repeat 10% 50%;width: 240px;height: 59px;border-radius: 30px;line-height: 59px;padding: 0 20px;border: 0;font-size: 18px;color: #212529;font-weight: bold;position: relative;-webkit-appearance: none;}
 .writtenBy{-webkit-appearance: none;background:url(/images/arrow_green.png) #F2F2F2 no-repeat 10% 50%;width: 360px;height: 59px;border-radius: 30px;line-height: 59px;padding: 0 20px;text-align: right;border: 0;font-size: 18px;color: #212529;font-weight: bold;}
