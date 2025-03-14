@@ -111,9 +111,12 @@ const [password, passwordAttrs] = defineField("password");
 const onSubmit = handleSubmit(() => {
     store.login(values , resetForm , 'email');
 });
-watch(()=>store.checkToast , (val)=>{
+watch([()=>store.checkToast , ()=> store.checkLogin] , ([val , val2])=>{
     if(val){
-        toast.add({ severity: 'error', summary: 'Error Message', detail: store.messageToast, life: 5000 });
+        toast.add({ severity: 'error', summary: 'خطأ', detail: store.messageToast, life: 5000 });
+    }
+    if(val2){
+        toast.add({ severity: 'error', summary: 'خطأ', detail: store.messageToastLogin, life: 5000 });
     }
 })
 </script>

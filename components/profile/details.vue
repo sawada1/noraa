@@ -2,9 +2,10 @@
     <div class="details-profile">
         <div class="custom-shadow-container mb-5">
             <div class="main-image mb-5">
-                <SvgUser1></SvgUser1>
+                <SvgUser1 v-if="!image"></SvgUser1>
+                <NuxtImg v-if="image && imageSrc" :src="imageSrc" class="profileImage"></NuxtImg>
                 <label for="changeImge1" class="float-input">
-                    <input id="changeImge1" type="file" class="d-none">
+                    <input id="changeImge1" @change="onFileChange1" type="file" class="d-none">
                     <SvgCamera></SvgCamera>
                 </label>
             </div>
@@ -13,19 +14,22 @@
                     <div class="col-12 col-xl-6 col-lg-6 mb-4">
                         <div class="input">
                             <label class="form-label "> الاسم كامل </label>
-                            <input type="text" class="form-control form-control-l" placeholder="" value=" محمد احمد  ">
+                            <input type="text" class="form-control form-control-l" placeholder="" readonly
+                                v-model="name">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 col-lg-6 mb-4">
                         <div class="input">
                             <label class="form-label "> البريد الإلكتروني </label>
-                            <input type="email" class="form-control form-control-l" placeholder="mohamed@gmail.com">
+                            <input type="email" class="form-control form-control-l" placeholder="" readonly
+                                v-model="email">
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 col-lg-6 mb-4">
                         <div class="input">
                             <label class="form-label "> رقم الجوال </label>
-                            <input type="text" class="form-control form-control-l" placeholder="" value="8347374623">
+                            <input type="text" class="form-control form-control-l" placeholder="" readonly
+                                v-model="phone">
                             <div class="num">
                                 <div class="divide"></div>
                                 <span>
@@ -60,34 +64,177 @@
             <div class="inputs mt-5" v-if="selectPass">
                 <div class="row mb-4">
                     <div class="col- mb-4">
+
                         <div class="input">
                             <label class="form-label "> كلمة المرور الحالية </label>
-                            <input type="text" class="form-control form-control-l" placeholder="************">
+                            <div class="pass-input">
+                                <input :type="typePass1 ? 'password' : 'text'" class="form-control form-control-l"
+                                    placeholder=" ************ " v-model="old_password">
+                                <button @click="typePass1 = !typePass1" class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                        fill="none">
+                                        <path
+                                            d="M16 8.5C16 8.5 13 3 8 3C3 3 0 8.5 0 8.5C0 8.5 3 14 8 14C13 14 16 8.5 16 8.5ZM1.173 8.5C1.65651 7.76512 2.21264 7.08069 2.833 6.457C4.12 5.168 5.88 4 8 4C10.12 4 11.879 5.168 13.168 6.457C13.7884 7.08069 14.3445 7.76512 14.828 8.5C14.77 8.587 14.706 8.683 14.633 8.788C14.298 9.268 13.803 9.908 13.168 10.543C11.879 11.832 10.119 13 8 13C5.88 13 4.121 11.832 2.832 10.543C2.21165 9.91931 1.65652 9.23487 1.173 8.5Z"
+                                            fill="#6C757D" />
+                                        <path
+                                            d="M8 6C7.33696 6 6.70107 6.26339 6.23223 6.73223C5.76339 7.20107 5.5 7.83696 5.5 8.5C5.5 9.16304 5.76339 9.79893 6.23223 10.2678C6.70107 10.7366 7.33696 11 8 11C8.66304 11 9.29893 10.7366 9.76777 10.2678C10.2366 9.79893 10.5 9.16304 10.5 8.5C10.5 7.83696 10.2366 7.20107 9.76777 6.73223C9.29893 6.26339 8.66304 6 8 6ZM4.5 8.5C4.5 7.57174 4.86875 6.6815 5.52513 6.02513C6.1815 5.36875 7.07174 5 8 5C8.92826 5 9.8185 5.36875 10.4749 6.02513C11.1313 6.6815 11.5 7.57174 11.5 8.5C11.5 9.42826 11.1313 10.3185 10.4749 10.9749C9.8185 11.6313 8.92826 12 8 12C7.07174 12 6.1815 11.6313 5.52513 10.9749C4.86875 10.3185 4.5 9.42826 4.5 8.5Z"
+                                            fill="#6C757D" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="text-danger" v-if="errors.old_password"> {{ errors.old_password }} </div>
+                            <div class="text-danger" v-if="errorsPasswords?.old_password"> {{
+                                errorsPasswords?.old_password[0] }} </div>
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 col-lg-6 mb-4">
                         <div class="input">
                             <label class="form-label "> كلمة المرور الجديدة</label>
-                            <input type="email" class="form-control form-control-l" placeholder="************">
+                            <div class="pass-input">
+                                <input :type="typePass2 ? 'password' : 'text'" class="form-control form-control-l"
+                                    placeholder=" ************ " v-model="password">
+                                <button @click="typePass2 = !typePass2" class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                        fill="none">
+                                        <path
+                                            d="M16 8.5C16 8.5 13 3 8 3C3 3 0 8.5 0 8.5C0 8.5 3 14 8 14C13 14 16 8.5 16 8.5ZM1.173 8.5C1.65651 7.76512 2.21264 7.08069 2.833 6.457C4.12 5.168 5.88 4 8 4C10.12 4 11.879 5.168 13.168 6.457C13.7884 7.08069 14.3445 7.76512 14.828 8.5C14.77 8.587 14.706 8.683 14.633 8.788C14.298 9.268 13.803 9.908 13.168 10.543C11.879 11.832 10.119 13 8 13C5.88 13 4.121 11.832 2.832 10.543C2.21165 9.91931 1.65652 9.23487 1.173 8.5Z"
+                                            fill="#6C757D" />
+                                        <path
+                                            d="M8 6C7.33696 6 6.70107 6.26339 6.23223 6.73223C5.76339 7.20107 5.5 7.83696 5.5 8.5C5.5 9.16304 5.76339 9.79893 6.23223 10.2678C6.70107 10.7366 7.33696 11 8 11C8.66304 11 9.29893 10.7366 9.76777 10.2678C10.2366 9.79893 10.5 9.16304 10.5 8.5C10.5 7.83696 10.2366 7.20107 9.76777 6.73223C9.29893 6.26339 8.66304 6 8 6ZM4.5 8.5C4.5 7.57174 4.86875 6.6815 5.52513 6.02513C6.1815 5.36875 7.07174 5 8 5C8.92826 5 9.8185 5.36875 10.4749 6.02513C11.1313 6.6815 11.5 7.57174 11.5 8.5C11.5 9.42826 11.1313 10.3185 10.4749 10.9749C9.8185 11.6313 8.92826 12 8 12C7.07174 12 6.1815 11.6313 5.52513 10.9749C4.86875 10.3185 4.5 9.42826 4.5 8.5Z"
+                                            fill="#6C757D" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="text-danger"> {{ errors.password }} </div>
+                            <div class="text-danger" v-if="errorsPasswords?.password"> {{ errorsPasswords?.password[0]
+                                }} </div>
                         </div>
                     </div>
                     <div class="col-12 col-xl-6 col-lg-6 mb-4">
                         <div class="input">
                             <label class="form-label "> تاكيد كلمة المرور </label>
-                            <input type="text" class="form-control form-control-l" placeholder="************">
-                           
+                            <div class="pass-input">
+                                <input :type="typePass3 ? 'password' : 'text'" class="form-control form-control-l"
+                                    placeholder=" ************ " v-model="password_confirmation">
+                                <button @click="typePass3 = !typePass3" class="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17"
+                                        fill="none">
+                                        <path
+                                            d="M16 8.5C16 8.5 13 3 8 3C3 3 0 8.5 0 8.5C0 8.5 3 14 8 14C13 14 16 8.5 16 8.5ZM1.173 8.5C1.65651 7.76512 2.21264 7.08069 2.833 6.457C4.12 5.168 5.88 4 8 4C10.12 4 11.879 5.168 13.168 6.457C13.7884 7.08069 14.3445 7.76512 14.828 8.5C14.77 8.587 14.706 8.683 14.633 8.788C14.298 9.268 13.803 9.908 13.168 10.543C11.879 11.832 10.119 13 8 13C5.88 13 4.121 11.832 2.832 10.543C2.21165 9.91931 1.65652 9.23487 1.173 8.5Z"
+                                            fill="#6C757D" />
+                                        <path
+                                            d="M8 6C7.33696 6 6.70107 6.26339 6.23223 6.73223C5.76339 7.20107 5.5 7.83696 5.5 8.5C5.5 9.16304 5.76339 9.79893 6.23223 10.2678C6.70107 10.7366 7.33696 11 8 11C8.66304 11 9.29893 10.7366 9.76777 10.2678C10.2366 9.79893 10.5 9.16304 10.5 8.5C10.5 7.83696 10.2366 7.20107 9.76777 6.73223C9.29893 6.26339 8.66304 6 8 6ZM4.5 8.5C4.5 7.57174 4.86875 6.6815 5.52513 6.02513C6.1815 5.36875 7.07174 5 8 5C8.92826 5 9.8185 5.36875 10.4749 6.02513C11.1313 6.6815 11.5 7.57174 11.5 8.5C11.5 9.42826 11.1313 10.3185 10.4749 10.9749C9.8185 11.6313 8.92826 12 8 12C7.07174 12 6.1815 11.6313 5.52513 10.9749C4.86875 10.3185 4.5 9.42826 4.5 8.5Z"
+                                            fill="#6C757D" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="text-danger"> {{ errors.password_confirmation }} </div>
+                            <div class="text-danger" v-if="errorsPasswords?.password_confirmation"> {{
+                                errorsPasswords?.password_confirmation[0] }} </div>
+
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-success bg-green px-5 rounded-5"> حفظ البيانات </button>
+                <button @click="changePassword()" class="btn btn-success bg-green px-5 rounded-5"> حفظ البيانات
+                </button>
             </div>
         </div>
-
+        <Toast />
         <ProfileEditModal></ProfileEditModal>
     </div>
 </template>
 <script setup>
 let selectPass = ref(false);
+import { useAuthStore } from '@/stores/auth';
+import { useProfileStore } from '@/stores/profile';
+const store = useProfileStore();
+const authStore = useAuthStore();
+import { useToast } from "primevue/usetoast";
+import * as yup from "yup";
+const toast = useToast();
+let name = ref('');
+let phone = ref('');
+let email = ref('');
+let typePass1 = ref(true);
+let typePass2 = ref(true);
+let typePass3 = ref(true);
+watch(() => store.profileDetails, (val) => {
+    name.value = val?.name ? val?.name : '';
+    phone.value = val?.name ? val?.phone : '';
+    email.value = val?.name ? val?.email : '';
+});
+
+const image = ref();
+const imageSrc = ref('');
+const { locale } = useI18n();
+const { errors, handleSubmit, values, resetForm, defineField } = useForm({
+    validationSchema: yup.object({
+        password: yup.string().required(locale.value == 'ar' ? 'هذا الحقل مطلوب' : 'this field is required'),
+        old_password: yup.string().required(locale.value == 'ar' ? 'هذا الحقل مطلوب' : 'this field is required'),
+        password_confirmation: yup.string().required(locale.value == 'ar' ? 'هذا الحقل مطلوب' : 'this field is required'),
+    }),
+});
+const [old_password] = defineField("old_password");
+const [password] = defineField("password");
+const [password_confirmation] = defineField("password_confirmation");
+
+const onFileChange1 = (event) => {
+    const target = event.target;
+    if (!target || !target.files || target.files.length === 0) return;
+    image.value = target.files[0];
+    console.log(image.value);
+
+    imageSrc.value = URL.createObjectURL(target.files[0]);
+    changePhoto();
+};
+
+const changePhoto = async () => {
+    let formData = new FormData();
+    formData.append("image", image.value)
+    try {
+        let result = await useApi().post('profile_image', formData);
+        if (result.status === 200 || result.status === 201) {
+            image.value = undefined;
+            store.getProfile();
+        }
+
+    } catch (error) {
+        toast.add({ severity: 'error', summary: 'خطأ', detail: error?.response?.data?.errors?.image[0], life: 5000 });
+    }
+}
+let pendingPass = ref(false);
+let errorsPasswords = ref();
+const changePassword = handleSubmit(async () => {
+    pendingPass.value = true;
+    try {
+        let result = await useApi().post('change-password', values);
+        if (result.status === 200 || result.status === 201) {
+            pendingPass.value = false;
+            errorsPasswords.value = undefined;
+            toast.add({ severity: 'success', summary: 'نجاح', detail: ' تم تغير كلمه المرور بنجاح ', life: 5000 });
+            resetForm({
+                values: {
+                    password: "",
+                    password_confirmation: "",
+                    old_password: "",
+
+                },
+                errors: {},
+            });
+        }
+    } catch (error) {
+        errorsPasswords.value = error?.response?.data?.errors;
+        pendingPass.value = false;
+
+    }
+
+});
+
+
+onMounted(() => {
+    store.getProfile();
+});
 </script>
 <style lang="scss">
 .details-profile {
@@ -100,6 +247,13 @@ let selectPass = ref(false);
         justify-content: center;
         background-color: #E9ECEF;
         border-radius: 50%;
+
+        .profileImage {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
 
         .float-input {
             width: 24px;
@@ -129,8 +283,8 @@ let selectPass = ref(false);
         }
     }
 
-    .password-container{
-        .head{
+    .password-container {
+        .head {
             cursor: pointer;
         }
     }

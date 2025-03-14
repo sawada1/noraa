@@ -58,8 +58,19 @@ export function useApi(){
           const response = await apiClient.get<T>(url, config);
           return response;
         },
-        post: async <T>(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
-          const response = await apiClient.post<T>(url, data, config);
+        // post: async <T>(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {
+        //   const response = await apiClient.post<T>(url, data, config);
+        //   return response;
+        // },
+        post: async <T>(url: string, data: any, config: AxiosRequestConfig = {}): Promise<AxiosResponse<T>> => {
+          const isFormData = data instanceof FormData;
+          const response = await apiClient.post<T>(url, data, {
+            ...config,
+            headers: {
+              'Content-Type': isFormData ? 'multipart/form-data' : 'application/json',
+              ...config.headers, // ✅ Now this will always be defined
+            },
+          });
           return response;
         },
         put: async <T>(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> => {

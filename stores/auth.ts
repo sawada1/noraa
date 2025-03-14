@@ -31,10 +31,12 @@ export const useAuthStore = defineStore('auth', {
         pendingReg: false,
         pendingLogin: false,
         pendingOtp: false,
+        checkLogin: false,
         errorsLogin: undefined,
         phoneLogin: undefined,
         errorsRegister: undefined,
         messageToast: '',
+        messageToastLogin: '',
         checkToast: false,
         otpNum: '' as number | string,
         errorOtp: undefined,
@@ -44,6 +46,7 @@ export const useAuthStore = defineStore('auth', {
     },
     actions: {
         async login(form: any, resetForm: any , type: string) {
+            this.checkLogin = false;
             const router = useRouter();
             const localePath = useLocalePath();
             this.pendingLogin = true;
@@ -77,15 +80,19 @@ export const useAuthStore = defineStore('auth', {
                 this.pendingLogin = false;
                      
                 // const axiosError = error as AxiosError; // Cast error to AxiosError
-                const axiosError = error as AxiosError; // Cast error to AxiosError
-                this.errorsLogin = axiosError.response?.data?.errors;
-                if (!axiosError.response?.data?.verified) {
+                // const axiosError = error as AxiosError; // Cast error to AxiosError
+                this.errorsLogin = error?.response?.data?.errors;
+                if(error?.response?.data?.errors?.login){
+                    this.checkLogin = true;
+                    this.messageToastLogin = error?.response?.data?.errors?.login[0];
+                }
+                if (error?.response?.data.verified) {
                     this.checkToast = true;
                     this.checkOtp = 2;
                     this.checkForm = 2;
-                    this.messageToast = axiosError.response?.data?.errors?.message;
-                    this.otpNum = String(axiosError.response?.data?.errors?.otp);
-                    this.phoneLogin = axiosError.response?.data?.errors?.phone;
+                    this.messageToast = error?.response?.data?.errors?.message;
+                    this.otpNum = String(error?.response?.data?.errors?.otp);
+                    this.phoneLogin = error?.response?.data?.errors?.phone;
                 }
             }
         },

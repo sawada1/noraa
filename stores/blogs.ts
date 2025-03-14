@@ -47,12 +47,12 @@ export const useBlogsStore = defineStore('blogs', {
 
     },
     actions: {
-        async getBlogs() {
+        async getBlogs(author?:any , date?: any) {
             try {
                 this.lengthBlogs = false;
                 this.pendingBlogs = true;
                 const api = useApi();
-                const response = await api.get<ApiResponse<Blogs[]>>('blogs');
+                const response = await api.get<ApiResponse<Blogs[]>>('blogs' , {params:{author_id: author , date:date}});
                 if(response.data){
                     this.blogs = response.data.data;
                     this.pendingBlogs = false;

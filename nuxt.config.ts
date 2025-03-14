@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     // '@nuxtjs/html-validator',
     'nuxt-aos',
     "@pinia/nuxt",
+    '@nuxt/image',
     "@primevue/nuxt-module"
   ],
   primevue: {

@@ -11,20 +11,20 @@
             </div>
         </div>
         <div class="container">
-            <div v-if="store.blogs.length >= 1" class="blogs-container mt-5 mb-5">
+            <div  class="blogs-container mt-5 mb-5">
                 <div class="head d-flex flex-column flex-xl-row flex-lg-row align-items-center gap-3 justify-content-between">
                     <h1 class="fC-green fs-2"> المدونات </h1>
                     
                     <div class="d-flex align-items-center flex-column flex-xl-row flex-lg-row gap-3">
-                        <Select v-model="selectedAuthor" :options="authors" optionValue="id" optionLabel="name" placeholder=" كتب بواسطة  " class="selectCustom" />
-                        <DatePicker v-model="selectedDate" placeholder=" رتب حسب التاريخ  " class="selectDate" />
+                        <Select v-model="selectedAuthor" :options="authors" optionValue="id" @change="getBlogsFilter" optionLabel="name" placeholder=" كتب بواسطة  " class="selectCustom" />
+                        <DatePicker v-model="selectedDate" placeholder=" رتب حسب التاريخ  " dateFormat="dd-mm-yy" @value-change="chooseDate" class="selectDate" />
 
                         <!-- <Select v-model="selectedCity" :options="cities" optionLabel="name" placeholder=" رتب حسب التاريخ  " class="selectCustom" /> -->
 
                 
                     </div>
                 </div>
-                <div class="blogs mt-5">
+                <div v-if="store.blogs.length >= 1" class="blogs mt-5">
                     <div class="row">
                         <div v-for="item in store.blogs" class="col-12 col-xl-4 col-lg-4 text-center mb-4">
                             <CardJournal2 :blog="item"></CardJournal2>
@@ -52,7 +52,16 @@ const getAuthors = async()=>{
 }
 
 const getBlogsFilter = ()=>{
-    store.getBlogs();
+ 
+    store.getBlogs(selectedAuthor.value );
+}
+
+const chooseDate = ()=>{
+    const year = selectedDate.value.getFullYear();
+    const month = String(selectedDate.value.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const day = String(selectedDate.value.getDate()); // Ensure 2-digit format
+    const formattedDate = `${year}-${month}-${day}`;
+    store.getBlogs(selectedAuthor.value , formattedDate );
 }
 
 

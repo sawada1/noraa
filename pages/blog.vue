@@ -11,7 +11,7 @@
                         </h1>
                         <div class="d-flex align-items-center gap-3 mt-3">
                             <span> {{ store.blog.created_at }}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
                                 <g clip-path="url(#clip0_88_2396)">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -23,7 +23,7 @@
                                         <rect width="24" height="24" fill="white" />
                                     </clipPath>
                                 </defs>
-                            </svg>
+                            </svg> -->
                         </div>
                         <p class="mt-3">
                             {{ store.blog.fully_description }}
@@ -37,7 +37,7 @@
                                         <div class="d-flex border-bottom align-items-center justify-content-between">
                                             <h4>
 
-                                                {{ store.blog?.comments?.length }}
+                                                {{ comments?.length }}
 
                                                 تعليق
                                             </h4>
@@ -56,24 +56,25 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <div v-for="(review, index) in store.blog?.comments" :key="index"
+                                        <div v-for="(review, index) in comments" :key="index"
                                             class="mb-4 mt-4 border-bottom pb-3">
                                             <div class="d-flex align-items-center gap-3">
 
                                                 <div class="image">
-                                                    <Avatar :image="review.vendor.image" class="mr-2" size="large"
+                                                    <Avatar :image="review?.client_image" class="mr-2" size="large"
                                                         shape="circle" />
 
                                                 </div>
 
                                                 <div>
-                                                    <p class="mb-1 fw-bold">{{ review.vendor.name }}</p>
+                                                    <p class="mb-1 fw-bold">{{ review?.client }}</p>
                                                     <div class="d-flex align-items-center gap-2 mb-2">
                                                         <span class="text-muted"
-                                                            style="color: #758AA0; font-size: 14px;">{{ review.created_at
+                                                            style="color: #758AA0; font-size: 14px;">{{
+                                                                review?.created_at
                                                             }}</span>
                                                     </div>
-                                                    <p class="text-muted">{{ review.description }}</p>
+                                                    <p class="text-muted">{{ review?.description }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -81,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end border-top">
-                                    <Paginator :rows="10" :totalRecords="120"></Paginator>
+                                    <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange" />
                                 </div>
                             </div>
                         </div>
@@ -89,17 +90,13 @@
                 </div>
                 <div class="col-3 position-relative">
                     <div class="lastNews position-sticky " style="top: 50px;">
-                        <h6 class="mb-3"> اخر الاخبار </h6>
-                        <div class="d-flex flex-column gap-3">
-                            <img src="/images/journal1.png" class="w-100 rounded" height="190" alt="">
-                            <h5> لــوريــم إيــبـسـوم هـو نص عربي غير معنى، يُستخدم ... </h5>
-                            <span> 10/10/2024 </span>
+                        <!-- <h6 class="mb-3"> اخر الاخبار </h6> -->
+                        <div v-for="item in store.blog?.latest_articles" @click="itemId = item?.id, store.getBlog(itemId)" style="cursor: pointer;" class="d-flex flex-column gap-3">
+                            <img :src="item?.image" class="w-100 rounded" height="190" alt="">
+                            <h5> {{ item?.title }} </h5>
+                            <span> {{ item?.created_at }} </span>
                         </div>
-                        <div class="d-flex flex-column gap-3">
-                            <img src="/images/journal1.png" class="w-100 rounded" height="190" alt="">
-                            <h5> لــوريــم إيــبـسـوم هـو نص عربي غير معنى، يُستخدم ... </h5>
-                            <span> 10/10/2024 </span>
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -122,8 +119,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn  solid px-4" style="border-radius: 20px;"
                             data-bs-dismiss="modal"> رجوع </button>
-                        <button @click="getComment()" type="button" data-bs-dismiss="modal" class="btn btn-success  bg-green px-4"
-                            style="border-radius: 20px;"> إرسال
+                        <button @click="getComment()" type="button" data-bs-dismiss="modal"
+                            class="btn btn-success  bg-green px-4" style="border-radius: 20px;"> إرسال
                         </button>
                     </div>
                 </div>
@@ -143,43 +140,78 @@ store.getBlog(route.query.id);
 let comment = ref('');
 let obj = ref({
     comment: ''
-})
+});
+let itemId = ref();
+const closeModal = () => {
+  const modal = document.querySelector('[data-bs-dismiss="modal"]')?.closest('.modal');
+  if (modal) {
+    const bsModal = bootstrap.Modal.getInstance(modal);
+    bsModal?.hide();
+  }
+};
 const getComment = async () => {
-    if(authStore.isLoggedIn){
-        store.createComment(route.query.id, obj.value);
-    } else{
-      router.push('/login')
+    if (authStore.isLoggedIn) {
+        if(obj.value.comment != ''){
+            try {
+                const response = await useApi().post(`blogs/createComment`, { article_id: route.query.id, comment: obj.value.comment });
+                if (response.status === 200 || response.status === 201) {
+                    obj.value.comment = '';
+                    getComments();
+                    closeModal();
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    } else {
+        router.push('/login')
     }
 }
-const reviews = [
-    { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },
-    { name: 'أحمد مصطفى', rating: 5, date: '6 يناير, 2024', comment: 'العمل بشكل مثالي، شكراً!' },
-    { name: 'مصطفى ماجد', rating: 4, date: '6 يناير, 2024', comment: 'كنت أتساءل عما إذا كان من الممكن إضافة المزيد...' },
-    { name: 'معاذ جابر', rating: 4, date: '6 يناير, 2024', comment: 'مرحباً، أود أن أعرف كيفية الحصول على تحديثات...' },
-    { name: 'معاذ جابر', rating: 4, date: '6 يناير, 2024', comment: 'مرحباً، أود أن أعرف كيفية الحصول على تحديثات...' },
 
-];
 
-const starBreakdown = [
-    { stars: 5, percentage: 20 },
-    { stars: 4, percentage: 20 },
-    { stars: 3, percentage: 20 },
-    { stars: 2, percentage: 20 },
-    { stars: 1, percentage: 20 },
-];
+
+const totalRecords = ref(100); // Replace with your dynamic total count
+const rows = ref(10); // Number of items per page
+const page = ref(1); // Active page number (starting from 1)
+
+// Function to fetch data when page changes
+const onPageChange = (event) => {
+    page.value = event.page + 1; // PrimeVue uses zero-based index
+    console.log("Current Page:", page.value);
+    getComments(); // Call function to fetch new data based on page
+};
+
+
+const comments = ref([]);
+const getComments = async () => {
+    let result = await useApi().get(`comments/${route.query.id}`, { params: { page: page.value } });
+    if (result.status === 200) {
+        comments.value = result.data.data;
+        totalRecords.value = result.data?.meta?.total;
+        rows.value = result.data?.meta?.per_page;
+    }
+
+}
+
+watch(()=> itemId.value, (newId) => {
+    // Update the route with the new id
+    router.push({ query: { id: newId } });
+});
+
+getComments();
 
 useHead({
-      title: ` المدونة `,
-      meta: [
-        { name: 'description', content: 'test test test'},
+    title: ` المدونة `,
+    meta: [
+        { name: 'description', content: 'test test test' },
         { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
         { name: 'author', content: 'khaled sawada' },
         { name: 'robots', content: 'index, follow' },
         { property: 'og:title', content: `المدونة | نورا` },
         { property: 'og:description', content: 'test test test' },
         { property: 'og:image', content: '/images/nora.png' },
-      ],
-    });
+    ],
+});
 </script>
 <style lang="">
 
