@@ -15,17 +15,28 @@ interface TypesData {
     id: number;
     name: string;
 }
+interface Quizzes{
+    id: number;
+    title: string;
+    description: string;
+}
 interface Consultation {
     id: number;
     consultaion_type_id: number;
     title: string;
     description: string;
     image: string;
+    quizzes: Quizzes[]
 }
 export const useConsultationStore = defineStore('Consultation', {
     state: () => ({
         types: [] as TypesData[],
         slots: [] as String[],
+        activeType:1,
+        quizzes: {} as Quizzes,
+        nextQuiz: false,
+        time:"",
+        date:"",
         dataConsultation: {} as Consultation
     }),
     getters: {
@@ -50,6 +61,7 @@ export const useConsultationStore = defineStore('Consultation', {
                 const response = await api.post<ApiResponse<Consultation>>(`filter_consultation_page`, {consultaion_type_id: id});
                 if (response.data) {
                     this.dataConsultation = response.data.data;
+                    this.quizzes = response.data.data.quizzes[0]
                 }
             } catch (error) {
                 console.log(error);

@@ -24,8 +24,8 @@
                     <div class="image d-flex align-items-center gap-3">
                         <img :src="store.groupDetails?.group?.image" alt="">
                         <div class="text d-flex flex-column gap-1">
-                            <h5>  {{ store.groupDetails?.group?.title }} </h5>
-                            <p>  {{ store.groupDetails?.group?.description }}  </p>
+                            <h5> {{ store.groupDetails?.group?.title }} </h5>
+                            <p> {{ store.groupDetails?.group?.description }} </p>
                         </div>
                     </div>
                     <nuxt-link to="/conversitions">
@@ -42,25 +42,43 @@
                 </div>
                 <div class="chat-msgs">
                     <div class="main-items d-flex flex-column gap-5">
-                        <div v-for="item , i in store.messages"  class="item-container" :class="{'active': i % 2 == 0}">
+                        <div v-for="item, i in store.messages" class="item-container"
+                            :class="{ 'active': authStore.user?.id == item.sender_id }">
                             <div class="item d-flex align-items-center gap-2">
-                                <img src="/images/person.png" alt="">
-                                <div class="text">
-                                    <p>
-                                      {{ item.message }}
-                                    </p>
-                                    <span>  {{ item.time }} </span>
+                                <img class="mainImage" :src="item?.sender?.image" alt="">
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="text">
+                                        <p>
+                                            {{ item.message }}
+                                        </p>
+                                        <span> {{ item.time }} </span>
+                                    </div>
+                                    <a v-if="item.file" :href="item.file">
+                                        <Avatar v-if="isImageOrPdf(item.file) == 'image'" :image="item.file"
+                                            class="mr-2" size="xlarge" shape="circle" />
+                                        <img v-if="isImageOrPdf(item.file) == 'pdf'" src="/images/pdfIcon.svg" alt=""
+                                            width="50" height="50">
+
+                                    </a>
+
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
-                    
+
                     <div class="foot d-flex align-items-center justify-content-between px-3">
                         <input type="text" v-model="text" placeholder=" اكتب رسالتك هنا ... ">
+                        <div class="position-relative">
+                            <Avatar v-if="previewImage" :image="previewImage" class="mr-2" size="large"
+                                shape="circle" />
+                            <img v-if="isPdf" src="/images/pdfIcon.svg" alt="" width="30" height="30">
+                            <button v-if="previewImage || isPdf" @click="deleteFile()"> x </button>
+                        </div>
+
                         <div class="icons d-flex align-items-center gap-3">
-                            <label for="file-input1">
-                                <input id="file-input1" type="file" class="d-none">
+                            <label for="file-input1" style="cursor: pointer;">
+                                <input id="file-input1" @change="handleFileChange" type="file" class="d-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
                                     fill="none">
                                     <path
@@ -68,7 +86,7 @@
                                         fill="#43806C" />
                                 </svg>
                             </label>
-                            <button @click="clickFunc()">
+                            <button @click="sendMessage()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
                                     fill="none">
                                     <path
@@ -85,7 +103,7 @@
     </div>
 </template>
 <script setup>
-import {useChatStore} from "@/stores/chat";
+import { useChatStore } from "@/stores/chat";
 import { useAuthStore } from '@/stores/auth';
 let authStore = useAuthStore();
 let store = useChatStore();
@@ -95,23 +113,127 @@ const arr = ref([]);
 let route = useRoute();
 // socket.on('message', text => {
 //      console.log(text);
-     
+
 //     arr.value.push(text);
 
 // });
 
-let text = ref('');
+const isImageOrPdf = (url) => {
+    // Define valid image extensions and PDF extension
+    const imageExtensions = /\.(jpg|jpeg|png|gif|webp|svg)$/i;
+    const pdfExtension = /\.pdf$/i;
 
-const clickFunc = ()=>{
-    socket.emit('message', {name: 'khaled' , text: text.value , image: 'sss'});
+    // Check if the URL ends with an image or PDF extension
+    if (imageExtensions.test(url)) {
+        return "image"; // It's an image
+    } else if (pdfExtension.test(url)) {
+        return "pdf"; // It's a PDF
+    } else {
+        return "invalid"; // Neither image nor PDF
+    }
+};
+const isPdf = ref(false);
+let text = ref('');
+let file = ref();
+let previewImage = ref();
+const validateFileType = (event) => {
+    let filee = event.target.files[0];
+
+    if (!filee) return false;
+
+    const allowedExtensions = ["application/pdf"];
+    const isImage = filee.type.startsWith("image/");
+    const isAllowedPdf = allowedExtensions.includes(filee.type);
+
+    isPdf.value = isAllowedPdf; // Set isPdf to true if file is a PDF, else false
+
+    return isImage || isAllowedPdf;
+};
+
+const deleteFile = () => {
+    file.value = undefined;
+    previewImage.value = undefined;
+    isPdf.value = false;
+}
+const handleFileChange = (event) => {
+    if (validateFileType(event)) {
+        const mainfile = event.target.files[0];
+        if (!mainfile) return;
+
+        file.value = mainfile;
+
+        if (isPdf.value) {
+            previewImage.value = null; // No preview for PDFs
+        } else {
+            previewImage.value = URL.createObjectURL(mainfile);
+        }
+    } else {
+        alert("نوع الملف غير صالح. يُسمح فقط بالصور وملفات PDF");
+    }
+};
+const clickFunc = () => {
+    socket.emit('message', { name: 'khaled', text: text.value, image: 'sss' });
     text.value = ''
 }
 
+const sendMessage = async () => {
+    let formData = new FormData();
+    formData.append("chat_group_id", route.query?.id);
+    formData.append("message", text.value);
+    if (file.value) {
+        formData.append("file", file.value);
+    }
+    if (text.value.trim()) {
+        let result = await useApi().post(`group/${route.query?.id}/send-message`, formData);
+        if (result.status == 200 || result.status == 201) {
+            text.value = '';
+            file.value = undefined;
+        }
+    }
+}
+
+const group_details = async () => {
+    try {
+        const api = useApi();
+        const response = await api.get(`group_details/${route.query?.id}`);
+        if (response.data) {
+            store.groupDetails = response.data.data;
+        }
+    } catch (error) {
+        console.log(error);
+
+    }
+};
+const fetchData = async () => {
+    group_details();
+    store.get_messages(route.query?.id);
+
+};
+const intervalId = ref(null);
+const startPolling = () => {
+
+    intervalId.value = window.setInterval(fetchData, 7000);
+};
+
+const stopPolling = () => {
+    if (intervalId.value) {
+        clearInterval(intervalId.value);
+        intervalId.value = null;
+    }
+};
+
 onMounted(() => {
-   store.group_details(route.query?.id); 
-   store.get_messages(route.query?.id); 
+    store.group_details(route.query?.id);
+    store.get_messages(route.query?.id);
+    if (route.path.includes('conversation')) {
+        startPolling();
+    }
+});
+
+
+
+onBeforeUnmount(() => {
+    stopPolling();
 });
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
