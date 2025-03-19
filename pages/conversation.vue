@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="foot d-flex align-items-center justify-content-between px-3">
-                        <input type="text" v-model="text" @keydown.enter="sendMessage()" placeholder=" اكتب رسالتك هنا ... ">
+                        <input type="text" v-model="text" @keydown.enter="sendMessage()" :readonly="pendingChat" placeholder=" اكتب رسالتك هنا ... ">
                         <div class="position-relative">
                             <Avatar v-if="previewImage" :image="previewImage" class="mr-2" size="large"
                                 shape="circle" />
@@ -86,7 +86,7 @@
                                         fill="#43806C" />
                                 </svg>
                             </label>
-                            <button @click="sendMessage()">
+                            <button :disabled="pendingChat" @click="sendMessage()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25"
                                     fill="none">
                                     <path
@@ -99,6 +99,8 @@
                 </div>
             </div>
         </div>
+        <Toast />
+
         <GeneralLoader v-if="store.pendingGroup_details"></GeneralLoader>
     </div>
 </template>
@@ -107,6 +109,8 @@ import { useChatStore } from "@/stores/chat";
 import { useAuthStore } from '@/stores/auth';
 let authStore = useAuthStore();
 let store = useChatStore();
+const toast = useToast();
+
 // import { io } from "socket.io-client";
 // const socket = io('ws://localhost:8080');
 const arr = ref([]);
@@ -188,6 +192,8 @@ watch(() => store.messages, (newMessages, oldMessages) => {
   }
 }, { deep: true });
 
+let pendingChat = ref(false);
+
 const sendMessage = async () => {
     let formData = new FormData();
     formData.append("chat_group_id", route.query?.id);
@@ -196,13 +202,20 @@ const sendMessage = async () => {
         formData.append("file", file.value);
     }
     if (text.value.trim()) {
+        pendingChat.value = true;
         let result = await useApi().post(`group/${route.query?.id}/send-message`, formData);
         if (result.status == 200 || result.status == 201) {
+            pendingChat.value = false;
             text.value = '';
             file.value = undefined;
             deleteFile();
             store.get_messages(route.query?.id);
         }
+    } else{
+        console.log('dsdsds');
+        
+        toast.add({ severity: 'error', summary: 'خطأ', detail: 'الرساله مطلوبة', life: 30000 });
+
     }
 }
 

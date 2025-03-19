@@ -60,7 +60,6 @@
         <div class="bookConsultation2">
             <div class="container">
                 <h2 class="text-center fC-green">احجز استشارتك</h2>
-                <p class="text-center">لوريم إيبسوم هو ببساطة نص وهمي<br>للطباعة والتنضيد</p>
                 <div class="row justify-content-center">
     
                     <div class="col-xl-9">

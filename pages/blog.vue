@@ -2,7 +2,7 @@
     <div class="container">
         <div class="blog-details mt-5 mb-5">
             <div class="row position-relative">
-                <div class="col-9">
+                <div class="col-xl-9 col-lg-9 col-12">
                     <div class="main-details">
                         <div class="image">
                             <img class="rounded w-100" height="330" :src="store.blog.image" alt="">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 position-relative">
+                <div class="col-xl-3 col-lg-3 col-12 position-relative">
                     <div class="lastNews position-sticky " style="top: 50px;">
                         <!-- <h6 class="mb-3"> اخر الاخبار </h6> -->
                         <div v-for="item in store.blog?.latest_articles" @click="itemId = item?.id, store.getBlog(itemId)" style="cursor: pointer;" class="d-flex flex-column gap-3">

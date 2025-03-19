@@ -4,8 +4,7 @@
             <div class="row">
                 <div class="bannerImage" style="background-image: url(/images/consultation-banner.png);">
                     <div>
-                        <h1 class="fC-LightOrange"> لوريم إيبسوم هو ببساطة نص وهمي للنص صناعة الطباعة والتنضيد. </h1>
-                        <p>لوريم إيبسوم هو ببساطة نص وهمي<br>للطباعة والتنضيد</p>
+                        <h1 class="fC-LightOrange"> المدونات </h1>
                     </div>
                 </div>
             </div>

@@ -107,6 +107,7 @@
   .mobileSec{display: flex;align-items: center;}  
   .mobileSec .hdlftIcon{margin: 0 0 0 15px;}
   .mobileSec .hdlftIcon img{width: 26px;}
+  .mobileSec a{ padding: 10px !important; border-radius: 30px;}
 
   .hd-left{display: none;}
   header{padding: 0px;}

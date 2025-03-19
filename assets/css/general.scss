@@ -334,6 +334,24 @@ html[dir="ltr"] {
 
 }
 
+.navbar-light ul.navbar-nav li a.nav-link{
+    background-color: #fff;
+}
+
+@media(max-width: 790px){
+    .chat-container{
+        flex-direction: column;
+        height: fit-content;
+        .persons , .main-chat{
+            width: 100%;
+            // margin-bottom: 130px;
+        }
+    }
+    .p-toast{
+        width: 300px !important;
+    }
+}
+
 
 .radio-check-inputs {
     display: flex;

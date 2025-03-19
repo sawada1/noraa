@@ -5,7 +5,6 @@
                 <div class="bannerImage" style="background-image: url(/images/consultation-banner.png);">
                     <div>
                         <h1 class="text-light"> المحادثات الجماعية </h1>
-                        <p>  لوريم إيبسوم هو نص عربي غير معنى، يُستخدم في مجالات الطباعة  </p>
                     </div>
                 </div>
             </div>
