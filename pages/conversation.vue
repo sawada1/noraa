@@ -12,7 +12,7 @@
                         <div class="text d-flex flex-column gap-1">
                             <h6> {{ i.name }} </h6>
                             <div class="d-flex align-items-center gap-2">
-                                <div class="status mt-1"></div>
+                                <div class="status mt-1" :class="{'active': i?.status == 'online'}"></div>
                                 <span> {{ i.status }} </span>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                         </p>
                                         <span> {{ item.time }} </span>
                                     </div>
-                                    <a v-if="item.file" :href="item.file">
+                                    <a v-if="item.file" :href="item.file" target="_blank">
                                         <Avatar v-if="isImageOrPdf(item.file) == 'image'" :image="item.file"
                                             class="mr-2" size="xlarge" shape="circle" />
                                         <img v-if="isImageOrPdf(item.file) == 'pdf'" src="/images/pdfIcon.svg" alt=""
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="foot d-flex align-items-center justify-content-between px-3">
-                        <input type="text" v-model="text" placeholder=" اكتب رسالتك هنا ... ">
+                        <input type="text" v-model="text" @keydown.enter="sendMessage()" placeholder=" اكتب رسالتك هنا ... ">
                         <div class="position-relative">
                             <Avatar v-if="previewImage" :image="previewImage" class="mr-2" size="large"
                                 shape="circle" />
@@ -188,6 +188,7 @@ const sendMessage = async () => {
         if (result.status == 200 || result.status == 201) {
             text.value = '';
             file.value = undefined;
+            deleteFile();
         }
     }
 }

@@ -2,8 +2,8 @@
     <div class="details-profile">
         <div class="custom-shadow-container mb-5">
             <div class="main-image mb-5">
-                <SvgUser1 v-if="!image"></SvgUser1>
-                <NuxtImg v-if="image && imageSrc" :src="imageSrc" class="profileImage"></NuxtImg>
+                <SvgUser1 v-if="!imageSrc"></SvgUser1>
+                <NuxtImg v-if="imageSrc" :src="imageSrc" class="profileImage"></NuxtImg>
                 <label for="changeImge1" class="float-input">
                     <input id="changeImge1" @change="onFileChange1" type="file" class="d-none">
                     <SvgCamera></SvgCamera>
@@ -166,7 +166,7 @@ watch(() => store.profileDetails, (val) => {
 });
 
 const image = ref();
-const imageSrc = ref('');
+const imageSrc = ref();
 const { locale } = useI18n();
 const { errors, handleSubmit, values, resetForm, defineField } = useForm({
     validationSchema: yup.object({
@@ -230,6 +230,12 @@ const changePassword = handleSubmit(async () => {
     }
 
 });
+
+watch(()=> store.profileDetails , (val)=>{
+    if(val?.image){
+        imageSrc.value = val?.image
+    }
+})
 
 
 onMounted(() => {
