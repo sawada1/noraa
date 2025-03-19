@@ -41,7 +41,7 @@
                     </nuxt-link>
                 </div>
                 <div class="chat-msgs">
-                    <div class="main-items d-flex flex-column gap-5">
+                    <div class="main-items d-flex flex-column gap-5" ref="chatContainer">
                         <div v-for="item, i in store.messages" class="item-container"
                             :class="{ 'active': authStore.user?.id == item.sender_id }">
                             <div class="item d-flex align-items-center gap-2">
@@ -171,10 +171,22 @@ const handleFileChange = (event) => {
         alert("نوع الملف غير صالح. يُسمح فقط بالصور وملفات PDF");
     }
 };
-const clickFunc = () => {
-    socket.emit('message', { name: 'khaled', text: text.value, image: 'sss' });
-    text.value = ''
-}
+const chatContainer = ref(null);
+
+// Scroll to bottom function
+const scrollToBottom = () => {
+  nextTick(() => {
+    if (chatContainer.value) {
+      chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+    }
+  });
+};
+
+watch(() => store.messages, (newMessages, oldMessages) => {
+  if (!oldMessages || newMessages.length > oldMessages.length) {
+    scrollToBottom();
+  }
+}, { deep: true });
 
 const sendMessage = async () => {
     let formData = new FormData();
@@ -189,6 +201,7 @@ const sendMessage = async () => {
             text.value = '';
             file.value = undefined;
             deleteFile();
+            store.get_messages(route.query?.id);
         }
     }
 }
@@ -213,7 +226,7 @@ const fetchData = async () => {
 const intervalId = ref(null);
 const startPolling = () => {
 
-    intervalId.value = window.setInterval(fetchData, 7000);
+    intervalId.value = window.setInterval(fetchData, 3000);
 };
 
 const stopPolling = () => {
