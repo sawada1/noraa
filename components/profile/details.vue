@@ -3,7 +3,7 @@
         <div class="custom-shadow-container mb-5">
             <div class="main-image mb-5">
                 <SvgUser1 v-if="!imageSrc"></SvgUser1>
-                <NuxtImg v-if="imageSrc" :src="imageSrc" class="profileImage"></NuxtImg>
+                <NuxtImg v-if="imageSrc" :src="getImageUrl(imageSrc)" class="profileImage"></NuxtImg>
                 <label for="changeImge1" class="float-input">
                     <input id="changeImge1" @change="onFileChange1" type="file" class="d-none">
                     <SvgCamera></SvgCamera>
@@ -168,6 +168,10 @@ watch(() => store.profileDetails, (val) => {
 const image = ref();
 const imageSrc = ref();
 const { locale } = useI18n();
+
+const getImageUrl = (url) => {
+  return url.startsWith('/.netlify/images?url=') ? decodeURIComponent(url.split('=')[1]) : url;
+};
 const { errors, handleSubmit, values, resetForm, defineField } = useForm({
     validationSchema: yup.object({
         password: yup.string().required(locale.value == 'ar' ? 'هذا الحقل مطلوب' : 'this field is required'),
