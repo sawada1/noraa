@@ -7,7 +7,6 @@
                     <div class="bannerImage" style="background-image: url(/images/consultation-banner.png);">
                         <div>
                             <h1 class="fC-LightOrange">الأستشارات</h1>
-                            <p>لوريم إيبسوم هو ببساطة نص وهمي<br>للطباعة والتنضيد</p>
                         </div>
                     </div>
                 </div>

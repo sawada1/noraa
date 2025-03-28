@@ -127,8 +127,7 @@
                     <button @click="checkBtn = 2" :class="{ 'active': checkBtn == 2 }"> محتوي الباقة </button>
                     <button @click="checkBtn = 3" :class="{ 'active': checkBtn == 3 }"> ماذا ساتعلم</button>
                 </div>
-                <div v-if="checkBtn == 1" class="desc-details d-flex flex-column gap-5">
-                    {{ store.CourseData?.fully_description }}
+                <div v-if="checkBtn == 1" class="desc-details d-flex flex-column gap-5" v-html="store.CourseData?.fully_description">
                 </div>
                 <div v-if="checkBtn == 2" class="accordion-details">
                     <Accordion value="0">
@@ -184,12 +183,12 @@
 
         </div>
 
-        <div class="relatedCourses">
+        <div v-if="store.CourseData?.related_courses?.length >= 1" class="relatedCourses">
             <div class="container">
                 <h2 class=" fC-green"> باقات الدورات ذات صلة </h2>
                 <div class="row">
-                    <div v-for="i in 4" class="col-md-3 mb-4">
-                        <CardJournal></CardJournal>
+                    <div v-for="i in store.CourseData?.related_courses" class="col-md-3 mb-4">
+                        <CardJournal :course="i"></CardJournal>
                     </div>
 
                 </div>

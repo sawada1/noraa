@@ -27,23 +27,29 @@
             </a>
             <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 5" :class="{'active': store.profileStat == 5}">
               <div class="icon">
+                <SvgProfile9></SvgProfile9>
+              </div>
+              <span> استشاراتي </span>
+            </a>
+            <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 6" :class="{'active': store.profileStat == 6}">
+              <div class="icon">
                 <SvgProfile5></SvgProfile5>
               </div>
               <span> الأحداث القادمة </span>
             </a>
-            <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 6" :class="{'active': store.profileStat == 6}">
+            <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 7" :class="{'active': store.profileStat == 7}">
               <div class="icon">
                 <SvgProfile6></SvgProfile6>
               </div>
               <span>  الردشة </span>
             </a>
-            <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 7" :class="{'active': store.profileStat == 7}">
+            <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 8" :class="{'active': store.profileStat == 8}">
               <div class="icon">
                 <SvgProfile7></SvgProfile7>
               </div>
               <span>  الملاحظات </span>
             </a>
-            <div class="item d-flex align-items-center gap-2" @click="store2.clearAuth()" :class="{'active': store.profileStat == 8}">
+            <div class="item d-flex align-items-center gap-2" @click="store2.clearAuth()" :class="{'active': store.profileStat == 9}">
               <div class="icon">
                 <SvgProfile8></SvgProfile8>
               </div>
