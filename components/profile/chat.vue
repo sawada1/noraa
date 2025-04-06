@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <ChatMain></ChatMain>
+        <ChatMain :profile="true"></ChatMain>
     </div>
 </template>
 <script setup>

@@ -1,22 +1,50 @@
 <template>
     <div class="custom-shadow-container">
         <div class="d-flex flex-column gap-5">
-            <div v-for="i in 5" class="consultation-item">
+            <div v-for="item in arrData" class="consultation-item">
                 <div class="d-flex flex-column gap-4">
-                    <h4> هنا يكتب اسم الاستشارة هنا يكتب اسم الاستشارة هنا يكتب ه... </h4>
-                    <p class="type"> هنا يكتب نوع الاستشارة </p>
-                    <p class="date"> موعد الانتهاء 2025\12\12</p>
-                    <button class="d-flex align-items-center justify-content-center text-light"> التفاصيل </button>
+                    <h4> {{ item?.title }}</h4>
+                    <p class="type"> {{ item?.type }} </p>
+                    <p class="date"> موعد البدء {{ item?.schedule?.date }}</p>
+                    <a :href="item?.schedule?.zoom_join_url" target="_blank">
+                        <button class="d-flex align-items-center justify-content-center text-light"> التفاصيل </button>
+                    </a>
                 </div>
-                <div class="float-text"> <span> استشارات قادمة </span> </div>
+                <div class="float-text"> <span> {{ item?.status }} </span> </div>
             </div>
         </div>
         <div class="d-flex justify-content-end mt-4">
-                    <Paginator :rows="10" :totalRecords="120"></Paginator>
+            <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange" />
                 </div>
     </div>
 </template>
 <script setup>
+ let arrData = ref([]);
+ const totalRecords = ref(100); // Replace with your dynamic total count
+const rows = ref(10); // Number of items per page
+const page = ref(1); // Active page number (starting from 1)
+
+// Function to fetch data when page changes
+
+
+ const getData = async()=>{
+ let result = await useApi().get('my-consultation' , {params:{page: page.value}});
+ if(result.status === 200){
+    arrData.value = result.data?.data;
+    totalRecords.value = result.data?.meta?.total;
+    rows.value = result.data?.meta?.per_page;
+ }
+ }
+
+ const onPageChange = (event) => {
+    page.value = event.page + 1; // PrimeVue uses zero-based index
+    console.log("Current Page:", page.value);
+    getData(); // Call function to fetch new data based on page
+};
+
+ onMounted(() => {
+    getData();
+ });
 
 </script>
 <style lang="scss">

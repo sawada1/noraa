@@ -99,7 +99,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <button v-if="selectedInputs >= 2" @click="selectedInputs--" class="bg-green text-light py-2 px-5 rounded-5 mt-5"> رجوع
                         </button>
-                        <button v-if="selectedInputs != 4"  @click="nextStep()" 
+                        <button v-if="selectedInputs == 4"  @click="nextStep()" 
                         :disabled="!isStepValid" class="bg-green text-light py-2 px-5 rounded-5 mt-5"> {{ selectedInputs <= 4 ? 'التالي' : 'انهاء' }} 
                         </button>
                     </div>

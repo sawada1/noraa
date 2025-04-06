@@ -4,15 +4,27 @@
             <div class="persons">
                 <div class="head d-flex flex-column gap-3">
                     <h3> جميع الاعضاء </h3>
-                    <span> {{ store.groupDetails?.group?.members_count }} عضو </span>
+                    <span> {{ profile ? groups.length : store.groupDetails?.group?.members_count }} عضو </span>
                 </div>
                 <div class="persons-main d-flex flex-column gap-3">
-                    <div v-for="i in store.groupDetails?.clients" class="person d-flex align-items-center gap-3">
+                    <div v-if="profile" v-for="i in groups" @click=" groupId = i, store.get_messages(groupId?.id)"
+                         :class="{'active': i?.id == groupId?.id}"
+                        style="cursor: pointer;" class="person chatProfile d-flex align-items-center gap-3">
+                        <img :src="i?.image" alt="">
+                        <div class="text d-flex flex-column gap-1">
+                            <h6> {{ i?.title }} </h6>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="status mt-1 active"></div>
+                                <span> {{ i?.online_vendors }} متصل </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else v-for="i in store.groupDetails?.clients" class="person d-flex align-items-center gap-3">
                         <img :src="i.image" alt="">
                         <div class="text d-flex flex-column gap-1">
                             <h6> {{ i.name }} </h6>
                             <div class="d-flex align-items-center gap-2">
-                                <div class="status mt-1" :class="{'active': i?.status == 'online'}"></div>
+                                <div class="status mt-1" :class="{ 'active': i?.status == 'online' }"></div>
                                 <span> {{ i.status }} </span>
                             </div>
                         </div>
@@ -21,7 +33,14 @@
             </div>
             <div class="main-chat">
                 <div class="head d-flex align-items-center justify-content-between">
-                    <div class="image d-flex align-items-center gap-3">
+                    <div v-if="profile" class="image d-flex align-items-center gap-3">
+                        <img :src="groupId?.image" alt="">
+                        <div class="text d-flex flex-column gap-1">
+                            <h5> {{ groupId?.title }} </h5>
+                            <p> {{ groupId?.description }} </p>
+                        </div>
+                    </div>
+                    <div v-else class="image d-flex align-items-center gap-3">
                         <img :src="store.groupDetails?.group?.image" alt="">
                         <div class="text d-flex flex-column gap-1">
                             <h5> {{ store.groupDetails?.group?.title }} </h5>
@@ -68,7 +87,8 @@
                     </div>
 
                     <div class="foot d-flex align-items-center justify-content-between px-3">
-                        <input type="text" v-model="text" @keydown.enter="sendMessage()" :readonly="pendingChat" placeholder=" اكتب رسالتك هنا ... ">
+                        <input type="text" v-model="text" @keydown.enter="sendMessage()" :readonly="pendingChat"
+                            placeholder=" اكتب رسالتك هنا ... ">
                         <div class="position-relative">
                             <Avatar v-if="previewImage" :image="previewImage" class="mr-2" size="large"
                                 shape="circle" />
@@ -110,7 +130,11 @@ import { useAuthStore } from '@/stores/auth';
 let authStore = useAuthStore();
 let store = useChatStore();
 const toast = useToast();
-
+let props = defineProps({
+    profile: {
+        default: false
+    }
+})
 // import { io } from "socket.io-client";
 // const socket = io('ws://localhost:8080');
 const arr = ref([]);
@@ -179,17 +203,17 @@ const chatContainer = ref(null);
 
 // Scroll to bottom function
 const scrollToBottom = () => {
-  nextTick(() => {
-    if (chatContainer.value) {
-      chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
-    }
-  });
+    nextTick(() => {
+        if (chatContainer.value) {
+            chatContainer.value.scrollTop = chatContainer.value.scrollHeight;
+        }
+    });
 };
 
 watch(() => store.messages, (newMessages, oldMessages) => {
-  if (!oldMessages || newMessages.length > oldMessages.length) {
-    scrollToBottom();
-  }
+    if (!oldMessages || newMessages.length > oldMessages.length) {
+        scrollToBottom();
+    }
 }, { deep: true });
 
 let pendingChat = ref(false);
@@ -211,13 +235,16 @@ const sendMessage = async () => {
             deleteFile();
             store.get_messages(route.query?.id);
         }
-    } else{
+    } else {
         console.log('dsdsds');
-        
+
         toast.add({ severity: 'error', summary: 'خطأ', detail: 'الرساله مطلوبة', life: 30000 });
 
     }
 }
+
+let groups = ref([]);
+let groupId = ref();
 
 const group_details = async () => {
     try {
@@ -231,9 +258,28 @@ const group_details = async () => {
 
     }
 };
+const get_groups = async () => {
+    try {
+        const api = useApi();
+        const response = await api.get(`my-chats`);
+        if (response.data) {
+            groups.value = response.data.groups;
+            groupId.value = groups.value[0];
+        }
+    } catch (error) {
+        console.log(error);
+
+    }
+};
+
 const fetchData = async () => {
-    group_details();
-    store.get_messages(route.query?.id);
+    if (props.profile) {
+        get_groups();
+        store.get_messages(groupId.value?.id);
+    } else {
+        group_details();
+        store.get_messages(route.query?.id);
+    }
 
 };
 const intervalId = ref(null);
@@ -250,9 +296,14 @@ const stopPolling = () => {
 };
 
 onMounted(() => {
-    store.group_details(route.query?.id);
-    store.get_messages(route.query?.id);
-    if (route.path.includes('conversation')) {
+    if (props.profile) {
+        get_groups();
+        store.get_messages(groupId.value?.id);
+    } else {
+        store.group_details(route.query?.id);
+        store.get_messages(route.query?.id);
+    }
+    if (route.path.includes('conversation' || 'chat')) {
         startPolling();
     }
 });
@@ -263,4 +314,21 @@ onBeforeUnmount(() => {
     stopPolling();
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.chatProfile {
+    position: relative;
+    &.active{
+        &::before {
+            content: '';
+            border-radius: 8px 0px 0px 8px;
+            position: absolute;
+            right: -15px;
+            background: rgba(67, 128, 108, 0.70);
+            width: 8px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+    }
+}
+</style>
