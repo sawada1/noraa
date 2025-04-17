@@ -30,13 +30,15 @@
     "nuxt": "^3.13.2",
     "nuxt-aos": "^1.2.5",
     "nuxt-swiper": "^1.2.2",
-    "pdfjs-dist": "^3.11.174",
+    "pdfjs-dist": "^2.16.105",
     "primevue": "^4.2.4",
     "pusher-js": "^8.4.0",
     "sass": "^1.80.5",
     "socket.io-client": "^4.8.1",
     "typescript": "^5.6.3",
     "vue": "latest",
+    "vue-pdf-embed": "^2.1.2",
+    "vue-reader": "^1.2.17",
     "vue-router": "latest",
     "yup": "^1.6.1"
   }
