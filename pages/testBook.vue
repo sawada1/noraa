@@ -1,73 +1,57 @@
 <template>
-    <div class="container" style="min-height: 100vh;">
-  <ClientOnly>
-    <div class="pdf-container">
-  <vue-pdf-embed
-    ref="pdfRef"
-    :source="pdfUrl"
-    :page="currentPage"
-    @loaded="onPdfLoaded"
-  />
-
-  <!-- Zoom & Pagination Controls -->
-  <div class="controls">
-    <button @click="zoomOut">-</button>
-    <span>{{ zoomLevel * 100 }}%</span>
-    <button @click="zoomIn">+</button>
-
-    <button @click="prevPage" :disabled="currentPage <= 1">Prev</button>
-    <span>Page {{ currentPage }} of {{ pageCount }}</span>
-    <button @click="nextPage" :disabled="currentPage >= pageCount">Next</button>
-  </div>
-</div>
-  </ClientOnly>
+  <div class="flex" style="height: 100vh">
+    <div id="viewer" class="flex-1" style="miheight: 100vh"></div>
+    <div class="w-96 bg-gray-100 p-4 overflow-y-auto">
+      <h2 class="text-lg font-bold mb-2">ملاحظاتك</h2>
+      <div v-if="notes.length">
+        <div v-for="(note, index) in notes" :key="index" class="mb-3">
+          <p class="text-sm text-gray-700"><strong>📍 نص:</strong> {{ note.text }}</p>
+          <p class="text-sm text-green-700"><strong>📝 ملاحظة:</strong> {{ note.note }}</p>
+        </div>
+      </div>
+      <div v-else class="text-center text-gray-500 mt-10">
+        لا توجد ملاحظات
+      </div>
     </div>
+  </div>
 </template>
-<script  setup>
-import VuePdfEmbed from 'vue-pdf-embed'
 
-const pdfUrl = '/books/testBook1.pdf'
-const pdfRef = ref(null)
-const currentPage = ref(1)
-const pageCount = ref(0)
-const zoomLevel = ref(1)
+<script setup>
+import { ref, onMounted } from 'vue'
 
-const onPdfLoaded = async () => {
-  const doc = await pdfRef.value?.getPdfDocument()
-  pageCount.value = doc?.numPages || 0
-}
+const notes = ref([])
 
-const nextPage = () => {
-  if (currentPage.value < pageCount.value) currentPage.value++
-}
+if (process.client) {
+  const WebViewer = (await import('@pdftron/webviewer')).default
 
-const prevPage = () => {
-  if (currentPage.value > 1) currentPage.value--
-}
+  onMounted(() => {
+    const element = document.getElementById('viewer')
 
-const zoomIn = () => {
-  zoomLevel.value += 0.1
-  pdfRef.value.setScale(zoomLevel.value)
-}
+    WebViewer(
+      {
+        path: '/webviewer/lib',
+        initialDoc: '/testBook1.pdf',
+        licenseKey: 'YOUR_LICENSE_KEY',
+        disabledElements: ['ribbons', 'toolsHeader', 'menuButton', 'notesPanelButton']
+      },
+      element
+    ).then((instance) => {
+      const { documentViewer } = instance.Core
 
-const zoomOut = () => {
-  if (zoomLevel.value > 0.2) {
-    zoomLevel.value -= 0.1
-    pdfRef.value.setScale(zoomLevel.value)
-  }
+      documentViewer.addEventListener('annotationChanged', (annotations, action) => {
+        if (action === 'add') {
+          annotations.forEach(annot => {
+            const content = annot.getContents()
+            if (content) {
+              notes.value.push({
+                text: annot.Subject || 'نص مميز',
+                note: content
+              })
+            }
+          })
+        }
+      })
+    })
+  })
 }
 </script>
-<style lang="scss">
-.pdf-container {
-  position: relative;
-  max-width: 800px;
-  margin: auto;
-}
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-  gap: 10px;
-}
-</style>

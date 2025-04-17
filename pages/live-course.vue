@@ -5,23 +5,21 @@
                 <div class="row">
                     <div class="col-md-7 position-relative">
                         <a class="shareOption" href="#"><img src="/images/share1.svg" alt="share icon"></a>
-                        <h1 class="fC-LightOrange">عنوان الدورة الحية</h1>
-                        <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي
-                            القياسي في هذه الصناعة منذ عام 1500.</p>
-                        <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء ليس فقط
-                            لخمسة قرون، بل أيضًا للقفزة.</p>
+                        <h1 class="fC-LightOrange">  {{ arrData?.title }} </h1>
+                        <p> {{ arrData?.description }} </p>
+                     
                         <h4 class="fC-green">تبدأ الدورة المباشرة في:</h4>
                         <ul class="liveCourse1Time">
-                            <li><span id="days1">2</span>
+                            <li><span id="days1"> {{ seconds }} </span>
                                 <p>ثانية</p>
                             </li>
-                            <li><span id="hours1">2</span>
+                            <li><span id="hours1"> {{ minutes }} </span>
                                 <p>دقيقة</p>
                             </li>
-                            <li><span id="minutes1">2</span>
+                            <li><span id="minutes1">{{ hours }}</span>
                                 <p>ساعة</p>
                             </li>
-                            <li><span id="seconds1">2</span>
+                            <li><span id="seconds1"> {{ days }} </span>
                                 <p>يوم</p>
                             </li>
                         </ul>
@@ -52,7 +50,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <iframe width="560" height="315"
-                                    src="https://www.youtube.com/embed/RiGIvbHpluE?si=XbJ71E6aIW42Y2rw"
+                                    :src="arrData?.previwe_video"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowfullscreen></iframe>
@@ -66,7 +64,7 @@
                                                 d="M14.0002 16.3335C13.0279 16.3335 12.2016 15.9932 11.521 15.3127C10.8404 14.6321 10.5002 13.8057 10.5002 12.8335V5.8335C10.5002 4.86127 10.8404 4.03488 11.521 3.35433C12.2016 2.67377 13.0279 2.3335 14.0002 2.3335C14.9724 2.3335 15.7988 2.67377 16.4793 3.35433C17.1599 4.03488 17.5002 4.86127 17.5002 5.8335V12.8335C17.5002 13.8057 17.1599 14.6321 16.4793 15.3127C15.7988 15.9932 14.9724 16.3335 14.0002 16.3335ZM12.8335 24.5002V20.9127C10.8113 20.6404 9.13905 19.7363 7.81683 18.2002C6.49461 16.6641 5.8335 14.8752 5.8335 12.8335H8.16683C8.16683 14.4474 8.73558 15.8231 9.87308 16.9606C11.0106 18.0981 12.3863 18.6668 14.0002 18.6668C15.6141 18.6668 16.9897 18.0981 18.1272 16.9606C19.2647 15.8231 19.8335 14.4474 19.8335 12.8335H22.1668C22.1668 14.8752 21.5057 16.6641 20.1835 18.2002C18.8613 19.7363 17.1891 20.6404 15.1668 20.9127V24.5002H12.8335ZM14.0002 14.0002C14.3307 14.0002 14.6078 13.8884 14.8314 13.6647C15.055 13.4411 15.1668 13.1641 15.1668 12.8335V5.8335C15.1668 5.50294 15.055 5.22586 14.8314 5.00225C14.6078 4.77863 14.3307 4.66683 14.0002 4.66683C13.6696 4.66683 13.3925 4.77863 13.1689 5.00225C12.9453 5.22586 12.8335 5.50294 12.8335 5.8335V12.8335C12.8335 13.1641 12.9453 13.4411 13.1689 13.6647C13.3925 13.8884 13.6696 14.0002 14.0002 14.0002Z"
                                                 fill="#212529" />
                                         </svg>
-                                        <div> <span class="fw-bold fs-6"> د. هند محمد احمد </span> <span
+                                        <div> <span class="fw-bold fs-6"> {{ arrData?.specialist?.name }} </span> <span
                                                 style="color: #6C757D;" class="fs-6"> ( محاضر ) </span> </div>
                                     </div>
                                     <div class="item d-flex align-items-center gap-2">
@@ -77,7 +75,7 @@
                                                 stroke="#212529" stroke-width="2.2" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div> <span class="fw-bold fs-6"> 7 ديسمبر – 13 ديسمبر </span> </div>
+                                        <div> <span class="fw-bold fs-6">  {{ arrData?.day_date }} </span> </div>
                                     </div>
                                     <div class="item d-flex align-items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -87,7 +85,7 @@
                                                 stroke="#212529" stroke-width="2.2" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div> <span class="fw-bold fs-6" style="color: #6C757D;"> 8 صباحًا - 3 مساءً
+                                        <div class="d-flex align-items-center gap-3"> <span class="fw-bold fs-6" style="color: #6C757D;"> <span> {{ arrData.to }} </span> <span> - </span>  <span> {{ arrData.from }} </span>
                                                 (بتوقيت السعودية)
                                             </span> </div>
                                     </div>
@@ -286,9 +284,13 @@
                 </div>
             </div>
         </div>
+    <GeneralLoader v-if="pending"></GeneralLoader>
+
     </div>
 </template>
 <script setup>
+let route = useRoute()
+let pending = ref(true);
 const reviews = [
     { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },
     { name: 'أحمد مصطفى', rating: 5, date: '6 يناير, 2024', comment: 'العمل بشكل مثالي، شكراً!' },
@@ -305,6 +307,74 @@ const starBreakdown = [
     { stars: 2, percentage: 20 },
     { stars: 1, percentage: 20 },
 ];
+
+const totalRecords = ref(100); // Replace with your dynamic total count
+const rows = ref(10); // Number of items per page
+const page = ref(1); // Active page number (starting from 1)
+let arrData = ref({});
+const getData = async () => {
+  const result = await useApi().get(`lives/${route.query.id}`);
+  if (result.status === 200) {
+    pending.value = false;
+    arrData.value = result.data?.data;
+    totalRecords.value = result.data?.meta?.total;
+    rows.value = result.data?.meta?.per_page;
+  }
+};
+
+const totalMinutes = ref(arrData.value?.duration_minutes); // Total duration in minutes
+let remainingSeconds 
+
+
+const days = ref(0)
+const hours = ref(0)
+const minutes = ref(0)
+const seconds = ref(0)
+
+let interval
+
+const updateCountdown = () => {
+  if (remainingSeconds <= 0) {
+    clearInterval(interval)
+    alert('⏰ Time is up!')
+    return
+  }
+
+  days.value = Math.floor(remainingSeconds / (24 * 60 * 60))
+  hours.value = Math.floor((remainingSeconds % (24 * 60 * 60)) / 3600)
+  minutes.value = Math.floor((remainingSeconds % 3600) / 60)
+  seconds.value = remainingSeconds % 60
+
+  remainingSeconds--
+}
+
+watch(()=> arrData.value , (val)=> {
+    if(val){
+        totalMinutes.value = val?.duration_minutes;
+        remainingSeconds = totalMinutes.value * 60; // Convert minutes to seconds
+        updateCountdown()
+
+    }
+
+})
+
+
+
+
+
+onBeforeUnmount(() => {
+  clearInterval(interval)
+})
+
+const onPageChange = (event) => {
+  page.value = event.page + 1; // PrimeVue uses zero-based index
+  getData(); // Call function to fetch new data based on page
+};
+
+onMounted(() => {
+  getData();
+  interval = setInterval(updateCountdown, 1000)
+});
 
 useHead({
       title: ` الدورات الحيه `,

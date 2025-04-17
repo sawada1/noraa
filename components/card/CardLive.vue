@@ -1,10 +1,10 @@
 <template>
     <div class="live-course-card" :class="{'profile': profile}">
-        <img class="mainImg" src="/images/live1.png" alt="">
+        <!-- <img class="mainImg" src="/images/live1.png" alt=""> -->
+        <img class="mainImg" :src="card.image" alt="">
         <div class="main">
-            <h4> هنا يكتب اسم الدورة الحية هنا يكتب اسم الدورة الحية </h4>
-            <p> لـوريـم إيـبسـوم هـو نـص عـربي غيـر معنى، يُستخدم في مجـالات الطباعة ومواقع الويب كنص دال على الشكـل
-                والتخطيط يمكنك اختيار عدد الفقرات وعدد الحروف لـوريـم إيـبسـوم هـو نـص عـرب   يسي يسي س يسي سي سي</p>
+            <h4> {{ card.title }} </h4>
+            <p> {{ card.description }}  </p>
             <div class="details d-flex flex-column gap-2">
                 <div class="d-flex align-items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -20,7 +20,7 @@
                             d="M12 6V12H16.5M21 12C21 13.1819 20.7672 14.3522 20.3149 15.4442C19.8626 16.5361 19.1997 17.5282 18.364 18.364C17.5282 19.1997 16.5361 19.8626 15.4442 20.3149C14.3522 20.7672 13.1819 21 12 21C10.8181 21 9.64778 20.7672 8.55585 20.3149C7.46392 19.8626 6.47177 19.1997 5.63604 18.364C4.80031 17.5282 4.13738 16.5361 3.68508 15.4442C3.23279 14.3522 3 13.1819 3 12C3 9.61305 3.94821 7.32387 5.63604 5.63604C7.32387 3.94821 9.61305 3 12 3C14.3869 3 16.6761 3.94821 18.364 5.63604C20.0518 7.32387 21 9.61305 21 12Z"
                             stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <span> 8 صباحًا - 3 مساءً </span>
+                    <div class="d-flex align-items-center gap-2"> <span> {{ card.to }} </span> <span> - </span>  <span> {{ card.from }} </span>  </div>
                     <span class="fc-grey"> بتوقيت السعودية </span>
                 </div>
                 <div class="d-flex align-items-center gap-2">
@@ -39,12 +39,16 @@
                     <span class="text-decoration-line-through" style="font-size: 14px;"> السعر 990 ر.س </span>
                 </div>
             </div>
-              <nuxt-link to="/live-course">
+              <nuxt-link :to="{path:'/live-course' , query:{id:card.id}}">
                   <button class="w-100 d-flex align-items-center justify-content-center">
                       عرض التفاصيل
                   </button>
               </nuxt-link>
 
+        </div>
+
+        <div class="status">
+          {{ card?.is_free ? 'مجاني' : `خصم ${card?.discount_percentge}` }} 
         </div>
 
     </div>
@@ -55,12 +59,17 @@ let props = defineProps({
         default: false,
         type: Boolean
     },
-    book:{
+    card:{
         required: true,
         default:{
             id: 1,
             title: 'title',
-            image: '/images/bookimage.png'
+            description:"",
+            price:"",
+            day_date:"",
+            from:"",
+            to:"",
+            image: ''
         }
     }
 })
@@ -71,7 +80,20 @@ let props = defineProps({
     border-radius: 32px;
     background: #FFF;
     box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
-
+    position: relative;
+   .status{
+    position: absolute;
+    border-radius: 32px 0px 16px 0px;
+background: rgba(67, 128, 108, 0.80);
+width: 111px;
+height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+top: 0;
+left: 0;
+color: #fff;
+   }
     .mainImg {
         height: 250px;
         width: 100%;
