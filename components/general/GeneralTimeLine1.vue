@@ -1,28 +1,18 @@
 <template>
     <ul class="liveCourseSchedule">
-        <li>
-            <p>11:00 am</p>
-            <h4>مقدمة</h4>
+      
+        <li v-for="i in data">
+            <p> {{ i?.start_time }} </p>
+            <h4> {{ i?.title }} </h4><span>  {{ i?.description }}  </span>
         </li>
-        <li>
-            <p>11:20 am</p>
-            <h4>عنوان</h4><span>لوريم إيبسوم هو ببساطة نص وهمي من<br>صناعة الطباعة والتنضيد.</span>
-        </li>
-        <li>
-            <p>13:30 am</p>
-            <h4>عنوان</h4><span>لوريم إيبسوم هو ببساطة نص وهمي من<br>صناعة الطباعة والتنضيد.</span>
-        </li>
-        <li>
-            <p>14:30 am</p>
-            <h4>خلاصة الموضوعين 1 و2</h4>
-        </li>
-        <li>
-            <p>14:45 pm</p>
-            <h4>عنوان</h4><span>لوريم إيبسوم هو ببساطة نص وهمي من<br>صناعة الطباعة والتنضيد.</span>
-        </li>
-        <li>
-            <p>15:30 pm</p>
-            <h4>نهاية الدورة المباشرة</h4>
-        </li>
+ 
     </ul>
 </template>
+
+<script setup>
+let props = defineProps({
+    data:{
+        required: true
+    }
+})
+</script>

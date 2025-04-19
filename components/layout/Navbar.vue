@@ -103,7 +103,6 @@ navItems.forEach((item) => {
   item.addEventListener("click", () => {
     const navbarCollapse = document.querySelector(".navbar-collapse");
     navbarCollapse.classList.remove("show");
-    removeStore();
     document.querySelector(".navbar-toggler").classList.add("collapsed");
   });
 });

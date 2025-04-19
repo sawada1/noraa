@@ -8,8 +8,8 @@
                 </div>
                 <div class="persons-main d-flex flex-column gap-3">
                     <div v-if="profile" v-for="i in groups" @click=" groupId = i, store.get_messages(groupId?.id)"
-                         :class="{'active': i?.id == groupId?.id}"
-                        style="cursor: pointer;" class="person chatProfile d-flex align-items-center gap-3">
+                        :class="{ 'active': i?.id == groupId?.id }" style="cursor: pointer;"
+                        class="person chatProfile d-flex align-items-center gap-3">
                         <img :src="i?.image" alt="">
                         <div class="text d-flex flex-column gap-1">
                             <h6> {{ i?.title }} </h6>
@@ -220,20 +220,20 @@ let pendingChat = ref(false);
 
 const sendMessage = async () => {
     let formData = new FormData();
-    formData.append("chat_group_id", route.query?.id);
+    formData.append("chat_group_id", groupId.value ? groupId.value?.id : route.query?.id);
     formData.append("message", text.value);
     if (file.value) {
         formData.append("file", file.value);
     }
     if (text.value.trim()) {
         pendingChat.value = true;
-        let result = await useApi().post(`group/${route.query?.id}/send-message`, formData);
+        let result = await useApi().post(`group/${groupId.value ? groupId.value?.id : route.query?.id}/send-message`, formData);
         if (result.status == 200 || result.status == 201) {
             pendingChat.value = false;
             text.value = '';
             file.value = undefined;
             deleteFile();
-            store.get_messages(route.query?.id);
+            store.get_messages(groupId.value ? groupId.value?.id : route.query?.id);
         }
     } else {
         console.log('dsdsds');
@@ -265,6 +265,7 @@ const get_groups = async () => {
         if (response.data) {
             groups.value = response.data.groups;
             groupId.value = groups.value[0];
+            store.get_messages(groupId.value?.id);
         }
     } catch (error) {
         console.log(error);
@@ -275,7 +276,6 @@ const get_groups = async () => {
 const fetchData = async () => {
     if (props.profile) {
         get_groups();
-        store.get_messages(groupId.value?.id);
     } else {
         group_details();
         store.get_messages(route.query?.id);
@@ -298,12 +298,11 @@ const stopPolling = () => {
 onMounted(() => {
     if (props.profile) {
         get_groups();
-        store.get_messages(groupId.value?.id);
     } else {
         store.group_details(route.query?.id);
         store.get_messages(route.query?.id);
     }
-    if (route.path.includes('conversation' || 'chat')) {
+    if (route.path.includes('conversation') || route.path.includes('chat') || route.path.includes('profile')) {
         startPolling();
     }
 });
@@ -317,7 +316,8 @@ onBeforeUnmount(() => {
 <style lang="scss">
 .chatProfile {
     position: relative;
-    &.active{
+
+    &.active {
         &::before {
             content: '';
             border-radius: 8px 0px 0px 8px;

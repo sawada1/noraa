@@ -1,17 +1,24 @@
 <template>
     <div class="row align-items-center">
         <div class="col-md-6">
-            <figure class="" style="background-image: url(/images/psychologist.png);">
+            <!-- <figure class="" style="background-image: url(/images/psychologist.png);">
+            </figure> -->
+            <figure class="" :style="{ backgroundImage: 'url(' + data?.image + ')' }">
             </figure>
         </div>
         <div class="col-md-6">
-            <h2 class="fC-LightOrange">مدربتك - نورا السفيري</h2>
-            <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي القياسي في
-                هذه الصناعة منذ عام 1500.</p>
-            <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء ليس فقط لخمسة قرون،
-                بل أيضًا للقفزة.</p>
-            <p>وقد انتشر بشكل كبير في ستينيات القرن الماضي مع إصدار أوراق "ليتراسيت" التي تحتوي على مقاطع لوريم إيبسوم.
-                لقد نجا لا.</p>
+            <h2 class="fC-LightOrange"> {{ data?.name }} </h2>
+            <p> {{ data?.description }} </p>
+
         </div>
     </div>
 </template>
+
+
+<script setup>
+let props = defineProps({
+    data:{
+        required: true
+    }
+})
+</script>

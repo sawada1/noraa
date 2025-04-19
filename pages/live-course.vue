@@ -4,10 +4,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 position-relative">
-                        <a class="shareOption" href="#"><img src="/images/share1.svg" alt="share icon"></a>
-                        <h1 class="fC-LightOrange">  {{ arrData?.title }} </h1>
+                        <button @click="sharePage()">
+                            <a class="shareOption" href="#"><img src="/images/share1.svg" alt="share icon"></a>
+                        </button>
+                        <h1 class="fC-LightOrange"> {{ arrData?.title }} </h1>
                         <p> {{ arrData?.description }} </p>
-                     
+
                         <h4 class="fC-green">تبدأ الدورة المباشرة في:</h4>
                         <ul class="liveCourse1Time">
                             <li><span id="days1"> {{ seconds }} </span>
@@ -24,7 +26,7 @@
                             </li>
                         </ul>
                         <div class="btns-live flex-column flex-xl-row flex-lg-row mb-5 mb-xl-0 mb-lg-0">
-                            <button class="buy ">
+                            <button @click="store.openPayModal = true" class="buy ">
                                 اشتري الان
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
                                     fill="none">
@@ -49,8 +51,7 @@
                     <div class="col-md-5 topVideoSec">
                         <div class="card">
                             <div class="card-header">
-                                <iframe width="560" height="315"
-                                    :src="arrData?.previwe_video"
+                                <iframe width="560" height="315" :src="arrData?.previwe_video"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                     allowfullscreen></iframe>
@@ -75,7 +76,7 @@
                                                 stroke="#212529" stroke-width="2.2" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div> <span class="fw-bold fs-6">  {{ arrData?.day_date }} </span> </div>
+                                        <div> <span class="fw-bold fs-6"> {{ arrData?.day_date }} </span> </div>
                                     </div>
                                     <div class="item d-flex align-items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -85,7 +86,9 @@
                                                 stroke="#212529" stroke-width="2.2" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <div class="d-flex align-items-center gap-3"> <span class="fw-bold fs-6" style="color: #6C757D;"> <span> {{ arrData.to }} </span> <span> - </span>  <span> {{ arrData.from }} </span>
+                                        <div class="d-flex align-items-center gap-3"> <span class="fw-bold fs-6"
+                                                style="color: #6C757D;"> <span> {{ arrData.from }} </span> <span> -
+                                                </span> <span> {{ arrData.to }} </span>
                                                 (بتوقيت السعودية)
                                             </span> </div>
                                     </div>
@@ -102,8 +105,12 @@
                                                 d="M2.25 18C2.05109 18 1.86032 18.079 1.71967 18.2197C1.57902 18.3603 1.5 18.5511 1.5 18.75C1.5 18.9489 1.57902 19.1397 1.71967 19.2803C1.86032 19.421 2.05109 19.5 2.25 19.5C7.65 19.5 12.88 20.222 17.85 21.575C19.04 21.899 20.25 21.017 20.25 19.755V18.75C20.25 18.5511 20.171 18.3603 20.0303 18.2197C19.8897 18.079 19.6989 18 19.5 18H2.25Z"
                                                 fill="#43806C" />
                                         </svg>
-                                        <div> <span class="fw-bold fs-6 fC-green"> السعر 99 ر.س
-                                            </span> </div>
+                                        <div>
+                                            <span v-if="arrData?.price == 0" class="fw-bold fs-6 fC-green"> مجاني
+                                            </span>
+                                            <span v-else class="fw-bold fs-6 fC-green"> السعر {{ arrData?.price }} ر.س
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +123,7 @@
 
         <div class="liveCourse2 bg-lightOrange text-center">
             <div class="container">
-                <GeneralBooked2></GeneralBooked2>
+                <GeneralBooked2 :data="arrData?.book_consultation"></GeneralBooked2>
             </div>
         </div>
 
@@ -124,30 +131,29 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <h1 class="fC-LightOrange">عنوان الدورة الحية</h1>
-                        <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي
-                            القياسي في هذه الصناعة منذ عام 1500.</p>
-                        <p>عندما أخذت طابعة غير معروفة لوح الكتابة وخلطته لعمل نموذج كتاب. لقد تمكنت من البقاء ليس فقط
-                            لخمسة قرون، بل أيضًا للقفزة.</p>
+                        <h1 class="fC-LightOrange"> {{ arrData?.title }} </h1>
+                        <p>
+                            {{ arrData?.description }}
+                        </p>
                         <h4 class="fC-green">تبدأ الدورة المباشرة في:</h4>
                         <ul class="liveCourse1Time">
-                            <li><span id="days"> 3 </span>
+                            <li><span id="days"> {{ seconds }} </span>
                                 <p class="fC-green">ثانية</p>
                             </li>
-                            <li><span id="hours">3 </span>
+                            <li><span id="hours"> {{ minutes }} </span>
                                 <p class="fC-green">دقيقة</p>
                             </li>
-                            <li><span id="minutes"> 3</span>
+                            <li><span id="minutes"> {{ hours }} </span>
                                 <p class="fC-green">ساعة</p>
                             </li>
-                            <li><span id="seconds"> 3</span>
+                            <li><span id="seconds"> {{ days }} </span>
                                 <p class="fC-green">يوم</p>
                             </li>
                         </ul>
                         <button href="#" class="btn btn-primary text-light mt-5 bg-green btnGreen">هدية لصديق</button>
                     </div>
                     <div class="col-md-6">
-                        <GeneralTimeLine1></GeneralTimeLine1>
+                        <GeneralTimeLine1 :data="arrData?.agenda"></GeneralTimeLine1>
                     </div>
                 </div>
             </div>
@@ -155,7 +161,7 @@
 
         <div class="coachSec">
             <div class="container">
-                <GeneralNora1></GeneralNora1>
+                <GeneralNora1 :data="arrData?.specialist"></GeneralNora1>
             </div>
         </div>
 
@@ -180,23 +186,23 @@
                     <div class="col-md-4 border-custom-rate">
                         <h5 class="fw-bold mb-5 mt-2 border-custom-head">تقييمات ومراجعات المنتج</h5>
                         <div class="d-flex align-items-center gap-3 mb-2">
-                            <span class="fw-bold fs-4 me-2">4.0</span>
-                            <Rating class="bigStars" :model-value="4" readonly />
+                            <span class="fw-bold fs-4 me-2"> {{ average_rate }} </span>
+                            <Rating class="bigStars" :model-value="average_rate" readonly />
                         </div>
 
                         <p class="mb-3" style="color:#758AA0; font-size: 12px;"> إجمالي التقييمات ({{
-                            starBreakdown.length }}) </p>
-                        <div class="mb-2" v-for="rating in starBreakdown" :key="rating.stars">
+                            rate_percentageArr?.length }}) </p>
+                        <div class="mb-2" v-for="rating in rate_percentageArr" :key="rating?.rate">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center gap-1">
-                                    <span class="">{{ rating.stars }}</span>
+                                    <span class="">{{ rating?.rate }}</span>
                                     <span class="" style="color:#F4C900;"> ★</span>
                                 </div>
                                 <div class="progress  flex-grow-1" style="height: 8px">
-                                    <div class="progress-bar bg-warning" :style="{ width: rating.percentage + '%' }">
+                                    <div class="progress-bar bg-warning" :style="{ width: rating?.percentage + '%' }">
                                     </div>
                                 </div>
-                                <span class="ms-2">{{ rating.percentage }}%</span>
+                                <span class="ms-2">{{ rating?.percentage }}%</span>
                             </div>
                         </div>
                     </div>
@@ -205,18 +211,18 @@
                         <div class="d-flex border-bottom align-items-center justify-content-between">
                             <h4>
 
-                                {{ reviews.length }}
+                                {{ commentsArr?.length }}
 
                                 تعليق
                             </h4>
 
-                            <div class="d-flex align-items-center gap-2" style="margin-bottom: 10px;">
+                            <div class="d-flex align-items-center gap-2" style="margin-bottom: 15px;">
 
-                                <select class="writtenBy headRate">
+                                <!-- <select class="writtenBy headRate">
                                     <option>أهم التقييمات</option>
                                     <option>Yes</option>
                                     <option>No</option>
-                                </select>
+                                </select> -->
                                 <button data-bs-toggle="modal" data-bs-target="#exampleModal"
                                     class="btn btn-success  bg-green" style="border-radius: 20px; font-size: 14px;">
                                     أضف تقييماً
@@ -228,22 +234,23 @@
                                 </button>
                             </div>
                         </div>
-                        <div v-for="(review, index) in reviews" :key="index" class="mb-4 mt-4 border-bottom pb-3">
+                        <div v-for="(review, index) in commentsArr" :key="index"
+                            class="mb-4 mt-4 border-bottom pb-3">
                             <div class="d-flex align-items-center gap-3">
 
                                 <div class="image">
-                                    <Avatar image="/images/aboutBanner.jpg" class="mr-2" size="large" shape="circle" />
+                                    <Avatar :image="review?.client_image" class="mr-2" size="large" shape="circle" />
 
                                 </div>
 
                                 <div>
-                                    <p class="mb-1 fw-bold">{{ review.name }}</p>
+                                    <p class="mb-1 fw-bold">{{ review?.client }}</p>
                                     <div class="d-flex align-items-center gap-2 mb-2">
-                                        <span class="text-muted" style="color: #758AA0; font-size: 14px;">{{ review.date
-                                            }}</span>
-                                        <Rating :model-value="4" readonly />
+                                        <span class="text-muted" style="color: #758AA0; font-size: 14px;">{{ review?.created_at
+                                        }}</span>
+                                        <Rating :model-value="review?.rate" readonly />
                                     </div>
-                                    <p class="text-muted">{{ review.comment }}</p>
+                                    <p class="text-muted">{{ review?.description }}</p>
                                 </div>
                             </div>
                         </div>
@@ -251,13 +258,13 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end border-top">
-                    <Paginator :rows="10" :totalRecords="120"></Paginator>
+                    <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange" />
                 </div>
             </div>
         </div>
 
-        <div class="modal fade modal-dialog-centere" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div ref="modalRef" class="modal fade modal-dialog-centere" id="exampleModal" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-heade pt-3 d-flex align-items-center justify-content-center">
@@ -268,62 +275,118 @@
                     <div class="modal-body  w-100">
                         <form class="w-100 d-flex justify-content-center flex-column align-items-center">
                             <div class="mb-3">
-                                <Rating class="bigStars" :model-value="4" />
+                                <Rating class="bigStars" v-model="commentDetails.rate" />
                             </div>
                             <div class="mb-3 w-100">
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea v-model="commentDetails.comment" class="form-control"
+                                    id="message-text"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn  solid px-4" style="border-radius: 20px;"
                             data-bs-dismiss="modal"> رجوع </button>
-                        <button type="button" class="btn btn-success  bg-green px-4" style="border-radius: 20px;"> إرسال
+                        <button @click="createComment()" type="button" class="btn btn-success  bg-green px-4"
+                            style="border-radius: 20px;"> إرسال
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    <GeneralLoader v-if="pending"></GeneralLoader>
+        <GeneralLoader v-if="pending"></GeneralLoader>
+
+        <GeneralPaymentModal></GeneralPaymentModal>
 
     </div>
 </template>
 <script setup>
+import {useGeneralStore} from '@/stores/general';
+let store = useGeneralStore();
+const modalRef = ref(null)
+let bootstrapModal = null
 let route = useRoute()
 let pending = ref(true);
-const reviews = [
-    { name: 'محمد أحمد', rating: 5, date: '6 يناير, 2024', comment: 'كل شيء يجب أن يعمل بشكل صحيح الآن...' },
-    { name: 'أحمد مصطفى', rating: 5, date: '6 يناير, 2024', comment: 'العمل بشكل مثالي، شكراً!' },
-    { name: 'مصطفى ماجد', rating: 4, date: '6 يناير, 2024', comment: 'كنت أتساءل عما إذا كان من الممكن إضافة المزيد...' },
-    { name: 'معاذ جابر', rating: 4, date: '6 يناير, 2024', comment: 'مرحباً، أود أن أعرف كيفية الحصول على تحديثات...' },
-    { name: 'معاذ جابر', rating: 4, date: '6 يناير, 2024', comment: 'مرحباً، أود أن أعرف كيفية الحصول على تحديثات...' },
-
-];
-
-const starBreakdown = [
-    { stars: 5, percentage: 20 },
-    { stars: 4, percentage: 20 },
-    { stars: 3, percentage: 20 },
-    { stars: 2, percentage: 20 },
-    { stars: 1, percentage: 20 },
-];
-
+let average_rate = ref(0);
 const totalRecords = ref(100); // Replace with your dynamic total count
 const rows = ref(10); // Number of items per page
 const page = ref(1); // Active page number (starting from 1)
 let arrData = ref({});
+let commentsArr = ref([]);
+let rate_percentageArr = ref([]);
+let commentDetails = ref({
+    comment: "",
+    rate: 3
+});
+
+
+const sharePage = async () => {
+    if(process.client){
+        const url = window.location.href // full current URL
+      
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: document.title,
+              text: 'شاهد هذا الكورس!',
+              url
+            })
+            console.log('تمت المشاركة بنجاح')
+          } catch (err) {
+            console.error('حدث خطأ أثناء المشاركة:', err)
+          }
+        } else {
+          // fallback: copy to clipboard
+          try {
+            await navigator.clipboard.writeText(url)
+            alert('تم نسخ الرابط إلى الحافظة!')
+          } catch (err) {
+            alert('لم نتمكن من نسخ الرابط، يرجى نسخه يدويًا.')
+          }
+        }
+    }
+}
 const getData = async () => {
-  const result = await useApi().get(`lives/${route.query.id}`);
-  if (result.status === 200) {
-    pending.value = false;
-    arrData.value = result.data?.data;
-    totalRecords.value = result.data?.meta?.total;
-    rows.value = result.data?.meta?.per_page;
-  }
+    const result = await useApi().get(`lives/${route.query.id}`);
+    if (result.status === 200) {
+        pending.value = false;
+        arrData.value = result.data?.data;
+    }
+};
+const getDataComments = async () => {
+    const result = await useApi().get(`lives/comments/${route.query.id}`, {params:{page: page.value}});
+    if (result.status === 200) {
+        pending.value = false;
+        commentsArr.value = result.data?.data?.comments?.data;
+        rate_percentageArr.value = result.data?.data?.rate_percentage;
+        average_rate.value = result.data?.data?.average_rate;
+        totalRecords.value = result.data?.data?.comments?.total;
+        rows.value = result.data?.data?.comments?.per_page;
+    }
 };
 
+const createComment = async () => {
+    if (commentDetails.value.comment && commentDetails.value.rate) {
+        const result = await useApi().post(`lives/createComment`, { live_id: route.query.id, ...commentDetails.value });
+        if (result.status === 200 || result.status === 201) {
+            if(process.client){
+                setTimeout(() => {
+                    bootstrapModal?.hide()
+    
+                    // Force cleanup in case backdrop lingers
+                    document.body.classList.remove('modal-open')
+                    const backdrop = document.querySelector('.modal-backdrop')
+                    if (backdrop) backdrop.remove()
+                }, 50)
+            }
+            commentDetails.value.rate = 3;
+            commentDetails.value.comment = "";
+            getDataComments();
+        }
+    }
+}
+
 const totalMinutes = ref(arrData.value?.duration_minutes); // Total duration in minutes
-let remainingSeconds 
+let remainingSeconds
 
 
 const days = ref(0)
@@ -334,22 +397,22 @@ const seconds = ref(0)
 let interval
 
 const updateCountdown = () => {
-  if (remainingSeconds <= 0) {
-    clearInterval(interval)
-    alert('⏰ Time is up!')
-    return
-  }
+    if (remainingSeconds <= 0) {
+        clearInterval(interval)
+        alert('⏰ Time is up!')
+        return
+    }
 
-  days.value = Math.floor(remainingSeconds / (24 * 60 * 60))
-  hours.value = Math.floor((remainingSeconds % (24 * 60 * 60)) / 3600)
-  minutes.value = Math.floor((remainingSeconds % 3600) / 60)
-  seconds.value = remainingSeconds % 60
+    days.value = Math.floor(remainingSeconds / (24 * 60 * 60))
+    hours.value = Math.floor((remainingSeconds % (24 * 60 * 60)) / 3600)
+    minutes.value = Math.floor((remainingSeconds % 3600) / 60)
+    seconds.value = remainingSeconds % 60
 
-  remainingSeconds--
+    remainingSeconds--
 }
 
-watch(()=> arrData.value , (val)=> {
-    if(val){
+watch(() => arrData.value, (val) => {
+    if (val) {
         totalMinutes.value = val?.duration_minutes;
         remainingSeconds = totalMinutes.value * 60; // Convert minutes to seconds
         updateCountdown()
@@ -363,31 +426,36 @@ watch(()=> arrData.value , (val)=> {
 
 
 onBeforeUnmount(() => {
-  clearInterval(interval)
+    clearInterval(interval)
 })
 
 const onPageChange = (event) => {
-  page.value = event.page + 1; // PrimeVue uses zero-based index
-  getData(); // Call function to fetch new data based on page
+    page.value = event.page + 1; // PrimeVue uses zero-based index
+    getDataComments(); // Call function to fetch new data based on page
 };
 
-onMounted(() => {
-  getData();
-  interval = setInterval(updateCountdown, 1000)
+onMounted(async () => {
+    getData();
+    getDataComments()
+    interval = setInterval(updateCountdown, 1000);
+    if (process.client && modalRef.value) {
+        const { Modal } = await import('bootstrap') // dynamic import only on client
+        bootstrapModal = Modal.getOrCreateInstance(modalRef.value)
+    }
 });
 
 useHead({
-      title: ` الدورات الحيه `,
-      meta: [
-        { name: 'description', content: 'test test test'},
+    title: ` الدورات الحيه `,
+    meta: [
+        { name: 'description', content: 'test test test' },
         { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
         { name: 'author', content: 'khaled sawada' },
         { name: 'robots', content: 'index, follow' },
         { property: 'og:title', content: `الدورات الحيه | نورا` },
         { property: 'og:description', content: 'test test test' },
         { property: 'og:image', content: '/images/nora.png' },
-      ],
-    });
+    ],
+});
 
 </script>
 <style lang="scss">

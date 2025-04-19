@@ -16,10 +16,10 @@
     <div class="bundledCourse topMargin">
       <div class="container">
         <div class="checkBtnsLive">
-          <button @click="checkBtn = 1" :class="{ active: checkBtn == 1 }">
+          <button @click="checkBtn = 1 , getData()" :class="{ active: checkBtn == 1 }">
             ندوات الحالية
           </button>
-          <button @click="checkBtn = 2" :class="{ active: checkBtn == 2 }">
+          <button @click="checkBtn = 2 , getData()" :class="{ active: checkBtn == 2 }">
             ندوات القادمة
           </button>
         </div>
@@ -49,6 +49,7 @@ const page = ref(1); // Active page number (starting from 1)
 let arrData = ref([]);
 let pending = ref(true);
 const getData = async () => {
+  pending.value = true;
   const result = await useApi().get("lives", {
     params: {
       page: page.value,
