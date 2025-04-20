@@ -1,13 +1,17 @@
 <template>
     <div class="custom-shadow-container books-container">
-        <div class="row">
-            <div v-for="i in arrData" class="col-12 col-xl-4 col-lg-4 mb-4">
-                <CardBook1 :profile="true" :book="i"></CardBook1>
-            </div>
-        </div>
-        <div class="d-flex justify-content-end ">
-                    <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange"></Paginator>
+        <div v-if="arrData.length">
+            <div class="row">
+                <div v-for="i in arrData" class="col-12 col-xl-4 col-lg-4 mb-4">
+                    <CardBook1 :profile="true" :book="i"></CardBook1>
                 </div>
+            </div>
+            <div class="d-flex justify-content-end ">
+                        <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange"></Paginator>
+                    </div>
+        </div>
+        <GeneralEmpty v-else></GeneralEmpty>
+
     </div>
 </template>
 <script setup>

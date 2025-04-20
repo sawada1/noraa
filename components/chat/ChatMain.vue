@@ -275,7 +275,11 @@ const get_groups = async () => {
 
 const fetchData = async () => {
     if (props.profile) {
-        get_groups();
+        if(groups.value.length){
+            get_groups();
+        } else{
+            return;
+        }
     } else {
         group_details();
         store.get_messages(route.query?.id);

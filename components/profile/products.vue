@@ -1,6 +1,6 @@
 <template>
     <div class=" products-profile-container custom-shadow-container">
-        <div class="items d-flex flex-column ">
+        <div v-if="arrData.length" class="items d-flex flex-column ">
             <div v-for="item in arrData" class="item d-flex align-items-center justify-content-between">
                 <div v-if="item?.book" class="text-container d-flex align-items-center gap-4">
                     <img src="/images/bookprofile.png" alt="">
@@ -61,14 +61,15 @@
                     <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange"></Paginator>
                 </div>
         </div>
+        <GeneralEmpty v-else></GeneralEmpty>
     </div>
 </template>
 <script setup>
+
  let arrData = ref([]);
  const totalRecords = ref(100); // Replace with your dynamic total count
 const rows = ref(10); // Number of items per page
 const page = ref(1); // Active page number (starting from 1)
-
 // Function to fetch data when page changes
 
 

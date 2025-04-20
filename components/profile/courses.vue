@@ -1,11 +1,12 @@
 <template>
     <div class="custom-shadow-container">
-        <div class="row">
+        <div v-if="arrData.length" class="row">
             <div v-for="i in arrData" class="col-12 col-xl-4 col-lg-4 mb-4">
-                <CardJournal :course="i"></CardJournal>
-             
+                <CardJournal :course="i"></CardJournal>         
             </div>
         </div>
+        <GeneralEmpty v-else></GeneralEmpty>
+
     </div>
 </template>
 <script setup>

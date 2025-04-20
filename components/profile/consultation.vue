@@ -1,21 +1,25 @@
 <template>
     <div class="custom-shadow-container">
-        <div class="d-flex flex-column gap-5">
-            <div v-for="item in arrData" class="consultation-item">
-                <div class="d-flex flex-column gap-4">
-                    <h4> {{ item?.title }}</h4>
-                    <p class="type"> {{ item?.type }} </p>
-                    <p class="date"> موعد البدء {{ item?.schedule?.date }}</p>
-                    <a :href="item?.schedule?.zoom_join_url" target="_blank">
-                        <button class="d-flex align-items-center justify-content-center text-light"> التفاصيل </button>
-                    </a>
+        <div v-if="arrData.length">
+            <div class="d-flex flex-column gap-5">
+                <div v-for="item in arrData" class="consultation-item">
+                    <div class="d-flex flex-column gap-4">
+                        <h4> {{ item?.title }}</h4>
+                        <p class="type"> {{ item?.type }} </p>
+                        <p class="date"> موعد البدء {{ item?.schedule?.date }}</p>
+                        <a :href="item?.schedule?.zoom_join_url" target="_blank">
+                            <button class="d-flex align-items-center justify-content-center text-light"> التفاصيل </button>
+                        </a>
+                    </div>
+                    <div class="float-text"> <span> {{ item?.status }} </span> </div>
                 </div>
-                <div class="float-text"> <span> {{ item?.status }} </span> </div>
             </div>
+            <div class="d-flex justify-content-end mt-4">
+                <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange" />
+                    </div>
         </div>
-        <div class="d-flex justify-content-end mt-4">
-            <Paginator :rows="rows" :totalRecords="totalRecords" @page="onPageChange" />
-                </div>
+        <GeneralEmpty v-else></GeneralEmpty>
+
     </div>
 </template>
 <script setup>
