@@ -42,9 +42,13 @@
                     <span class="fC-green fw-bold" v-else> مجاني </span>
                 </div>
             </div>
-              <nuxt-link :to="{path:'/live-course' , query:{id:card.id}}">
+            <button v-if="profile" class="w-100 d-flex align-items-center justify-content-center">
+                <a :href="card?.zoom_join_url" target="_blank">
+                    عرض التفاصيل
+                </a>
+            </button>
+              <nuxt-link v-else :to="{path:'/live-course' , query:{id:card.id}}">
                   <button class="w-100 d-flex align-items-center justify-content-center">
-                      عرض التفاصيل
                   </button>
               </nuxt-link>
 

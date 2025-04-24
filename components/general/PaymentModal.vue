@@ -53,15 +53,29 @@
 <script setup>
 import {useGeneralStore} from '@/stores/general';
 let store = useGeneralStore();
-
+import { useAuthStore } from '@/stores/auth';
+let authStore = useAuthStore();
+let props = defineProps({
+    liveId:{
+        type: Number
+    }
+})
 const selectedCard = ref('')
+let router = useRouter();
 
 const visible = ref(true)
 
-const submit = () => {
+const submit = async() => {
     // Submit logic here
-    alert('تم إرسال البيانات!')
-    close()
+    if (authStore.isLoggedIn){
+       let result = await useApi().post(`Live-order`,{live_id: props.liveId , payment_method: 'visa'});
+       if(result.status === 200 || result.status === 201){
+           alert('تم إرسال البيانات!')
+           close();
+       }
+    } else{
+        router.push('/login')
+    }
 }
 </script>
 

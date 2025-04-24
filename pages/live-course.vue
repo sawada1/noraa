@@ -295,7 +295,7 @@
         </div>
         <GeneralLoader v-if="pending"></GeneralLoader>
 
-        <GeneralPaymentModal></GeneralPaymentModal>
+        <GeneralPaymentModal :liveId="id"></GeneralPaymentModal>
 
     </div>
 </template>
@@ -317,6 +317,8 @@ let commentDetails = ref({
     comment: "",
     rate: 3
 });
+
+let id = route.query.id
 
 
 const sharePage = async () => {
