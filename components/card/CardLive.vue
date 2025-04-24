@@ -49,6 +49,7 @@
             </button>
               <nuxt-link v-else :to="{path:'/live-course' , query:{id:card.id}}">
                   <button class="w-100 d-flex align-items-center justify-content-center">
+                    عرض التفاصيل
                   </button>
               </nuxt-link>
 
