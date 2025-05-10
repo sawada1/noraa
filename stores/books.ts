@@ -64,6 +64,8 @@ export const useBooksStore = defineStore('books', {
         slots: [] as String[],
         lengthBooks: false,
         pendingLoader: false,
+        pendingBook: false,
+        closePdf:false,
         BookData: {} as BookDetail
     }),
     actions: {
@@ -87,9 +89,11 @@ export const useBooksStore = defineStore('books', {
         },
         async getBook(id: any) {
             try {
+                this.pendingBook = true;
                 const api = useApi();
                 const response = await api.get<ApiResponse<BookDetail>>(`books/${id}`);
                 if (response.data) {
+                    this.pendingBook = false;
                     this.BookData = response.data.data;
                 }
             } catch (error) {

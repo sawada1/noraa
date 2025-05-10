@@ -24,7 +24,7 @@
     "@primevue/nuxt-module": "^4.2.4",
     "@primevue/themes": "^4.2.4",
     "@vee-validate/nuxt": "^4.14.6",
-    "@vue-pdf-viewer/viewer": "^2.1.1",
+    "@vue-pdf-viewer/viewer": "^2.5.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "laravel-echo": "^2.0.2",
