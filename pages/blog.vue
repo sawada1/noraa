@@ -5,7 +5,7 @@
                 <div class="col-xl-9 col-lg-9 col-12">
                     <div class="main-details">
                         <div class="image">
-                            <img class="rounded w-100" height="330" :src="store.blog.image" alt="">
+                            <img class="rounded w-100" height="330" style="object-fit: cover;" :src="store.blog.image" alt="">
                         </div>
                         <h1 class="fs-2"> {{ store.blog.title }}
                         </h1>
@@ -92,7 +92,7 @@
                     <div class="lastNews position-sticky " style="top: 50px;">
                         <!-- <h6 class="mb-3"> اخر الاخبار </h6> -->
                         <div v-for="item in store.blog?.latest_articles" @click="itemId = item?.id, store.getBlog(itemId)" style="cursor: pointer;" class="d-flex flex-column gap-3">
-                            <img :src="item?.image" class="w-100 rounded" height="190" alt="">
+                            <img :src="item?.image" class="w-100 rounded" style="object-fit: cover;" height="190" alt="">
                             <h5> {{ item?.title }} </h5>
                             <span> {{ item?.created_at }} </span>
                         </div>

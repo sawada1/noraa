@@ -14,7 +14,7 @@
                             <img :src="store.HomeData?.section1?.image" alt="homebanner">
                         </div>
                     </div>
-                    <div class="events-Sec">
+                    <!-- <div class="events-Sec">
                         <div class="container">
                             <div class="row">
                                 <h4 class="text-center fC-green">الاحداث الاسبوعية</h4>
@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     </div>

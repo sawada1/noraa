@@ -4,9 +4,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 position-relative">
-                        <button @click="sharePage()">
-                            <a class="shareOption" href="#"><img src="/images/share1.svg" alt="share icon"></a>
-                        </button>
+                        <!-- <button @click="sharePage()">
+                            <div class="shareOption" href="#"><img src="/images/share1.svg" alt="share icon"></div>
+                        </button> -->
                         <h1 class="fC-LightOrange"> {{ arrData?.title }} </h1>
                         <p> {{ arrData?.description }} </p>
 

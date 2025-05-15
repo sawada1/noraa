@@ -3,17 +3,16 @@
     <div class="testimonials_sec text-center">
       <div class="container-fluid">
         <div class="row">
-          <h2 class="fC-green">ماذا يقول المستخدمون</h2>
-          <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد، وكان<br>لوريم إيبسوم هو الصناعة.</p>
+          <h2 class="fC-green"> {{ store.HomeData?.section6?.title }} </h2>
+          <p> {{ store.HomeData?.section6?.description }} </p>
         </div>
         <section id="demos">
           <div class="row">
             <div class="large-12 columns p-0">
-              <swiper :effect="'fade'" :centeredSlides="true" :loop="true" :centeredSlidesBounds="true"
-                 :autoplay="{
-            delay: 4000,
-            disableOnInteraction: false,
-          }" :breakpoints="{
+              <swiper :effect="'fade'" :centeredSlides="true" :loop="true" :centeredSlidesBounds="true" :autoplay="{
+                delay: 4000,
+                disableOnInteraction: false,
+              }" :breakpoints="{
             '300': {
               slidesPerView: 1,
               spaceBetween: 40,
@@ -27,8 +26,8 @@
               spaceBetween: 20,
             },
           }" :modules="[SwiperPagination, SwiperAutoplay]" class="testimonial-carousel owl-carousel owl-theme">
-                <swiper-slide v-for="(item, index) in testArr" class="">
-                  <div class="item " :class="item.background">
+                <swiper-slide v-for="(item, index) in store.HomeData?.section6?.details" class="">
+                  <div class="item " :class="getColorForItem(index + 1)">
                     <figure><span><img src="/images/user1.png" alt="testimonials"></span>
                       <figcaption class="h2">الآنسة أنفال نبيل</figcaption>
                     </figure>
@@ -37,7 +36,7 @@
                   </div>
                 </swiper-slide>
               </swiper>
-            
+
             </div>
           </div>
         </section>
@@ -45,29 +44,24 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script setup>
 import { useGeneralStore } from '@/stores/general';
 const store = useGeneralStore();
 let testArr = ref([
-  {
-    background:'bg-yellow',
-  },
-  {
-    background:'bg-black',
-  },
-  {
-    background:'bg-green',
-  },
-  {
-    background:'bg-yellow',
-  },
-  {
-    background:'bg-black',
-  },
-  {
-    background:'bg-green',
-  },
-])
+  'bg-yellow',
+  'bg-black',
+  'bg-green',
+]);
+const colorMap = ref({});
+// console.log(Math.floor(Math.random() * testArr.value.length));
+
+function getColorForItem(itemId) {
+  if (!colorMap.value[itemId]) {
+    const randomIndex = Math.floor(Math.random() * testArr.value.length);
+    colorMap.value[itemId] = testArr.value[randomIndex];
+  }
+  return colorMap.value[itemId];
+}
 </script>
 <style lang="">
 

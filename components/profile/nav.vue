@@ -43,12 +43,12 @@
               </div>
               <span>  الردشة </span>
             </a>
-            <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 8" :class="{'active': store.profileStat == 8}">
+            <!-- <a href="#mainProfile" class="item d-flex align-items-center gap-2" @click="store.profileStat = 8" :class="{'active': store.profileStat == 8}">
               <div class="icon">
                 <SvgProfile7></SvgProfile7>
               </div>
               <span>  الملاحظات </span>
-            </a>
+            </a> -->
             <div class="item d-flex align-items-center gap-2" @click="store2.clearAuth()" :class="{'active': store.profileStat == 9}">
               <div class="icon">
                 <SvgProfile8></SvgProfile8>

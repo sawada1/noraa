@@ -393,6 +393,9 @@ onMounted(() => {
     left: 0;
     z-index: 55555555;
     height: 100vh;
+    p{
+        margin-bottom: 0px !important;
+    }
 
     .pdf-container {
         width: 75%;

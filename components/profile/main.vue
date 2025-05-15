@@ -7,7 +7,7 @@
          <ProfileConsultation v-if="store.profileStat == 5"></ProfileConsultation>
          <ProfileEvents v-if="store.profileStat == 6"></ProfileEvents>
          <ProfileChat v-if="store.profileStat == 7"></ProfileChat>
-         <ProfileNotes v-if="store.profileStat == 8"></ProfileNotes>
+         <!-- <ProfileNotes v-if="store.profileStat == 8"></ProfileNotes> -->
 
 </template>
 <script setup>

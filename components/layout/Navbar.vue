@@ -20,16 +20,16 @@
                       <ul class="navbar-nav">
                    
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#"  id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">الدورات</a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="nav-link dropdown-toggle" @click="checkDrop = !checkDrop"  href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">الدورات</a>
+                            <ul class="dropdown-menu" :class="{'show': checkDrop}">
                            
-                                <li> 
+                                <li @click="checkDrop = false"> 
                                     <nuxt-link  class="nav-link navbar-link" to="/live-courses">
                                         دورات حية 
                                     </nuxt-link>
                                 
                                 </li>
-                                <li><nuxt-link class="nav-link navbar-link" to="/bundled-courses"> باقة دورات </nuxt-link></li>
+                                <li @click="checkDrop = false"><nuxt-link class="nav-link navbar-link" to="/bundled-courses"> باقة دورات </nuxt-link></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -56,12 +56,12 @@
                             
                             </nuxt-link>
                           </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <nuxt-link to="/tests" class="nav-link navbar-link">
                                 الاختبارات
                             
                             </nuxt-link>
-                          </li>
+                          </li> -->
                         <li class="nav-item">
                             <nuxt-link to="/about" class="nav-link navbar-link">
                                 عن دكتورة نورة
@@ -95,7 +95,7 @@
 const localePath = useLocalePath();
 import { useAuthStore } from "@/stores/auth.ts";
 let store = useAuthStore();
-
+let checkDrop = ref(false)
 const closeNav = ()=>{
     const navItems = document.querySelectorAll(".navbar-link");
 
