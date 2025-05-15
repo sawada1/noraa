@@ -1,9 +1,9 @@
 <template>
     <div class="container-pdf">
-        <div class="items p-4">
+        <div class="items p-4" :class="{'mobile': checkOpen}">
             <div class="mb-3 fC-green fs-3">
-                 <button @click="store.closePdf = false"> x </button> 
-                </div>
+                <button @click="store.closePdf = false"> x </button>
+            </div>
             <div class="btns-container">
                 <button @click="activeBtn = 1" :class="{ 'active': activeBtn == 1 }">
                     <SvgNotes :width="18" :height="18" :color="activeBtn == 1 ? '#fff' : '#43806C'"></SvgNotes>
@@ -16,7 +16,7 @@
                 </button>
             </div>
             <div v-if="activeBtn === 1" class="notes-container data-pdf">
-                <div class="item" v-for="i in notes" @click="search(i?.main_text)">
+                <div class="item" v-for="i in notes" @click="search(i?.main_text) , checkOpen = false">
                     <div class="d-flex flex-column gap-2">
                         <p> {{ i?.note }} </p>
                         <div class="d-flex align-items-center gap-3">
@@ -45,35 +45,46 @@
                             <p> في انتظار الاجابة </p>
                         </div>
                         <div v-else class="answer data">
-                            <p> {{  i?.answer }} </p>
+                            <p> {{ i?.answer }} </p>
                         </div>
                     </div>
                     <!-- <button @click="search(i.text)"> {{ i.text }} </button> -->
                 </div>
             </div>
         </div>
-        <div class="pdf-container">
+        <div class="pdf-container" :class="{'mobile': checkOpen}">
             <ClientOnly>
-                <VPdfViewer @mouseup="handleMouseUp" ref="vpvRef" @pageChanged="onPageChanged" :src="pdfUrl"
-                    :text-layer="true" />
+                <VPdfViewer @mouseup="handleMouseUp" :toolbar-options="{
+                    themeSwitchable: true,
+                    newFileOpenable: false,
+                    downloadable: false,
+                    printable: false,
+                    fullscreen: true,
+                }" ref="vpvRef" @pageChanged="onPageChanged" :src="pdfUrl" :text-layer="true" />
             </ClientOnly>
         </div>
         <div class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="notesModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header w-100  d-flex align-items-center justify-content-between">
-                        <h5 class="modal-title fw-semibold" id="notesModalLabel" style="color:#212529;"> اضافة ملحوظة </h5>
-                        <button type="button" class="btn-close m-0" id="btn-close-notes" data-bs-dismiss="modal"></button>
+                        <h5 class="modal-title fw-semibold" id="notesModalLabel" style="color:#212529;"> اضافة ملحوظة
+                        </h5>
+                        <button type="button" class="btn-close m-0" id="btn-close-notes"
+                            data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <textarea class="mb-3 w-100 p-2" name="" v-model="noteText" id="" placeholder=" اكتب هنا... " cols="20" rows="8" style="resize: none; border: 1px solid  #DFE4EA; border-radius: 6px;"></textarea>
+                        <textarea class="mb-3 w-100 p-2" name="" v-model="noteText" id="" placeholder=" اكتب هنا... "
+                            cols="20" rows="8"
+                            style="resize: none; border: 1px solid  #DFE4EA; border-radius: 6px;"></textarea>
                         <!-- Note form or content goes here -->
                         <!-- <p>{{ selectedText }}</p> -->
 
                         <div class="d-flex align-items-center gap-4">
 
-                            <button class="btn btn-success  bg-green px-4" style="width: 150px; height: 40px;" @click="createNote()"> حفظ </button>
-                            <button data-bs-dismiss="modal" class="btn solid fC-green px-4" style="width: 150px; height: 40px; border-color: #43806C;"> رجوع </button>
+                            <button class="btn btn-success  bg-green px-4" style="width: 150px; height: 40px;"
+                                @click="createNote()"> حفظ </button>
+                            <button data-bs-dismiss="modal" class="btn solid fC-green px-4"
+                                style="width: 150px; height: 40px; border-color: #43806C;"> رجوع </button>
                         </div>
 
                     </div>
@@ -88,24 +99,41 @@
                 <div class="modal-content">
                     <div class="modal-header w-100  d-flex align-items-center justify-content-between">
                         <h5 class="modal-title" id="questionsModalLabel"> اضافة سؤال </h5>
-                        <button type="button" class="btn-close m-0" id="btn-close-question" data-bs-dismiss="modal"></button>
+                        <button type="button" class="btn-close m-0" id="btn-close-question"
+                            data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <textarea class="mb-3 w-100 p-2" name="" v-model="questionText" id="" placeholder=" اكتب هنا... " cols="20" rows="8" style="resize: none; border: 1px solid  #DFE4EA; border-radius: 6px;"></textarea>
+                        <textarea class="mb-3 w-100 p-2" name="" v-model="questionText" id=""
+                            placeholder=" اكتب هنا... " cols="20" rows="8"
+                            style="resize: none; border: 1px solid  #DFE4EA; border-radius: 6px;"></textarea>
 
 
                         <!-- Question form or content goes here -->
                         <!-- <p>{{ selectedText }}</p> -->
-                             <div class="d-flex align-items-center gap-4">
+                        <div class="d-flex align-items-center gap-4">
 
-                            <button class="btn btn-success  bg-green px-4" style="width: 150px; height: 40px;" @click="createQuestion()"> حفظ </button>
-                            <button data-bs-dismiss="modal" class="btn solid fC-green px-4" style="width: 150px; height: 40px; border-color: #43806C;"> رجوع </button>
+                            <button class="btn btn-success  bg-green px-4" style="width: 150px; height: 40px;"
+                                @click="createQuestion()"> حفظ </button>
+                            <button data-bs-dismiss="modal" class="btn solid fC-green px-4"
+                                style="width: 150px; height: 40px; border-color: #43806C;"> رجوع </button>
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
+
+        <button @click="checkOpen = !checkOpen" class="openBtn">
+            <span v-if="!checkOpen">
+                <SvgNotes color="#fff" :width="25" :height="25"></SvgNotes>
+            </span>
+            <span v-else>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M1.34313 1.34315L12.6568 12.6569M12.6568 1.34315L1.34313 12.6569" stroke="white"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </span>
+        </button>
     </div>
     <GeneralLoader v-if="pending"></GeneralLoader>
 </template>
@@ -127,15 +155,16 @@ const questions = ref([]);
 const pdfUrl = ref('/testBook1.pdf');
 const vpvRef = ref<InstanceType<typeof VPdfViewer>>();
 let route = useRoute();
+const checkOpen = ref(false);
 const searchValue = ref<string>('')
 const searchControl = computed(() => vpvRef.value?.searchControl)
 const searching = computed(() => searchControl?.value?.searching?.value)
 
 const search = (text: string) => {
     console.log(text);
-     if(process.client){
+    if (process.client) {
         document.querySelector('.vpv-toolbar-start .vpv-toolbar-btn')?.click();
-     }
+    }
     searchControl.value?.search(text)
 }
 
@@ -404,14 +433,43 @@ onMounted(() => {
             }
         }
     }
+
+    .openBtn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        background-color: #366656;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        display: none;
+    }
 }
 
 @media (max-width:1024px) {
- .container-pdf{
-    flex-direction: column;
-   .pdf-container , .items{
-     width: 100% !important;
-   } 
- }   
+    .container-pdf {
+        flex-direction: column;
+       .openBtn{
+        display: flex;
+       }
+       .items{
+        display: none;
+        &.mobile{
+            display: block;
+        }
+       }
+       .pdf-container{
+        display: block;
+        &.mobile{
+            display: none;
+        }
+       }
+        .pdf-container,
+        .items {
+            width: 100% !important;
+        }
+    }
 }
 </style>
