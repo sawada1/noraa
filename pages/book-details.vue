@@ -77,12 +77,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h2 class="fC-green"> {{ BookData.title }} <a class="bdShare" href="#"><img src="/images/share_icon.png"
-                                    alt="share Icon"></a></h2>
+                        <h2 class="fC-green"> {{ BookData.title }} <a class="bdShare" href="#"><img
+                                    src="/images/share_icon.png" alt="share Icon"></a></h2>
                         <h4>وصف</h4>
                         <div class="detailscDescptn">
                             <p> {{ BookData.fully_description }} </p>
-                         
+
                         </div>
                         <div class="cheknDropdown d-flex align-items-center gap-3">
                             <select class="writtenBy">
@@ -98,8 +98,7 @@
                             </select>
                         </div>
                         <div class="descrptnBtnSec">
-                            <button
-                            @click="store.closePdf = true"
+                            <button @click="store.closePdf = true"
                                 class=" d-flex align-items-center justify-content-center gap-2  bg-green btnGreen btn1">
                                 اشتري الان
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
@@ -146,7 +145,7 @@
                             </figure>
                             <div class="bookDeatils">
                                 <h2 class="fC-green">وصف</h2>
-                                 <p> {{ BookData?.author?.description }} </p>                        
+                                <p> {{ BookData?.author?.description }} </p>
                             </div>
                         </div>
                     </div>
@@ -163,7 +162,8 @@
                             <Rating class="bigStars" :model-value="4" readonly />
                         </div>
 
-                        <p class="mb-3" style="color:#758AA0; font-size: 12px;"> إجمالي التقييمات ({{ BookData.rate_count }}) </p>
+                        <p class="mb-3" style="color:#758AA0; font-size: 12px;"> إجمالي التقييمات ({{
+                            BookData.rate_count }}) </p>
                         <div class="mb-2" v-for="rating in BookData.rate_percentage" :key="rating.rate">
                             <div class="d-flex align-items-center gap-2">
                                 <div class="d-flex align-items-center gap-1">
@@ -195,7 +195,8 @@
                                     <option>Yes</option>
                                     <option>No</option>
                                 </select>
-                                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success  bg-green" style="border-radius: 20px; font-size: 14px;">
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    class="btn btn-success  bg-green" style="border-radius: 20px; font-size: 14px;">
                                     أضف تقييماً
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                         fill="none">
@@ -205,20 +206,22 @@
                                 </button>
                             </div>
                         </div>
-                        <div v-for="(review, index) in BookData.comments" :key="index" class="mb-4 mt-4 border-bottom pb-3">
+                        <div v-for="(review, index) in store.comments" :key="index"
+                            class="mb-4 mt-4 border-bottom pb-3">
                             <div class="d-flex align-items-center gap-3">
 
                                 <div class="image">
                                     <!-- <Avatar image="/images/aboutBanner.jpg" class="mr-2" size="large" shape="circle" /> -->
-                                    <Avatar :image="review?.vendor?.image" class="mr-2" size="large" shape="circle" />
+                                    <Avatar :image="review?.client_image" class="mr-2" size="large" shape="circle" />
 
                                 </div>
 
                                 <div>
-                                    <p class="mb-1 fw-bold">{{ review?.vendor?.name }}</p>
+                                    <p class="mb-1 fw-bold">{{ review?.client }}</p>
                                     <div class="d-flex align-items-center gap-2 mb-2">
-                                        <span class="text-muted" style="color: #758AA0; font-size: 14px;">{{ review?.created_at
-                                            }}</span>
+                                        <span class="text-muted" style="color: #758AA0; font-size: 14px;">{{
+                                            review?.created_at
+                                        }}</span>
                                         <Rating :model-value="review?.rate" readonly />
                                     </div>
                                     <p class="text-muted">{{ review?.description }}</p>
@@ -229,31 +232,37 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end border-top">
-                    <Paginator :rows="10" :totalRecords="120"></Paginator>
+                    <Paginator :rows="store.rows" :totalRecords="store.totalRecords" @page="onPageChange" />
+
                 </div>
             </div>
         </div>
 
-        <div class="modal fade modal-dialog-centere" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade modal-dialog-centere" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-heade pt-3 d-flex align-items-center justify-content-center">
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                        <h1 class="modal-title text-center fs-5" id="exampleModalLabel"> اختر التقييم واكتب تعليقًا </h1>
+                        <h1 class="modal-title text-center fs-5" id="exampleModalLabel"> اختر التقييم واكتب تعليقًا
+                        </h1>
                     </div>
                     <div class="modal-body  w-100">
                         <form class="w-100 d-flex justify-content-center flex-column align-items-center">
                             <div class="mb-3">
-                                <Rating class="bigStars" v-model="commentData.star"  />
+                                <Rating class="bigStars" v-model="commentData.star" />
                             </div>
                             <div class="mb-3 w-100">
-                                <textarea class="form-control" v-model="commentData.comment" id="message-text"></textarea>
+                                <textarea class="form-control" v-model="commentData.comment"
+                                    id="message-text"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn  solid px-4" style="border-radius: 20px;" data-bs-dismiss="modal"> رجوع </button>
-                        <button type="button" class="btn btn-success  bg-green px-4" @click="createCommentFunc()" data-bs-dismiss="modal" style="border-radius: 20px;"> إرسال </button>
+                        <button type="button" class="btn  solid px-4" style="border-radius: 20px;"
+                            data-bs-dismiss="modal"> رجوع </button>
+                        <button type="button" class="btn btn-success  bg-green px-4" @click="createCommentFunc()"
+                            data-bs-dismiss="modal" style="border-radius: 20px;"> إرسال </button>
                     </div>
                 </div>
             </div>
@@ -272,7 +281,7 @@
             </div>
         </div>
         <GeneralLoader v-if="store.pendingBook"></GeneralLoader>
-      
+
         <BookPdf v-if="store.closePdf"></BookPdf>
 
     </div>
@@ -285,17 +294,18 @@ const route = useRoute();
 const itemId = ref(route.query.id);
 import { useBooksStore } from '@/stores/books';
 let store = useBooksStore();
-store.getBook(route.query.id);
 let BookData = ref(store.BookData);
 let commentData = ref({
     comment: '',
     star: 1
 })
-const createCommentFunc = ()=>{
-    store.createComment(route.query.id , commentData.value)
+const createCommentFunc = () => {
+    store.createComment(route.query.id, commentData.value)
 }
-watch(()=> store.BookData , (val)=>{
-    if(val){
+
+
+watch(() => store.BookData, (val) => {
+    if (val) {
         BookData.value = val
     }
 })
@@ -309,18 +319,28 @@ const reviews = [
 
 ];
 
+const onPageChange = (event: any) => {
+    store.page = event.page + 1; // PrimeVue uses zero-based index
+    store.getComments(route.query.id)
+    // Call function to fetch new data based on page
+};
+onMounted(() => {
+    store.getBook(route.query.id);
+    store.getComments(route.query.id)
+});
+
 useHead({
-      title: ` الكتاب `,
-      meta: [
-        { name: 'description', content: 'test test test'},
+    title: ` الكتاب `,
+    meta: [
+        { name: 'description', content: 'test test test' },
         { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
         { name: 'author', content: 'khaled sawada' },
         { name: 'robots', content: 'index, follow' },
         { property: 'og:title', content: `الكتاب | نورا` },
         { property: 'og:description', content: 'test test test' },
         { property: 'og:image', content: '/images/nora.png' },
-      ],
-    });
+    ],
+});
 
 const setThumbsSwiper = (swiper: any) => {
     thumbsSwiper.value = swiper;

@@ -63,8 +63,12 @@ export const useBooksStore = defineStore('books', {
         books: {} as BooksData,
         slots: [] as String[],
         lengthBooks: false,
+        comments:[],
         pendingLoader: false,
         pendingBook: false,
+         totalRecords : 100, // Replace with your dynamic total count
+         rows : 10, // Number of items per page
+         page : 1, // Active page number (starting from 1)
         closePdf:false,
         BookData: {} as BookDetail
     }),
@@ -101,6 +105,24 @@ export const useBooksStore = defineStore('books', {
 
             }
         },
+        async getComments(id: any) {
+            try {
+                this.pendingBook = true;
+                const api = useApi();
+                const response = await api.get(`books/comments/${id}`,{params:{
+                    id: this.page
+                }});
+                if (response.data) {
+                    this.pendingBook = false;
+            this.comments = response.data?.data;
+        this.totalRecords = response.data?.meta?.total;
+        this.rows = response.data?.meta?.per_page;
+                }
+            } catch (error) {
+                console.log(error);
+
+            }
+        },
         async createComment(id: any, obj: any) {
             try {
                 const api = useApi();
@@ -108,7 +130,7 @@ export const useBooksStore = defineStore('books', {
                 if (response.data) {
                  obj.comment = '';
                  obj.star = 1;
-                 this.getBook(id);
+                 this.getComments(id);
                 }
             } catch (error) {
                 console.log(error);
