@@ -98,7 +98,7 @@
                             </select>
                         </div>
                         <div class="descrptnBtnSec">
-                            <button @click="store.closePdf = true"
+                            <button @click="openPdf()"
                                 class=" d-flex align-items-center justify-content-center gap-2  bg-green btnGreen btn1">
                                 اشتري الان
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24"
@@ -288,6 +288,9 @@
 </template>
 <script setup lang="ts">
 import Rating from 'primevue/rating';
+import { useAuthStore } from '@/stores/auth';
+let authStore = useAuthStore();
+const router = useRouter();
 const thumbsSwiper = ref(null);
 const tab1 = ref(1);
 const route = useRoute();
@@ -302,7 +305,13 @@ let commentData = ref({
 const createCommentFunc = () => {
     store.createComment(route.query.id, commentData.value)
 }
-
+const openPdf =  () => {
+    if (authStore.isLoggedIn) {
+       store.closePdf = true;
+    } else {
+        router.push('/login')
+    }
+}
 
 watch(() => store.BookData, (val) => {
     if (val) {
