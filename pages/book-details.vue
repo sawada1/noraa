@@ -87,14 +87,15 @@
                         <div class="cheknDropdown d-flex align-items-center gap-3">
                             <select class="writtenBy">
                                 <option>كمية</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                            <select class="shortBydate">
-                                <option>الكتاب الاليكتروني</option>
-                                <option>1</option>
+                                  <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
+                            </select>
+                            <select class="shortBydate">
+                                <option> الكتاب الالكتروني </option>
+                                <option> الكتاب الالكتروني </option>
+                                <option> الكتاب الورقي </option>
+                   
                             </select>
                         </div>
                         <div class="descrptnBtnSec">

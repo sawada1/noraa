@@ -2,7 +2,7 @@
     <div>
         <div class="container-fluid">
             <div class="row">
-                <div class="bannerImage" style="background-image: url(/images/consultation-banner.png);">
+                <div class="bannerImage" style="background-image: url(/images/chat-background.png);">
                     <div>
                         <h1 class="text-light"> المحادثات الجماعية </h1>
                     </div>
@@ -12,12 +12,12 @@
 
         <div class="container mt-5 mb-5">
             <div class="multipleQuizSec">
-                <div class="container">
+                <div class="">
                     <div class="row justify-content-center">
                         <div v-for="group in store.groups" class="col-md-11">
                             <div class="card quizCard bg-offwhite3">
-                                <div class="card-header" :style="{ backgroundImage: `url(${group.image})`}">
-                                </div>
+                                <img :src="group.image" alt="" class="" >
+            
                                 <div class="card-body">
                                     <h2 class="fs-3 fC-green">  {{ group.title }} </h2>
                                     <p > {{ group.description }}  </p>

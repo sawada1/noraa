@@ -64,6 +64,7 @@ const store = useProfileStore();
 const authStore = useAuthStore();
 import { useToast } from "primevue/usetoast";
 const toast = useToast();
+
 let typePass = ref(true);
 const { locale } = useI18n();
 const { errors, handleSubmit, values, resetForm, defineField } = useForm({
@@ -81,8 +82,11 @@ const { errors, handleSubmit, values, resetForm, defineField } = useForm({
 const [email] = defineField("email");
 const [name] = defineField("name");
 const [phone] = defineField("phone");
-const onSubmit = handleSubmit(() => {
-    store.editProfile(values);
+const onSubmit = handleSubmit(async() => {
+    await store.editProfile(values);
+  if (store.successEdit) {
+    toast.add({ severity: 'success', summary: '', detail: 'تم تعديل البيانات بنجاح', life: 3000 });
+  }
 });
 
 const modalRef = ref(null);

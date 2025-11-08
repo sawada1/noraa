@@ -7,16 +7,18 @@
                         <div class="row">
                             <div v-for="i, index in store.HomeData?.books" class="col-md-4 col-12" data-aos="fade-up"
                                 :data-aos-duration="(index + 1) * 200">
-                                <div class="card bg-offwhite">
-                                    <!-- <span><img src="/images/product1.png" alt="product1"/></span> -->
-                                    <span><img :src="i?.image" alt="product1" /></span>
-                                    <h2> {{ i?.title }} </h2>
-                                    <p> {{ i?.description }} </p>
+                                <div class="card-home bg-offwhite">
+                                    <div class="text-container">
+                                        <span><img :src="i?.image" alt="product1" /></span>
+                                        <h2> {{ i?.title }} </h2>
+                                        <p> {{ i?.description }} </p>
+    
+                                    </div>
+                                    <NuxtLink  class="w-100"
+                                        :to="{ path: '/book-details', query: { id: i?.id || 1 } }">
+                                        <button class="btn btn-primary btn-pr bg-green">اشتري الآن</button>
+                                    </NuxtLink>
                                 </div>
-                                <NuxtLink  class="w-100"
-                                    :to="{ path: '/book-details', query: { id: i?.id || 1 } }">
-                                    <button class="btn btn-primary btn-pr bg-green">اشتري الآن</button>
-                                </NuxtLink>
                             </div>
 
                         </div>

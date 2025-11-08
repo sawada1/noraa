@@ -1,5 +1,6 @@
 <template>
   <div style="min-height: 100vh;">
+    <Toast />
     <div v-if="showPage" class="container mt-5 mb-5 main-profile-container" >
       <div class="row position-relative">
         <div class="col-xl-3 col-lg-3 col-12  position-relative">
@@ -17,6 +18,12 @@
 definePageMeta({
   middleware: "auth",
 });
+import { useToast } from "primevue/usetoast";
+const toast = useToast();
+
+const show = () => {
+    toast.add({ severity: 'info', summary: 'Info', detail: 'Message Content', life: 3000 });
+};
 
 const showPage = ref(false);
 

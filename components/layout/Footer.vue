@@ -1,51 +1,71 @@
 <template>
-    <div>
-        <footer class="bg-offwhite">
-			<div class="container">
-                <div class="row">
-                    
-                    <div class="col-4 footer1">
-                        <h4 class="fC-green">المساعدة الذاتية</h4>
-                        <ul class="">
-                            <li>
-                                <NuxtLink to="/live-course">
-                                    الدورات الحية 
-                                </NuxtLink>
-                            </li>
-                            <li><NuxtLink to="quiz">الإختبارات</NuxtLink></li>
-                            <li><a href="#">حزم</a></li>
-                            <li><a href="book-store.html">كتب</a></li>
-                            <li><a href="#">مقالات</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="col-4 footer2">
-                        <h4 class="fC-green">روابط سريعة</h4>
-                        <ul class="">
-                            <li><a href="#">استشارة حول كتاب</a></li>
-                            <li><a href="#">العلاج الجماعي</a></li>
-                            <li><NuxtLink to="/journals">المجلات</NuxtLink></li>
-                            <li><NuxtLink to="/subscription">الاشتراكات</NuxtLink></li>
-                        </ul>
-                    </div>
-                    <div class="col-4 footer3">
-                        <h4 class="fC-green">روابط سريعة</h4>
-                        <ul class="">
-                            <li><a href="about.html">عن</a></li>
-                            <li><a href="book-store.html">كتب</a></li>
-                            <li><a href="#">المدفوعات</a></li>
-                            <li><a href="#">شروط الاستخدام</a></li>
-                            <li><a href="#">سياسة الخصوصية</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-		</footer>
-    </div>
-</template>
-<script>
+  <footer class="footer bg-light text-dark pt-5 pb-4 mt-5">
+    <div class="container  text-center">
+        
+      <div class="row">
 
-</script>
-<style lang="">
-    
+        <!-- Column 1 -->
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold text-success mb-3">المساعدة الذاتية</h5>
+          <ul class="list-unstyled footer-links">
+            <li><NuxtLink to="/live-courses">الدورات الحية</NuxtLink></li>
+            <li><NuxtLink to="/book-store">كتب</NuxtLink></li>
+            <li><NuxtLink to="/blogs">المدونات</NuxtLink></li>
+          </ul>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold text-success mb-3">روابط سريعة</h5>
+          <ul class="list-unstyled footer-links">
+            <li><NuxtLink to="/consultation">استشارة حول كتاب</NuxtLink></li>
+            <li><NuxtLink to="/subscription">المحادثات</NuxtLink></li>
+          </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="col-md-4 mb-4">
+          <h5 class="fw-bold text-success mb-3">روابط أخرى</h5>
+          <ul class="list-unstyled footer-links">
+            <li><NuxtLink to="/about">عن</NuxtLink></li>
+            <li><NuxtLink to="/bundled-courses"> باقة دورات </NuxtLink></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="my-4" />
+
+      <div class="text-center text-muted small">
+        جميع الحقوق محفوظة © {{ new Date().getFullYear() }} 
+      </div>
+    </div>
+  </footer>
+</template>
+
+<style scoped>
+.footer {
+  direction: rtl;
+  background-color: #f8f9fa;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #198754; /* Bootstrap success color */
+}
+
+@media (max-width: 767px) {
+  .footer {
+    text-align: center;
+  }
+}
 </style>

@@ -60,7 +60,7 @@
                         <h2 class=""> {{ store.CourseData?.title }} </h2>
                         <div class="price d-flex align-items-center gap-3 mb-3 mt-5">
                             <h4 class="fC-green fw-bold m-0"> السعر : {{ store.CourseData?.price }} ر.س</h4>
-                            <h6 v-if="store.CourseData?.price_before_discount"> قبل الخصم {{
+                            <h6 v-if="store.CourseData?.price_before_discount" class="mt-1"> قبل الخصم {{
                                 store.CourseData?.price_before_discount }} ر.س </h6>
                         </div>
                         <div class="details-price d-flex flex-column gap-3 mt-4">
@@ -73,7 +73,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                                 <h6> اجمالي الحصص : </h6>
-                                <span> {{ store.CourseData?.total_count_lecture }} حصة </span>
+                                <span class="d-block mt-1"> {{ store.CourseData?.total_count_lecture }} حصة </span>
                             </div>
                             <div class="d-flex align-items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
@@ -84,7 +84,7 @@
                                         stroke-linejoin="round" />
                                 </svg>
                                 <h6> المدة الباقة : </h6>
-                                <span> 999 دقيقة </span>
+                                <span class="d-block mt-1"> 999 دقيقة </span>
                             </div>
                         </div>
                         <h4 class="mt-5"> ملخص </h4>
@@ -133,7 +133,7 @@
                     <Accordion value="0">
                         <AccordionPanel v-for="item, index in store.CourseData?.sections_videos " :value="index">
                             <AccordionHeader class="head">
-                                كورس رقم {{ item.section_name }}
+                                  {{ item.section_name }}
                             </AccordionHeader>
                             <AccordionContent class="mt-3">
                                 <div v-for="i in item.videos"
@@ -153,8 +153,8 @@
                                                 stroke="black" stroke-width="1.3" stroke-linecap="round"
                                                 stroke-linejoin="round" />
                                         </svg>
-                                        <span> المدة الحصة : </span>
-                                        <span class="minute"> {{ i.time }} دقيقة </span>
+                                        <span>  مدة الحصة : </span>
+                                        <span class="minute"> {{ i.time }}  </span>
                                     </div>
                                 </div>
                             </AccordionContent>

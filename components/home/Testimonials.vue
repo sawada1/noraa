@@ -28,11 +28,10 @@
           }" :modules="[SwiperPagination, SwiperAutoplay]" class="testimonial-carousel owl-carousel owl-theme">
                 <swiper-slide v-for="(item, index) in store.HomeData?.section6?.details" class="">
                   <div class="item " :class="getColorForItem(index + 1)">
-                    <figure><span><img src="/images/user1.png" alt="testimonials"></span>
-                      <figcaption class="h2">الآنسة أنفال نبيل</figcaption>
+                    <figure><span><img :src="item?.image" alt="testimonials"></span>
+                      <figcaption class="h2"> {{ item?.title }} </figcaption>
                     </figure>
-                    <p>لوريم إيبسوم هو ببساطة نص وهمي من صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم هو النص الوهمي
-                      القياسي في الصناعة منذ عام 1500. لوريم إيبسوم هو ببساطة نص وهمي في صناعة الطباعة والتنضيد.</p>
+                    <p> {{ item?.description }} </p>
                   </div>
                 </swiper-slide>
               </swiper>

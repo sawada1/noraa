@@ -15,7 +15,7 @@
                 <div class="col-12 col-xl-3 col-lg-3">
                     <div class="main-videos px-3 py-2">
                         <div class="item" v-for="i, index in store.videos?.videos"
-                            :class="{ 'active': activeVideo.includes(index + 1) }">
+                            :class="{ 'active': index + 1 == indexVideo}">
 
                             <svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 viewBox="0 0 20 20" fill="none">
@@ -48,7 +48,7 @@
                         </div>
                         <div
                             class="btns d-flex flex-column flex-xl-row flex-lg-row gap-4 align-items-center justify-content-between mt-4">
-                            <button class="next" @click="nextVideo()"> التالي </button>
+                            <button v-if="activeVideo.length" class="next" @click="nextVideo()"> التالي </button>
                             <button class="prev" @click="prevVideo()"> السابق </button>
                         </div>
                     </div>
@@ -91,35 +91,41 @@ let arrData = ref([
     },
 
 ])
-let activeVideo = ref([1]);
+let activeVideo = ref([]);
 let videoActive = ref();
 let indexVideo = ref(1);
 
 
 const updatePercentage = computed(()=>{
-    return percentage.value = Math.round((activeVideo.value.length / store.videos?.videos?.length) * 100);
+    return percentage.value = Math.round(((activeVideo.value.length) / store.videos?.videos?.length) * 100);
 });
 
 watch(()=> store.videos?.videos , (val)=>{
 if(val.length >= 1){
     videoActive.value = val[0]?.video_path
+    activeVideo.value = Array.from({ length: val.length }, (_, i) => i + 1);    
 }
 })
 const nextVideo = ()=>{
-    if(store.videos?.videos?.length == activeVideo.value.length)return;
-    console.log('testtt');
-    activeVideo.value.push(++indexVideo.value);
-    videoActive.value = store.videos?.videos[indexVideo.value - 1].video_path
+    if(activeVideo.value.length == 0)return;
+    if(indexVideo.value == store.videos?.videos.length){
+        activeVideo.value.length -1;
+    }
+    activeVideo.value.pop(++indexVideo.value);
     console.log(activeVideo.value);
+    
+    videoActive.value = store.videos?.videos[indexVideo.value - 1].video_path
+    // console.log(indexVideo.value);
+    // console.log(videoActive.value);
     // updatePercentage();
     
 }
 const prevVideo = ()=>{
-    if(activeVideo.value.length <= 1)return;
-    console.log('testtt');
-    activeVideo.value.pop(--indexVideo.value);
+    if(indexVideo.value <= 1)return;
+    activeVideo.value.push(--indexVideo.value);
     videoActive.value = store.videos?.videos[indexVideo.value - 1].video_path
-    console.log(activeVideo.value);
+    console.log(indexVideo.value);
+    
     // updatePercentage();
     
 }

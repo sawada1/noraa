@@ -64,19 +64,20 @@
                     <div class="col-xl-9">
                         <div class="row">
                             <div class="col-md-6 bookConsultationSecLft">
-                                <div class="text-center iconSec mb-3">
-                                    <p>حدد الوقت</p>
-                                    <span><img src="/images/calender-Icon.png" alt="calender icon" /></span>
-                                </div>
+                                 <div class="text-center iconSec">
+                                        <p class="fw-bold">حدد تاريخ</p>
+                                        <span><img src="/images/watch-icon.png" alt="watch icon" /></span>
+                                    </div>
+                             
                                 <DatePicker v-model="date" @value-change="formateDate" dateFormat="dd/mm/yy" inline
                                     class=" h-100" />
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="text-center iconSec">
-                                        <span><img src="/images/watch-icon.png" alt="watch icon" /></span>
-                                        <p>حدد تاريخ</p>
-                                    </div>
+                                      <div class="text-center iconSec mb-3">
+                                    <p class="fw-bold">حدد الوقت</p>
+                                    <span><img src="/images/calender-Icon.png" alt="calender icon" /></span>
+                                  </div>
                                     <div v-if="store?.slots.length >= 1" class="timeslot row-cols-3 justify-content-center">
                                         <button class="col cu" :class="{'active': currentTime == index+1}" v-for="i , index in store?.slots" @click="store.time = i?.value ,currentTime = index +1"> {{ i?.name }} </button>
                                     </div>

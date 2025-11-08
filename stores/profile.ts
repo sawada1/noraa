@@ -27,11 +27,11 @@ export const useProfileStore = defineStore('profile', {
     actions: {
      
         async editProfile(form:any) {
+            this.pendingEdit = true;
+            this.successEdit = false;
+            const api = useApi();
+            const response = await api.post(`update-profile`,form);
             try {
-                this.pendingEdit = true;
-                this.successEdit = false;
-                const api = useApi();
-                const response = await api.post(`update-profile`,form);
                 if(response.data){
                     this.pendingEdit = false;
                     this.errorsProfile = undefined;

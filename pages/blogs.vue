@@ -2,7 +2,7 @@
     <div class="min-vh-100">
         <div class="container-fluid">
             <div class="row">
-                <div class="bannerImage" style="background-image: url(/images/consultation-banner.png);">
+                <div class="bannerImage" style="background-image: url(/images/blogs-background.png);">
                     <div>
                         <h1 class="fC-LightOrange"> المدونات </h1>
                     </div>
